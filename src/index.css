@@ -1,33 +1,93 @@
+@import "tailwindcss";
+
 @font-face {
-  font-family: "Roboto", sans-serif;
-  src: url("/public/assets/Roboto-Bold.ttf");
+  font-family: "Roboto";
+  src: url("/assets/Roboto-Bold.ttf");
 }
 
 @font-face {
-  font-family: "Roboto", sans-serif;
-  src: url("/public/assets/Roboto-Medium.ttf");
+  font-family: "Roboto";
+  src: url("/assets/Roboto-Medium.ttf");
 }
 @font-face {
-  font-family: "Roboto", sans-serif;
-  src: url("/public/assets/Roboto-Regular.ttf");
-}
-:root {
-  --primary-color-white: "FFFFFF";
-  --primary-color-black: "2F2F2F";
-  --primary-color-blue: "407BFF";
-  --hover-color: "FF9D43";
-  --error-color: "EF5050";
-  --light-blue: "ECF2FF";
-  --middle-blue: "9EBBFF";
-  --blue: "D7E3FF";
+  font-family: "Roboto";
+  src: url("/assets/Roboto-Regular.ttf");
 }
 
-* {
-  margin: 0;
-  padding: 0;
+@theme inline {
+  --font-display: "Roboto", "sans-serif";
+
+  --color-*: initial;
+  --color-white: #ffffff;
+  --color-black: #2f2f2f;
+  --color-blue: #407bff;
+  --color-hover-color: #ff9d43;
+  --color-error-color: #ef5050;
+  --color-light-blue: #ecf2ff;
+  --color-middle-blue: #9ebbff;
+  --color-blue2: #d7e3ff;
+
+  --breakpoint-mobile-s: 320px;
+  --breakpoint-tablet-ms: 768px;
+  --breakpoint-desktop-m: 1440px;
+
+  --text-*: initial;
+  --text-6x: 36px;
+  --text-6x--line-height: 42px;
+  --text-6x--font-weight: 700;
+
+  --text-5x: 28px;
+  --text-5x--line-height: 32px;
+  --text-5x--font-weight: 700;
+
+  --text-4x: 26px;
+  --text-4x--line-height: 32px;
+  --text-4x--font-weight: 400;
+
+  --text-3x: 24px;
+  --text-3x--line-height: 30px;
+  --text-3x--font-weight: 400;
+
+  --text-2x: 18px;
+  --text-2x--line-height: 24px;
+  --text-2x--font-weight: 500;
+
+  --text-1x: 16px;
+  --text-1x--line-height: 20px;
+  --text-1x--font-weight: 400;
+
+  --radius-*: initial;
+  --radius-xs: 6px;
+  --radius-s: 10px;
+  --radius-m: 40px;
+  --radius-full: 100%;
+
+  --shadow-*: initial;
+  --shadow-base: 0px 4px 14px 0px #407bff4d;
+  --shadow-secondary: 0px 4px 8px 0px #407bff57;
+}
+
+.container {
+  margin: 0 auto;
+  padding: 0 20px;
+  max-width: 767px;
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 1220px;
+    padding: 0 32px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .container {
+    max-width: 100%;
+  }
 }
 
 body {
   font-family: "Roboto", sans-serif;
-  background-color: var(--primary-color-white);
+  background-color: var(--color-white);
+  color: var(--color-black);
 }
