@@ -1,14 +1,18 @@
-import { Main } from "./pages/Main";
-import "./index.css";
-import { Header } from "./components/Header";
+import './index.css';
+import { createBrowserRouter } from 'react-router-dom';
+import { Main } from './pages/Main';
+import { RootLayout } from './components/RootLayout';
+import { Signup } from './pages/Signup';
 
-function App() {
-  return (
-    <div>
-      <Header />
-      <Main />
-    </div>
-  );
-}
+const routers = createBrowserRouter([
+  {
+    path: '/',
+    element: <RootLayout />,
+    children: [
+      { index: true, element: <Main /> },
+      { path: 'signup', element: <Signup /> },
+    ],
+  },
+]);
 
-export default App;
+export default routers;
