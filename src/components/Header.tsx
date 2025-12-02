@@ -1,20 +1,20 @@
-import icon from "../../public/sprite.svg";
+import { Icon } from '../shared/Icon';
+
 export function Header() {
   return (
-    <header className="tablet-ms:mt-4 desktop:mt-3 mt-2">
+    <header className="tablet-ms:pt-4 desktop:m+pt-3 tablet-ms:pb-10 desktop-m:pb-20 pt-2 pb-6">
       <div className="container flex justify-between">
         <a>
-          <svg className="tablet-ms:h-12 h-10 w-[102px]">
-            <use xlinkHref={icon + `#logo`}></use>
-          </svg>
+          <Icon iconName="logo" className="tablet-ms:h-12 h-10 w-[102px]" />
         </a>
         <div className="flex items-center gap-2">
           <button className="text-blue text-1x tablet-ms:text-2x">
             Sign in
           </button>
-          <svg className="size-7 fill-transparent stroke-black">
-            <use xlinkHref={icon + `#user-account`}></use>
-          </svg>
+          <Icon
+            iconName="user-account"
+            className="size-7 fill-transparent stroke-black"
+          />
         </div>
       </div>
     </header>

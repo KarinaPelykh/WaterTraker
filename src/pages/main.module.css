@@ -1,34 +1,17 @@
 .background {
-  background-image: url("");
+  background-image: url('/hero/hero-mob.png');
   background-size: contain;
+
   background-repeat: no-repeat;
-  background-attachment: fixed;
   background-position: bottom;
+
   @media screen and (min-width: 768px) {
-    background-image: url("/hero-tablet.png");
+    background-image: url('/hero/hero-tablet2.png');
   }
 
   @media screen and (min-width: 1440px) {
-    background-image: url("/Background.png");
-  }
-}
-
-.background2 {
-  background-image: url("/hero-mob2.png");
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-position: center;
-
-  @media screen and (min-width: 768px) {
-    .background {
-      background-image: url("/hero-tablet2.png");
-    }
-  }
-
-  @media screen and (min-width: 1440px) {
-    .background {
-      background-image: url("/Background.png");
-    }
+    background-image:
+      url('/hero/hero-desktop2.png'), url('/hero/hero-desktop.png');
+    background-position: center, bottom;
   }
 }
