@@ -1,21 +1,21 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @font-face {
-  font-family: "Roboto";
-  src: url("/assets/Roboto-Bold.ttf");
+  font-family: 'Roboto';
+  src: url('/assets/Roboto-Bold.ttf');
 }
 
 @font-face {
-  font-family: "Roboto";
-  src: url("/assets/Roboto-Medium.ttf");
+  font-family: 'Roboto';
+  src: url('/assets/Roboto-Medium.ttf');
 }
 @font-face {
-  font-family: "Roboto";
-  src: url("/assets/Roboto-Regular.ttf");
+  font-family: 'Roboto';
+  src: url('/assets/Roboto-Regular.ttf');
 }
 
 @theme inline {
-  --font-display: "Roboto", "sans-serif";
+  --font-display: 'Roboto', 'sans-serif';
 
   --color-*: initial;
   --color-white: #ffffff;
@@ -68,7 +68,7 @@
 }
 
 .container {
-  margin: 0 auto;
+  /* margin: 0 auto; */
   padding: 0 20px;
   max-width: 767px;
 }
@@ -93,7 +93,7 @@
 }
 
 body {
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
   background-color: var(--color-white);
   color: var(--color-black);
 }

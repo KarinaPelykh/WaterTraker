@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import type { ComponentProps } from 'react';
 
 type Form = ComponentProps<'form'>;
@@ -9,5 +10,9 @@ export function Form({ ...props }: FromProps) {
 }
 
 export function Label({ ...props }: ComponentProps<'label'>) {
-  return <label className='className="text-2x mb-2"' {...props} />;
+  return <label className="text-2x mb-2" {...props} />;
+}
+
+export function ItemLabel({ className, ...props }: ComponentProps<'div'>) {
+  return <div className={clsx(className, 'mb-4')} {...props} />;
 }

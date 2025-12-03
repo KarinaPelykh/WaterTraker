@@ -12,10 +12,7 @@ export function Header() {
           <NavLink to="/signup" className="text-blue text-1x tablet-ms:text-2x">
             Sign in
           </NavLink>
-          <Icon
-            iconName="user-account"
-            className="size-7 fill-transparent stroke-black"
-          />
+          <Icon iconName="user-account" className="size-7 stroke-black" />
         </div>
       </div>
     </header>
