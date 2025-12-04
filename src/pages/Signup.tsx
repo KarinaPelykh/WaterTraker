@@ -6,9 +6,9 @@ import { PasswordInput } from '../shared/PasswordInput';
 
 export function Signup() {
   return (
-    <section className="tablet-ms:pb-[172px] overflow-hidden pb-5">
-      <div className="container">
-        <Form className="tablet-ms:w-[336px] mb-4">
+    <section className="tablet-ms:pb-[172px] desktop-m:pb-10 min-h-screen overflow-hidden pb-5">
+      <div className="tablet-ms:flex desktop-m:flex-row-reverse desktop-m:items-center desktop-m:justify-center relative container">
+        <Form className="mobile:w-[336px] max-tablet-ms:mx-auto desktop-m:w-[384px]">
           <p className="text-4x mb-4">Sign In</p>
           <ItemLabel>
             <Label htmlFor="email">Enter your email</Label>
@@ -22,22 +22,20 @@ export function Signup() {
             <Label htmlFor="conf-password">Repeat password</Label>
             <PasswordInput placeholder="Repeat password" id="conf-password" />
           </ItemLabel>
-          <Button className="text-2x! w-full py-2.5" type="submit">
+          <Button className="text-2x! mb-4! w-full py-2.5" type="submit">
             Sign Up
           </Button>
-        </Form>
-        <div className="relative">
-          <Link to="/" className="text-blue text-1x absolute top-0 left-0 z-10">
+          <Link to="/" className="text-blue text-1x">
             Sign in
           </Link>
-          <img
-            className="tablet-ms:-top-[350px] tablet-ms:-z-10 tablet-ms:left-28 tablet-ms:absolute tablet-ms:w-[736px] tablet-ms:h-[548px]"
-            src="/signup-desk.png"
-            alt="Botel of water"
-            width={280}
-            height={210}
-          />
-        </div>
+        </Form>
+        <img
+          className="tablet-ms:-right-28 max-tablet-ms:max-w-[336px] desktop-m:-ml-38 desktop-m:max-w-[916px] desktop-m:max-h-[680px] tablet-ms:max-w-[736px] tablet-ms:max-h-[548px] max-tablet-ms:mx-auto tablet-ms:-bottom-38 tablet-ms:absolute desktop-m:static"
+          src="/signup-desk.png"
+          alt="Botel of water"
+          width={280}
+          height={210}
+        />
       </div>
     </section>
   );

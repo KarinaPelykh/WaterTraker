@@ -28,6 +28,8 @@
   --color-blue2: #d7e3ff;
 
   --breakpoint-mobile-s: 320px;
+  --breakpoint-mobile: 360px;
+
   --breakpoint-tablet-ms: 768px;
   --breakpoint-desktop-m: 1440px;
 
@@ -96,11 +98,16 @@ body {
   font-family: 'Roboto', sans-serif;
   background-color: var(--color-white);
   color: var(--color-black);
+  min-height: 100vh;
+  background-image: url('/public/hero/hero-desktop2.png');
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 img {
   width: 100%;
   height: auto;
   display: block;
-  object-fit: cover;
+  object-fit: contain;
 }

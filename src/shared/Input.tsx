@@ -9,7 +9,7 @@ export function Input({ className, ...props }: InputProps) {
     <input
       className={clsx(
         className,
-        'text-1x border-middle-blue placeholder:text-middle-blue w-full rounded-xs border px-2.5 py-3 outline-none',
+        'text-1x border-middle-blue placeholder:text-middle-blue w-full rounded-xs border bg-white px-2.5 py-3 outline-none',
       )}
       {...props}
     />
