@@ -6,10 +6,10 @@ import { PasswordInput } from '../shared/PasswordInput';
 
 export function Signup() {
   return (
-    <section className="tablet-ms:pb-[172px] desktop-m:pb-10 min-h-screen overflow-hidden pb-5">
+    <section className="tablet-ms:pb-[172px] tablet-ms:pt-10 desktop-m:pb-10 desktop-m:pt-5 min-h-screen overflow-hidden pt-6 pb-5">
       <div className="tablet-ms:flex desktop-m:flex-row-reverse desktop-m:items-center desktop-m:justify-center relative container">
         <Form className="mobile:w-[336px] max-tablet-ms:mx-auto desktop-m:w-[384px]">
-          <p className="text-4x mb-4">Sign In</p>
+          <p className="text-4x mb-4">Sign up</p>
           <ItemLabel>
             <Label htmlFor="email">Enter your email</Label>
             <Input placeholder="E-mail" id="email" />
@@ -25,12 +25,16 @@ export function Signup() {
           <Button className="text-2x! mb-4! w-full py-2.5" type="submit">
             Sign Up
           </Button>
-          <Link to="/" className="text-blue text-1x">
+          <Link to="/signin" className="text-blue text-1x">
             Sign in
           </Link>
         </Form>
         <img
-          className="tablet-ms:-right-28 max-tablet-ms:max-w-[336px] desktop-m:-ml-38 desktop-m:max-w-[916px] desktop-m:max-h-[680px] tablet-ms:max-w-[736px] tablet-ms:max-h-[548px] max-tablet-ms:mx-auto tablet-ms:-bottom-38 tablet-ms:absolute desktop-m:static"
+        className='tablet-ms:-right-28 max-tablet-ms:max-w-[336px] desktop-m:-ml-38
+           desktop-m:max-w-[916px] desktop-m:max-h-[680px] 
+          tablet-ms:max-w-[736px] tablet-ms:max-h-[548px] 
+          max-tablet-ms:mx-auto tablet-ms:top-0
+          tablet-ms:absolute desktop-m:static'
           src="/signup-desk.png"
           alt="Botel of water"
           width={280}

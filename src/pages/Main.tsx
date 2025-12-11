@@ -3,6 +3,7 @@ import icon from '/sprite.svg';
 import css from './main.module.css';
 import { Button } from '../shared/Button';
 import clsx from 'clsx';
+
 const info = [
   {
     iconName: 'calendar',

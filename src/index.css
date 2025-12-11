@@ -98,11 +98,11 @@ body {
   font-family: 'Roboto', sans-serif;
   background-color: var(--color-white);
   color: var(--color-black);
-  min-height: 100vh;
-  background-image: url('/public/hero/hero-desktop2.png');
+  background-image: url('/hero/hero-desktop2.png');
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 img {

@@ -3,13 +3,13 @@ import { Icon } from '../shared/Icon';
 
 export function Header() {
   return (
-    <header className="tablet-ms:pt-4 desktop:pt-3 pt-2">
+    <header className="tablet-ms:pt-4 desktop:pt-3 pt-2 bg-white">
       <div className="container flex justify-between">
         <NavLink to="/">
           <Icon iconName="logo" className="tablet-ms:h-12 h-10 w-[102px]" />
         </NavLink>
         <div className="flex items-center gap-2">
-          <NavLink to="/signup" className="text-blue text-1x tablet-ms:text-2x">
+          <NavLink to="/signin" className="text-blue text-1x tablet-ms:text-2x">
             Sign in
           </NavLink>
           <Icon iconName="user-account" className="size-7 stroke-black" />
