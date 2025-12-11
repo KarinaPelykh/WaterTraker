@@ -26,6 +26,7 @@
   --color-light-blue: #ecf2ff;
   --color-middle-blue: #9ebbff;
   --color-blue2: #d7e3ff;
+  --color-grey: #8f8f8f;
 
   --breakpoint-mobile-s: 320px;
   --breakpoint-mobile: 360px;
@@ -56,6 +57,10 @@
 
   --text-1x: 16px;
   --text-1x--line-height: 20px;
+  --text-1x--font-weight: 400;
+
+  --text-sx: 12px;
+  --text-1x--line-height: 16px;
   --text-1x--font-weight: 400;
 
   --radius-*: initial;

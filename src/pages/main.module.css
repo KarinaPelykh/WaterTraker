@@ -1,6 +1,15 @@
 .background {
-  background-image: url('/hero/hero-desktop.png');
-  background-size: contain;
+  background-image: url('/hero/hero-mob.png');
+  background-size: cover;
   background-repeat: no-repeat;
   background-position: bottom;
+  max-width: 100%;
+  min-height: 100vh;
+  @media screen and (min-width: 768px) {
+    background-image: url('/hero/hero-tablet2.png');
+  }
+  @media screen and (min-width: 1440px) {
+    background-image: url('/hero/hero-desktop.png');
+    background-size: contain;
+  }
 }

@@ -17,7 +17,7 @@ export function Main() {
   return (
     <section
       className={clsx(
-        `${css.background} tablet-ms:pt-10 desktop-m:pt-20 tablet-ms:pb-[50px] desktop-m:pb-[294px] min-h-screen pt-6 pb-10`,
+        `${css.background} tablet-ms:pt-10 desktop-m:pt-20 tablet-ms:pb-[50px] desktop-m:pb-[294px] min-h-screen w-full pt-6 pb-10`,
       )}
     >
       <div className="desktop-m:flex desktop-m:gap-[81px] desktop-m:justify-center container">
