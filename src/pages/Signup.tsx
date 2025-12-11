@@ -30,11 +30,7 @@ export function Signup() {
           </Link>
         </Form>
         <img
-        className='tablet-ms:-right-28 max-tablet-ms:max-w-[336px] desktop-m:-ml-38
-           desktop-m:max-w-[916px] desktop-m:max-h-[680px] 
-          tablet-ms:max-w-[736px] tablet-ms:max-h-[548px] 
-          max-tablet-ms:mx-auto tablet-ms:top-0
-          tablet-ms:absolute desktop-m:static'
+          className="tablet-ms:-right-28 max-tablet-ms:max-w-[336px] desktop-m:-ml-38 desktop-m:max-w-[916px] desktop-m:max-h-[680px] tablet-ms:max-w-[736px] tablet-ms:max-h-[548px] max-tablet-ms:mx-auto tablet-ms:top-0 tablet-ms:absolute desktop-m:static"
           src="/signup-desk.png"
           alt="Botel of water"
           width={280}

@@ -19,6 +19,7 @@ export function List() {
           <span className="before:bg-blue relative size-2 before:absolute before:top-1/2 before:left-0 before:block before:size-2 before:-translate-y-1/2 before:transform before:rounded-full before:content-['']" />
           Release of processed substances
         </li>
+
         <li className="flex items-center gap-2">
           <span className="before:bg-blue relative size-2 before:absolute before:top-1/2 before:left-0 before:block before:size-2 before:-translate-y-1/2 before:transform before:rounded-full before:content-['']" />
           Ensuring the stability of the internal environment

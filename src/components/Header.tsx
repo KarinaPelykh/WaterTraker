@@ -3,7 +3,7 @@ import { Icon } from '../shared/Icon';
 
 export function Header() {
   return (
-    <header className="tablet-ms:pt-4 desktop:pt-3 pt-2 bg-white">
+    <header className="tablet-ms:pt-4 desktop:pt-3 bg-white pt-2">
       <div className="container flex justify-between">
         <NavLink to="/">
           <Icon iconName="logo" className="tablet-ms:h-12 h-10 w-[102px]" />
