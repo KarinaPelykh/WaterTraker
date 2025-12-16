@@ -1,5 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import { Icon } from '../shared/Icon';
+import { User } from './User';
 
 export function Header() {
   return (
@@ -14,6 +15,7 @@ export function Header() {
           </NavLink>
           <Icon iconName="user-account" className="size-7 stroke-black" />
         </div>
+        <User />
       </div>
     </header>
   );

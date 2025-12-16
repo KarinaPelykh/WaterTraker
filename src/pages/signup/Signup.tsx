@@ -3,24 +3,26 @@ import { Button } from '../../shared/Button';
 import { ErrorMessage, Form, ItemLabel, Label } from '../../shared/Form';
 import { Input } from '../../shared/Input';
 import { PasswordInput } from '../../shared/PasswordInput';
-import { signup } from './api/service';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { UserSignupSchema, type UserSignup } from './model/contract';
+import { useSignup } from './api/useSignup';
 
 export function Signup() {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<UserSignup>({
     defaultValues: {
       email: '',
       password: '',
+      confirmPassword: '',
     },
     resolver: zodResolver(UserSignupSchema),
   });
-  console.log(useForm);
+  const { mutate: signup } = useSignup(reset);
 
   return (
     <section className="tablet-ms:pb-[172px] tablet-ms:pt-10 desktop-m:pb-10 desktop-m:pt-5 min-h-screen overflow-hidden pt-6 pb-5">
