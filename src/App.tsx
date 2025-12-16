@@ -2,7 +2,7 @@ import './index.css';
 import { createBrowserRouter } from 'react-router-dom';
 import { Main } from './pages/Main';
 import { RootLayout } from './components/RootLayout';
-import { Signup } from './pages/Signup';
+import { Signup } from './pages/signup/Signup';
 import { Signin } from './pages/Signin';
 
 const routers = createBrowserRouter([

@@ -16,3 +16,15 @@ export function Label({ className, ...props }: ComponentProps<'label'>) {
 export function ItemLabel({ className, ...props }: ComponentProps<'div'>) {
   return <div className={clsx(className, 'mb-4')} {...props} />;
 }
+
+export function ErrorMessage({
+  className,
+  children,
+  ...props
+}: ComponentProps<'div'>) {
+  return (
+    <div className={clsx(className)} {...props}>
+      {children}
+    </div>
+  );
+}
