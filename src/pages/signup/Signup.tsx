@@ -22,6 +22,7 @@ export function Signup() {
     },
     resolver: zodResolver(UserSignupSchema),
   });
+
   const { mutate: signup } = useSignup(reset);
 
   return (

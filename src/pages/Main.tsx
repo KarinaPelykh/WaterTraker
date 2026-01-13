@@ -1,8 +1,8 @@
 import { List } from '../components/List';
 import icon from '/sprite.svg';
 import css from './main.module.css';
-import { Button } from '../shared/Button';
 import clsx from 'clsx';
+import { Link } from 'react-router-dom';
 
 const info = [
   {
@@ -38,7 +38,12 @@ export function Main() {
               );
             })}
           </ul>
-          <Button className="w-[280px]"> Try tracker</Button>
+          <Link
+            to="/signin"
+            className="bg-blue shadow-secondary text-1x tablet-ms:text-2x w-[300px] rounded-s px-[30px] py-2 text-white"
+          >
+            Try tracker
+          </Link>
         </div>
         <List />
       </div>
