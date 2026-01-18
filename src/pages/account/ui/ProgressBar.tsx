@@ -10,7 +10,7 @@ const progress = [
 
 export function ProgressBar() {
   return (
-    <div className="mb-4">
+    <div className="tablet-ms:mb-0 desktop-m:w-2/3 mb-4 w-full">
       <span className="text-2x text-blue mb-2 block">Today</span>
       <div>
         <div className="relative mb-1">
