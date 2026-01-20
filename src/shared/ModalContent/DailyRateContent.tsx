@@ -12,11 +12,12 @@ export function DailyRateContent() {
       <ScrollAreaBar className="flex min-h-0 flex-1">
         <Form>
           <div className="mb-6 flex items-center justify-between">
-            <h2 className="text-4x">My daily norma</h2>
-            <Dialog.Trigger>
+            <Dialog.Title className="text-4x">My daily norma</Dialog.Title>
+            <Dialog.Trigger className="cursor-pointer">
               <Icon iconName="plus" className="stroke-blue size-6 rotate-45" />
             </Dialog.Trigger>
           </div>
+          <Dialog.DialogDescription aria-describedby={undefined} />
           <div className="tablet-ms:flex tablet-ms:gap-6 mb-3">
             <p className="tablet-ms:m-0 mb-4">
               For girl:

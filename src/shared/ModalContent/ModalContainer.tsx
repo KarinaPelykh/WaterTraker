@@ -7,7 +7,7 @@ export function ModalContainer({
   className,
 }: {
   children: ReactNode;
-  className: string;
+  className?: string;
 }) {
   return (
     <Dialog.Portal>

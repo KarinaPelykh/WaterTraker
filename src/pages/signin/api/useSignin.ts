@@ -12,6 +12,8 @@ export const useSignin = (reset: UseFormReset<UserSignin>) => {
     mutationFn: signin,
     onSuccess: (data) => {
       reset();
+      console.log(data.data.token);
+
       setAuthToken(data.data.token);
       navigate('/main');
     },

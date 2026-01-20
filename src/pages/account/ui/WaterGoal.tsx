@@ -13,7 +13,7 @@ export function WaterGoal() {
           <span className="text-7x desktop-m:text-3x text-blue font-bold">
             1.5 L
           </span>
-          <Trigger className="text-blue-marine! cursor-poi">Edit</Trigger>
+          <Trigger className="text-blue-marine! cursor-pointer">Edit</Trigger>
         </div>
       </div>
       <DailyRateContent />

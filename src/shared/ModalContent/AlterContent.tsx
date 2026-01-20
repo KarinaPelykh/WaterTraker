@@ -7,10 +7,11 @@ export function AlterContent() {
   return (
     <ModalContainer className="tablet-ms:w-[592px]">
       <div className="mb-6 flex items-center justify-between">
-        <Dialog.Title className="text-4x"> Delete entry</Dialog.Title>
-        <Button variant="secondary">
+        <Dialog.Title className="text-4x"> Delete entry</Dialog.Title>{' '}
+        <Dialog.DialogDescription aria-describedby={undefined} />
+        <Dialog.Trigger className="cursor-pointer">
           <Icon iconName="plus" className="stroke-blue size-6 rotate-45" />
-        </Button>
+        </Dialog.Trigger>
       </div>
 
       <p className="text-2x mb-6">Are you sure you want to delete the entry?</p>

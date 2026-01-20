@@ -26,7 +26,6 @@ export function Signin() {
         <Form
           className="mobile:w-[336px] max-tablet-ms:mx-auto desktop-m:w-[384px]"
           onSubmit={handleSubmit((data) => {
-            console.log(data);
             signin(data);
           })}
         >

@@ -121,3 +121,6 @@ img {
   display: block;
   object-fit: contain;
 }
+input[type='time']::-webkit-calendar-picker-indicator {
+  background: none;
+}

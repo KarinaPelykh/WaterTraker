@@ -20,11 +20,11 @@ export function ProgressBar() {
           >
             <Progress.Indicator
               className="bg-middle-blue size-full"
-              style={{ transform: `translateX(-${100 - 50}%)` }}
+              // style={{ transform: `translateX(-${100 - 50}%)` }}
             />
             <div
               className="border-blue absolute top-1/2 size-3.5 -translate-y-1/2 rounded-full border bg-white transition-all duration-500 ease-out"
-              style={{ left: `calc(${50}% - 10px)` }}
+              // style={{ left: `calc(${50}% - 10px)` }}
             />
           </Progress.Root>
         </div>
