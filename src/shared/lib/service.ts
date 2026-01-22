@@ -9,9 +9,16 @@ type UserSignin = {
   email: string;
   password: string;
 };
+
 type AmountWater = {
   time: string;
   amount: number;
+};
+
+type UserDailyRate = {
+  gender: string;
+  weight: number;
+  activeTime: number;
 };
 
 export const signup = async (data: SignupSchema) => {
@@ -34,6 +41,32 @@ export const current = async () => {
 
 export const addWater = async (data: AmountWater) => {
   const response = await axiosInstance.post('water', data);
+
+  return response;
+};
+
+export const getHydrationStory = async () => {
+  const response = await axiosInstance.get('water');
+
+  return response;
+};
+
+export const deleteHydrationLog = async (userID: string) => {
+  console.log('delete', userID);
+
+  const response = await axiosInstance.delete(`water/${userID}`);
+
+  return response;
+};
+
+export const addDailyRate = async (data: UserDailyRate) => {
+  const response = await axiosInstance.patch('user/water-rate', data);
+
+  return response;
+};
+
+export const getUserInfo = async () => {
+  const response = await axiosInstance.get('user');
 
   return response;
 };

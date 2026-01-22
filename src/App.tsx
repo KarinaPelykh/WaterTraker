@@ -4,7 +4,7 @@ import { Main } from './pages/Main';
 import { RootLayout } from './components/RootLayout';
 import { Signup } from './pages/signup/Signup';
 import { Signin } from './pages/signin/Signin';
-import { UserAccount } from './pages/account/ui/UserAccount';
+import { HydrationDashboard } from './pages/account/ui/HydrationDashboard';
 
 const routers = createBrowserRouter([
   {
@@ -14,7 +14,7 @@ const routers = createBrowserRouter([
       { index: true, element: <Main /> },
       { path: 'signup', element: <Signup /> },
       { path: 'signin', element: <Signin /> },
-      { path: 'main', element: <UserAccount /> },
+      { path: 'main', element: <HydrationDashboard /> },
     ],
   },
 ]);

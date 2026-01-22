@@ -1,4 +1,3 @@
-import { Trigger } from '@radix-ui/react-dialog';
 import { Icon } from '../Icon';
 import { Button } from '../Button';
 import { ModalContainer } from './ModalContainer';
@@ -10,9 +9,9 @@ export function EditAmountOfWater() {
       <form>
         <div className="mb-6 flex items-center justify-between">
           <h1 className="text-4x">Edit the entered amount of water</h1>
-          <Trigger className="rotate-45 cursor-pointer">
+          <Dialog.Close className="rotate-45 cursor-pointer">
             <Icon iconName="plus" className="stroke-blue size-6" />
-          </Trigger>
+          </Dialog.Close>
         </div>
         <Dialog.Title className="text-2x mb-4">
           Correct entered data:
@@ -41,7 +40,6 @@ export function EditAmountOfWater() {
           <p className="mb-3">Recording time:</p>
           <input
             type="time"
-            value="7:00"
             placeholder="7:00"
             className="border-blue tablet-ms:w-full placeholder:text-blue block h-11 w-[120px] rounded-xs border px-2.5 py-3 outline-none"
           />

@@ -1,13 +1,16 @@
 import { Root, Trigger } from '@radix-ui/react-dialog';
-import { Button } from '../../../shared/Button';
 import { Icon } from '../../../shared/Icon';
 import { ScrollAreaBar } from '../../../shared/ScrollAreaBar';
 import { ProgressBar } from './ProgressBar';
-import { WaterConsumptionList } from './WaterConsumptionList';
+import { WaterConsumptionItem } from './WaterConsumptionItem';
 import { WaterGoal } from './WaterGoal';
 import { AddWater } from '../../../shared/ModalContent/AddWater';
+import { useHydrationStory } from '../api/useHydrationStory';
+import { HydrationMonthlyStats } from './HydrationMonthlyStats';
 
-export function UserAccount() {
+export function HydrationDashboard() {
+  const { data, isPending } = useHydrationStory();
+
   return (
     <section className="pb-10">
       <div className="desktop-m:flex desktop-m:gap-8 relative container">
@@ -30,41 +33,25 @@ export function UserAccount() {
           </div>
           <div className="bg-light-blue shadow-base tablet-ms:py-8 tablet-ms:px-6 desktop-m:w-1/2 rounded-s px-2 py-6">
             <p className="text-3x">Today</p>
-            <ScrollAreaBar className="max-h-[220px]">
+            <ScrollAreaBar className="">
               <ul className="mb-3">
-                <WaterConsumptionList />
+                {isPending ? (
+                  <span>Loading...</span>
+                ) : (
+                  data?.data.map(
+                    (item: { _id: string; time: string; amount: number }) => (
+                      <WaterConsumptionItem key={item._id} item={item} />
+                    ),
+                  )
+                )}
               </ul>
+              <Trigger className="text-blue mb-6 flex cursor-pointer items-center justify-center gap-2 font-medium">
+                <Icon iconName="plus" className="stroke-blue size-4" />
+                Add Water
+              </Trigger>
             </ScrollAreaBar>
 
-            <Trigger className="text-blue mb-6 flex cursor-pointer items-center justify-center gap-2 font-medium">
-              <Icon iconName="plus" className="stroke-blue size-4" />
-              Add Water
-            </Trigger>
-
-            <div className="flex items-center justify-between">
-              <p className="text-3x">Month</p>
-              <div className="flex items-center gap-3">
-                <Button
-                  variant="secondary"
-                  className="flex items-center justify-center"
-                >
-                  <Icon
-                    iconName="arrow-down"
-                    className="stroke-blue size-3.5 rotate-90"
-                  />
-                </Button>
-                <span className="text-blue">April, 2023</span>
-                <Button
-                  variant="secondary"
-                  className="flex items-center justify-center"
-                >
-                  <Icon
-                    iconName="arrow-down"
-                    className="stroke-blue size-3.5 -rotate-90"
-                  />
-                </Button>
-              </div>
-            </div>
+            <HydrationMonthlyStats />
           </div>
           <AddWater />
         </Root>

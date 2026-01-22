@@ -6,6 +6,7 @@ import { useState } from 'react';
 import { ModalContainer } from './ModalContainer';
 import { useAddWater } from '../../pages/account/api/useAddWater';
 import { useForm } from 'react-hook-form';
+import type { UserWaterEntity } from '../../pages/account/model/contract';
 
 export function AddWater() {
   const [amountWater, setAmountWater] = useState(50);
@@ -14,11 +15,11 @@ export function AddWater() {
     return amountWater > 0 && setAmountWater(amountWater - 50);
   };
 
-  const { mutate: addWater } = useAddWater();
-
-  const { watch, register, handleSubmit } = useForm({
-    defaultValues: { time: '', amount: null },
+  const { watch, register, handleSubmit, reset } = useForm<UserWaterEntity>({
+    defaultValues: { time: '', amount: 0 },
   });
+  
+  const { mutate: addWater } = useAddWater(reset);
 
   const definiteAmountOfWater = watch('amount') ? watch('amount') : amountWater;
 
@@ -31,9 +32,9 @@ export function AddWater() {
       >
         <div className="mb-6 flex items-center justify-between">
           <Dialog.Title className="text-4x">Add water</Dialog.Title>
-          <Dialog.Trigger className="rotate-45 cursor-pointer">
+          <Dialog.Close className="rotate-45 cursor-pointer">
             <Icon iconName="plus" className="stroke-blue size-6" />
-          </Dialog.Trigger>
+          </Dialog.Close>
         </div>
         <Dialog.DialogDescription aria-describedby={undefined} />
         <h2 className="text-2x mb-4">Choose a value:</h2>

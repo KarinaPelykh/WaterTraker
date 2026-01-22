@@ -1,9 +1,12 @@
 import { Root, Trigger } from '@radix-ui/react-dialog';
 import { useState } from 'react';
 import { DailyRateContent } from '../../../shared/ModalContent/DailyRateContent';
+import { useGetUserInfo } from '../api/useGetUserInfo';
 
 export function WaterGoal() {
   const [open, setOpen] = useState(false);
+
+  const { data, isPending } = useGetUserInfo();
 
   return (
     <Root open={open} onOpenChange={setOpen}>
@@ -11,7 +14,7 @@ export function WaterGoal() {
         <p className="text-2x mb-3">My daily norma</p>
         <div className="flex items-center gap-3">
           <span className="text-7x desktop-m:text-3x text-blue font-bold">
-            1.5 L
+            {isPending ? 1.5 : data?.data.water} L
           </span>
           <Trigger className="text-blue-marine! cursor-pointer">Edit</Trigger>
         </div>
