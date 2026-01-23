@@ -7,8 +7,8 @@ export const UserWaterEntitySchema = z.object({
 
 export const UserDailyWaterRateSchema = z.object({
   gender: z.string().trim(),
-  weight: z.number(),
-  activeTime: z.number(),
+  weight: z.string().trim(),
+  activeTime: z.string().trim(),
 });
 
 export type UserWaterEntity = z.infer<typeof UserWaterEntitySchema>;

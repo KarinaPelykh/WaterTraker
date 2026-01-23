@@ -5,24 +5,29 @@ import { Input } from '../Input';
 import * as Dialog from '@radix-ui/react-dialog';
 import { ScrollAreaBar } from '../ScrollAreaBar';
 import { ModalContainer } from './ModalContainer';
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { useAddDailyRate } from '../../pages/account/api/useAddDailyRate';
 import type { UserDailyWaterRate } from '../../pages/account/model/contract';
+import { RadioBtn } from '../RadioBtn';
+import * as RadioGroup from '@radix-ui/react-radio-group';
+import { useToggle } from '../hooks/useToggle';
 
-const enum Gender {
-  MALE = 'male',
-  FEMALE = 'woman',
-}
+const Gender = {
+  male: 'male',
+  female: 'woman',
+};
 
 export function DailyRateContent() {
-  const { handleSubmit, register } = useForm<UserDailyWaterRate>({
-    defaultValues: {
-      gender: '',
-      weight: 0,
-      activeTime: 0,
-    },
-  });
-  const { mutate: addDailyRate } = useAddDailyRate();
+  const { handleSubmit, register, control, reset } =
+    useForm<UserDailyWaterRate>({
+      defaultValues: {
+        gender: '',
+        weight: '',
+        activeTime: '',
+      },
+    });
+
+  const { mutate: addDailyRate } = useAddDailyRate({ reset });
 
   return (
     <ModalContainer className="tablet-ms:w-[704px] desktop-m:w-[592px] flex">
@@ -54,24 +59,31 @@ export function DailyRateContent() {
           <div className="flex flex-col">
             <p className="text-2x mb-4">Calculate your rate:</p>
             <div className="mb-4 flex items-center gap-6">
-              <ItemLabel className="m-0! flex items-center gap-2">
-                <input
-                  type="radio"
-                  id="gender"
-                  value={Gender.FEMALE}
-                  {...register('gender')}
-                />
-                <Label className="m-0!"> For woman</Label>
-              </ItemLabel>
-              <ItemLabel className="m-0! flex items-center gap-2">
-                <input
-                  type="radio"
-                  id="gender"
-                  value={Gender.MALE}
-                  {...register('gender')}
-                />
-                <Label className="m-0!"> For man</Label>
-              </ItemLabel>
+              <Controller
+                name="gender"
+                control={control}
+                rules={{ required: true }}
+                render={({ field }) => (
+                  <RadioGroup.Root
+                    className="flex items-center gap-1"
+                    {...field}
+                    onValueChange={field.onChange}
+                  >
+                    <ItemLabel className="m-0! flex items-center gap-2">
+                      <RadioBtn value={Gender.female} id="r1" />
+                      <Label className="m-0!" htmlFor="r1">
+                        For woman
+                      </Label>
+                    </ItemLabel>
+                    <ItemLabel className="m-0! flex items-center gap-2">
+                      <RadioBtn value={Gender.male} id="r2" />
+                      <Label className="m-0!" htmlFor="r2">
+                        For man
+                      </Label>
+                    </ItemLabel>
+                  </RadioGroup.Root>
+                )}
+              />
             </div>
             <ItemLabel>
               <Label className="text-1x">Your weight in kilograms:</Label>

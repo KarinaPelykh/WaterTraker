@@ -17,8 +17,8 @@ type AmountWater = {
 
 type UserDailyRate = {
   gender: string;
-  weight: number;
-  activeTime: number;
+  weight: string;
+  activeTime: string;
 };
 
 export const signup = async (data: SignupSchema) => {
@@ -52,8 +52,6 @@ export const getHydrationStory = async () => {
 };
 
 export const deleteHydrationLog = async (userID: string) => {
-  console.log('delete', userID);
-
   const response = await axiosInstance.delete(`water/${userID}`);
 
   return response;
