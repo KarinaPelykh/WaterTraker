@@ -14,7 +14,7 @@ export function ScrollAreaBar({
       <ScrollArea.Viewport className={clsx('relative mr-1 w-full', className)}>
         {children}
       </ScrollArea.Viewport>
-      <div className="relative hidden w-0.5">
+      <div className="relative w-0.5">
         <ScrollArea.Scrollbar
           className="bg-blue2 absolute top-0 right-0 w-0.5 touch-none rounded-s opacity-100 transition-all"
           orientation="vertical"

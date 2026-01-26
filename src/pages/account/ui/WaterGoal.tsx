@@ -14,7 +14,7 @@ export function WaterGoal() {
         <p className="text-2x mb-3">My daily norma</p>
         <div className="flex items-center gap-3">
           <span className="text-7x desktop-m:text-3x text-blue font-bold">
-            {isPending ? 1.5 : data?.data.water} L
+            {isPending ? 1.5 : data.water} L
           </span>
           <Trigger className="text-blue-marine! cursor-pointer">Edit</Trigger>
         </div>

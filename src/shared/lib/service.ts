@@ -20,7 +20,7 @@ type UserDailyRate = {
   weight: string;
   activeTime: string;
 };
-
+// auth
 export const signup = async (data: SignupSchema) => {
   const response = await axiosInstance.post('auth/signup', data);
 
@@ -38,6 +38,7 @@ export const current = async () => {
 
   return response;
 };
+// auth/
 
 export const addWater = async (data: AmountWater) => {
   const response = await axiosInstance.post('water', data);
@@ -45,10 +46,10 @@ export const addWater = async (data: AmountWater) => {
   return response;
 };
 
-export const getHydrationStory = async () => {
+export const getTodaysHydrationStory = async () => {
   const response = await axiosInstance.get('water');
 
-  return response;
+  return response.data;
 };
 
 export const deleteHydrationLog = async (userID: string) => {
@@ -66,5 +67,10 @@ export const addDailyRate = async (data: UserDailyRate) => {
 export const getUserInfo = async () => {
   const response = await axiosInstance.get('user');
 
-  return response;
+  return response.data;
+};
+export const getMonthHydrationStory = async (userID: string) => {
+  const response = await axiosInstance.get(`month/${userID}`);
+
+  return response.data;
 };

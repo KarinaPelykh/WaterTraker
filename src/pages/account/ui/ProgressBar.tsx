@@ -8,7 +8,9 @@ const progress = [
   { id: 3, text: '100%' },
 ];
 
-export function ProgressBar() {
+type ProgressBarProps = { percentOfConsumedWater: number };
+
+export function ProgressBar({ percentOfConsumedWater }: ProgressBarProps) {
   return (
     <div className="tablet-ms:mb-0 desktop-m:w-2/3 mb-4 w-full">
       <span className="text-2x text-blue mb-2 block">Today</span>
@@ -20,11 +22,13 @@ export function ProgressBar() {
           >
             <Progress.Indicator
               className="bg-middle-blue size-full"
-              // style={{ transform: `translateX(-${100 - 50}%)` }}
+              style={{
+                transform: `translateX(-${100 - percentOfConsumedWater}%)`,
+              }}
             />
             <div
               className="border-blue absolute top-1/2 size-3.5 -translate-y-1/2 rounded-full border bg-white transition-all duration-500 ease-out"
-              // style={{ left: `calc(${50}% - 10px)` }}
+              style={{ left: `calc(${percentOfConsumedWater}% - 10px)` }}
             />
           </Progress.Root>
         </div>
