@@ -70,7 +70,52 @@ export const getUserInfo = async () => {
   return response.data;
 };
 export const getMonthHydrationStory = async (userID: string) => {
-  const response = await axiosInstance.get(`month/${userID}`);
+  const response = await axiosInstance.get(`water/month/${userID}`, {
+    params: {
+      date: '2026.01',
+    },
+  });
 
   return response.data;
 };
+
+// const usedWaterByMonth = async (req, res) => {
+//   const { id } = req.params;
+//   const { date } = req.body;
+
+//   const [year, month] = date.split(".").map(Number);
+
+//   const startDate = new Date(year, month - 1, 1);
+//   const endDate = new Date(year, month, 0, 23, 59, 59, 999).getDate();
+
+//   const user = await User.findById(id);
+//   if (!user) {
+//     throw HttpError(404);
+//   }
+
+//   const dailyGoal = Number(user.water) || 1.5;
+
+//   const result = [];
+
+//   // for (let day = 1; day <= dayInMonth; day++) {
+//   //   const start = new Date(year, monthIndex, day, 0, 0, 0, 0);
+//   //   const end = new Date(year, monthIndex, day, 23, 59, 59, 999);
+
+//   //   const data = await Water.find({
+//   //     createdAt: { $gte: start, $lte: end },
+//   //   });
+
+//   //   const total = data.reduce((sum, item) => (sum += item.amount), 0);
+
+//   //   const liters = total / 1000;
+//   //   const percent = (liters / Number(user.water)) * 100;
+
+//   // result.push({
+//   //   dailyNormWater: user.water,
+//   //   percent: Math.round(percent),
+//   //   list: data,
+//   //   date: `${day},${months[monthIndex]}`,
+//   // });
+//   // }
+//   res.json(result);
+// };

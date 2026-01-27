@@ -8,10 +8,12 @@ import { AddWater } from '../../../shared/ModalContent/AddWater';
 import { useHydrationStory } from '../api/useHydrationStory';
 import { HydrationMonthlyStats } from './HydrationMonthlyStats';
 import { useGetUserInfo } from '../api/useGetUserInfo';
+import { useToggle } from '../../../shared/hooks/useToggle';
 
 export function HydrationDashboard() {
   const { data, isPending } = useHydrationStory();
   const { data: userIfo } = useGetUserInfo();
+  const { isOpen, setIsOpen } = useToggle();
 
   const consumed = data?.reduce(
     (sum: number, { amount }: { amount: string }) => sum + Number(amount),
@@ -26,7 +28,7 @@ export function HydrationDashboard() {
   return (
     <section className="pb-10">
       <div className="desktop-m:flex desktop-m:gap-8 relative container">
-        <Root>
+        <Root open={isOpen} onOpenChange={setIsOpen}>
           <div className="desktop-m:w-1/2">
             <WaterGoal />
             <img
@@ -65,7 +67,7 @@ export function HydrationDashboard() {
 
             <HydrationMonthlyStats />
           </div>
-          <AddWater />
+          <AddWater setIsOpen={setIsOpen} />
         </Root>
       </div>
     </section>

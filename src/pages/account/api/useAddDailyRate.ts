@@ -16,7 +16,6 @@ export const useAddDailyRate = ({
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['daily-rate'] });
       reset();
-      close();
     },
   });
 };

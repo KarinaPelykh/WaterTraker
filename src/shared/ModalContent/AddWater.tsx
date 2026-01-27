@@ -8,7 +8,9 @@ import { useAddWater } from '../../pages/account/api/useAddWater';
 import { useForm } from 'react-hook-form';
 import type { UserWaterEntity } from '../../pages/account/model/contract';
 
-export function AddWater() {
+type AddWaterProps = { setIsOpen: (value: boolean) => void };
+
+export function AddWater({ setIsOpen }: AddWaterProps) {
   const [amountWater, setAmountWater] = useState(50);
 
   const handelAmountWater = () => {
@@ -18,7 +20,7 @@ export function AddWater() {
   const { watch, register, handleSubmit, reset } = useForm<UserWaterEntity>({
     defaultValues: { time: '', amount: 0 },
   });
-  
+
   const { mutate: addWater } = useAddWater(reset);
 
   const definiteAmountOfWater = watch('amount') ? watch('amount') : amountWater;
@@ -28,6 +30,7 @@ export function AddWater() {
       <form
         onSubmit={handleSubmit(({ time }) => {
           addWater({ time, amount: Number(definiteAmountOfWater) });
+          setIsOpen(false);
         })}
       >
         <div className="mb-6 flex items-center justify-between">

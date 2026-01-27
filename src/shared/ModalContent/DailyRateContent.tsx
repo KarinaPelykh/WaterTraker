@@ -10,14 +10,17 @@ import { useAddDailyRate } from '../../pages/account/api/useAddDailyRate';
 import type { UserDailyWaterRate } from '../../pages/account/model/contract';
 import { RadioBtn } from '../RadioBtn';
 import * as RadioGroup from '@radix-ui/react-radio-group';
-import { useToggle } from '../hooks/useToggle';
 
 const Gender = {
   male: 'male',
   female: 'woman',
 };
 
-export function DailyRateContent() {
+type DailyRateContentProps = {
+  setIsOpen: (value: boolean) => void;
+};
+
+export function DailyRateContent({ setIsOpen }: DailyRateContentProps) {
   const { handleSubmit, register, control, reset } =
     useForm<UserDailyWaterRate>({
       defaultValues: {
@@ -32,7 +35,12 @@ export function DailyRateContent() {
   return (
     <ModalContainer className="tablet-ms:w-[704px] desktop-m:w-[592px] flex">
       <ScrollAreaBar className="flex min-h-0 flex-1">
-        <Form onSubmit={handleSubmit((data) => addDailyRate(data))}>
+        <Form
+          onSubmit={handleSubmit((data) => {
+            addDailyRate(data);
+            setIsOpen(false);
+          })}
+        >
           <div className="mb-6 flex items-center justify-between">
             <Dialog.Title className="text-4x">My daily norma</Dialog.Title>
             <Dialog.Trigger className="cursor-pointer">
