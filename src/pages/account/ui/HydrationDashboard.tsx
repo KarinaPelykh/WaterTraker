@@ -5,25 +5,30 @@ import { ProgressBar } from './ProgressBar';
 import { WaterConsumptionItem } from './WaterConsumptionItem';
 import { WaterGoal } from './WaterGoal';
 import { AddWater } from '../../../shared/ModalContent/AddWater';
-import { useHydrationStory } from '../api/useHydrationStory';
+import { useTodaysHydrationStory } from '../api/useTodaysHydrationStory';
 import { HydrationMonthlyStats } from './HydrationMonthlyStats';
 import { useGetUserInfo } from '../api/useGetUserInfo';
 import { useToggle } from '../../../shared/hooks/useToggle';
 
 export function HydrationDashboard() {
-  const { data, isPending } = useHydrationStory();
   const { data: userIfo } = useGetUserInfo();
+
+  const userID = userIfo?.id;
+
+  const { data, isPending } = useTodaysHydrationStory(userID);
+  // console.log(data);
+
   const { isOpen, setIsOpen } = useToggle();
 
-  const consumed = data?.reduce(
-    (sum: number, { amount }: { amount: string }) => sum + Number(amount),
-    0,
-  );
+  // const consumed = data.list?.reduce(
+  //   (sum: number, { amount }: { amount: string }) => sum + Number(amount),
+  //   0,
+  // );
 
-  const percentOfConsumedWater =
-    consumed && userIfo?.water
-      ? (consumed / Number(userIfo?.water * 1000)) * 100
-      : 0;
+  // const percentOfConsumedWater =
+  //   consumed && userIfo?.water
+  //     ? (consumed / Number(userIfo?.water * 1000)) * 100
+  //     : 0;
 
   return (
     <section className="pb-10">
@@ -37,7 +42,7 @@ export function HydrationDashboard() {
               alt="Botel of water"
             />
             <div className="tablet-ms:flex tablet-ms:gap-3 desktop-m:gap-[23px] tablet-ms:items-center tablet-ms:mb-10 desktop-m:mb-0 w-full">
-              <ProgressBar percentOfConsumedWater={percentOfConsumedWater} />
+              <ProgressBar percentOfConsumedWater={data?.percent} />
 
               <Trigger className="text-1x tablet-ms:text-2x bg-blue shadow-secondary tablet-ms:mb-0! desktop-m:w-[178px] desktop-m:text-2x mb-10! flex w-full cursor-pointer items-center justify-center gap-2.5 rounded-s px-[30px] py-1.5! text-white">
                 <Icon iconName="add" className="size-6 stroke-white" />
@@ -45,26 +50,27 @@ export function HydrationDashboard() {
               </Trigger>
             </div>
           </div>
-          <div className="bg-light-blue shadow-base tablet-ms:py-8 tablet-ms:px-6 desktop-m:w-1/2 rounded-s px-2 py-6">
-            <p className="text-3x">Today</p>
-            <ScrollAreaBar className="h-[200px]">
-              <ul className="mb-3">
-                {isPending ? (
-                  <span>Loading...</span>
-                ) : (
-                  data.map(
-                    (item: { _id: string; time: string; amount: number }) => (
-                      <WaterConsumptionItem key={item._id} item={item} />
-                    ),
-                  )
-                )}
-              </ul>
+          <div className="bg-light-blue shadow-base tablet-ms:py-8 tablet-ms:px-6 desktop-m:w-1/2 desktop-m:h-[680px] flex flex-col rounded-s px-2 py-6">
+            <div className="mb-auto">
+              <p className="text-3x mb-4">Today</p>
+              <ScrollAreaBar className="max-h-[200px]">
+                <ul>
+                  {isPending ? (
+                    <span>Loading...</span>
+                  ) : (
+                    data?.list.map(
+                      (item: { _id: string; time: string; amount: number }) => (
+                        <WaterConsumptionItem key={item._id} item={item} />
+                      ),
+                    )
+                  )}
+                </ul>
+              </ScrollAreaBar>
               <Trigger className="text-blue mb-6 flex cursor-pointer items-center justify-center gap-2 font-medium">
                 <Icon iconName="plus" className="stroke-blue size-4" />
                 Add Water
               </Trigger>
-            </ScrollAreaBar>
-
+            </div>
             <HydrationMonthlyStats />
           </div>
           <AddWater setIsOpen={setIsOpen} />

@@ -1,9 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
 import { getTodaysHydrationStory } from '../../../shared/lib/service';
 
-export const useHydrationStory = () => {
+export const useTodaysHydrationStory = (usedID: string) => {
   return useQuery({
-    queryKey: ['hydration-story'],
-    queryFn: getTodaysHydrationStory,
+    queryKey: ['today-story'],
+    queryFn: () => getTodaysHydrationStory(usedID),
   });
 };

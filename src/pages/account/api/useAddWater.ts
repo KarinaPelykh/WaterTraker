@@ -10,7 +10,9 @@ export const useAddWater = (reset: UseFormReset<UserWaterEntity>) => {
     mutationKey: ['water'],
     mutationFn: addWater,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['hydration-story'] });
+      queryClient.invalidateQueries({
+        queryKey: ['today-story'],
+      });
       reset();
     },
   });

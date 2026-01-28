@@ -46,8 +46,8 @@ export const addWater = async (data: AmountWater) => {
   return response;
 };
 
-export const getTodaysHydrationStory = async () => {
-  const response = await axiosInstance.get('water');
+export const getTodaysHydrationStory = async (userID: string) => {
+  const response = await axiosInstance.get(`water/${userID}`);
 
   return response.data;
 };
@@ -78,6 +78,14 @@ export const getMonthHydrationStory = async (userID: string) => {
 
   return response.data;
 };
+
+export const getAll = async () => {
+  const response = await axiosInstance.get('water');
+  console.log(response.data);
+
+  return response.data;
+};
+getAll();
 
 // const usedWaterByMonth = async (req, res) => {
 //   const { id } = req.params;

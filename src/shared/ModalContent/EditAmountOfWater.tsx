@@ -2,8 +2,16 @@ import { Icon } from '../Icon';
 import { Button } from '../Button';
 import { ModalContainer } from './ModalContainer';
 import * as Dialog from '@radix-ui/react-dialog';
+import { BtnStepper } from '../BtnStepper';
+import type { UserWaterEntity } from '../../pages/account/model/contract';
 
-export function EditAmountOfWater() {
+type EditAmountOfWaterProps = {
+  item: { _id: string } & UserWaterEntity;
+};
+
+export function EditAmountOfWater({ item }: EditAmountOfWaterProps) {
+  console.log(item.amount);
+
   return (
     <ModalContainer className="desktop-m:w-[592px] tablet-ms:w-[704px]">
       <form>
@@ -19,23 +27,7 @@ export function EditAmountOfWater() {
         <Dialog.Description aria-describedby={undefined} />
 
         <p className="text-2x mb-3">Amount of water:</p>
-        <div className="mb-6 flex items-center gap-[7px]">
-          <Button
-            className="border-middle-blue flex size-11! items-center justify-center rounded-full! border"
-            variant="secondary"
-          >
-            <Icon iconName="minus" className="stroke-blue size-6" />
-          </Button>
-          <span className="text-blue text-2x bg-light-blue rounded-m block px-2.5 py-1.5 font-bold">
-            {50}ml
-          </span>
-          <Button
-            className="border-middle-blue flex size-11! items-center justify-center rounded-full! border"
-            variant="secondary"
-          >
-            <Icon iconName="plus" className="stroke-blue fill-blue size-6" />
-          </Button>
-        </div>
+        <BtnStepper />
         <label className="mb-6 block">
           <p className="mb-3">Recording time:</p>
           <input

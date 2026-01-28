@@ -4,12 +4,15 @@ import * as Separator from '@radix-ui/react-separator';
 import { AlterContent } from '../../../shared/ModalContent/AlterContent';
 import { EditAmountOfWater } from '../../../shared/ModalContent/EditAmountOfWater';
 import type { UserWaterEntity } from '../model/contract';
+import { useToggle } from '../../../shared/hooks/useToggle';
 
 type WaterConsumptionItemProps = {
   item: { _id: string } & UserWaterEntity;
 };
 
 export function WaterConsumptionItem({ item }: WaterConsumptionItemProps) {
+  const { isOpen, setIsOpen } = useToggle();
+
   return (
     <>
       <li className="mt-[13px] mb-3 flex items-center">
@@ -25,17 +28,17 @@ export function WaterConsumptionItem({ item }: WaterConsumptionItemProps) {
           <Trigger className="mr-4.5! cursor-pointer">
             <Icon iconName="edit" className="stroke-middle-blue size-4" />
           </Trigger>
-          <EditAmountOfWater />
+          <EditAmountOfWater item={item} />
         </Root>
-        <Root>
+        <Root open={isOpen} onOpenChange={setIsOpen}>
           <Trigger className="cursor-pointer">
             <Icon iconName="delete" className="stroke-error-color size-4" />
           </Trigger>
-          <AlterContent userID={item._id} />
+          <AlterContent setIsOpen={setIsOpen} userID={item._id} />
         </Root>
       </li>
       <Separator.Root
-        className="bg-blue2 mb-1 ml-2 h-px w-full"
+        className="bg-blue2 h-px w-full"
         decorative
         orientation="vertical"
       />

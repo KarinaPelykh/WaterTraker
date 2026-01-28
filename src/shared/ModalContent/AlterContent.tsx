@@ -5,14 +5,25 @@ import { ModalContainer } from './ModalContainer';
 import { useDeleteHydrationLog } from '../../pages/account/api/useDeleteHydrationLog';
 import { useForm } from 'react-hook-form';
 
-export function AlterContent({ userID }: { userID: string }) {
+export function AlterContent({
+  userID,
+  setIsOpen,
+}: {
+  userID: string;
+  setIsOpen: (value: boolean) => void;
+}) {
   const { mutate: deleteHydrationLog } = useDeleteHydrationLog(userID);
 
   const { handleSubmit } = useForm();
 
   return (
     <ModalContainer className="tablet-ms:w-[592px]">
-      <form onSubmit={handleSubmit(() => deleteHydrationLog())}>
+      <form
+        onSubmit={handleSubmit(() => {
+          deleteHydrationLog();
+          setIsOpen(false);
+        })}
+      >
         <div className="mb-6 flex items-center justify-between">
           <Dialog.Title className="text-4x">Delete entry</Dialog.Title>
           <Dialog.DialogDescription aria-describedby={undefined} />

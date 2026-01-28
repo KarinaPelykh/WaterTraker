@@ -8,7 +8,9 @@ export const useDeleteHydrationLog = (userID: string) => {
     mutationKey: ['delete', userID],
     mutationFn: () => deleteHydrationLog(userID),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['hydration-story'] });
+      queryClient.invalidateQueries({
+        queryKey: ['today-story'],
+      });
     },
   });
 };

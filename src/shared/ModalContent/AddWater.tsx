@@ -2,28 +2,24 @@ import * as Dialog from '@radix-ui/react-dialog';
 
 import { Icon } from '../Icon';
 import { Button } from '../Button';
-import { useState } from 'react';
 import { ModalContainer } from './ModalContainer';
 import { useAddWater } from '../../pages/account/api/useAddWater';
 import { useForm } from 'react-hook-form';
 import type { UserWaterEntity } from '../../pages/account/model/contract';
+import { BtnStepper } from '../BtnStepper';
 
 type AddWaterProps = { setIsOpen: (value: boolean) => void };
 
 export function AddWater({ setIsOpen }: AddWaterProps) {
-  const [amountWater, setAmountWater] = useState(50);
-
-  const handelAmountWater = () => {
-    return amountWater > 0 && setAmountWater(amountWater - 50);
-  };
-
   const { watch, register, handleSubmit, reset } = useForm<UserWaterEntity>({
     defaultValues: { time: '', amount: 0 },
   });
 
   const { mutate: addWater } = useAddWater(reset);
 
-  const definiteAmountOfWater = watch('amount') ? watch('amount') : amountWater;
+  // const definiteAmountOfWater = watch('amount') ? watch('amount') : amountWater;
+
+  const definiteAmountOfWater = watch('amount') ? watch('amount') : 200;
 
   return (
     <ModalContainer className="desktop-m:w-[592px] tablet-ms:w-[704px]">
@@ -42,25 +38,7 @@ export function AddWater({ setIsOpen }: AddWaterProps) {
         <Dialog.DialogDescription aria-describedby={undefined} />
         <h2 className="text-2x mb-4">Choose a value:</h2>
         <p className="text-2x mb-3">Amount of water:</p>
-        <div className="mb-6 flex items-center gap-[7px]">
-          <Button
-            onClick={handelAmountWater}
-            className="border-middle-blue flex size-11! items-center justify-center rounded-full! border"
-            variant="secondary"
-          >
-            <Icon iconName="minus" className="stroke-blue size-6" />
-          </Button>
-          <span className="text-blue text-2x bg-light-blue rounded-m block px-2.5 py-1.5 font-bold">
-            {amountWater}ml
-          </span>
-          <Button
-            onClick={() => setAmountWater(amountWater + 50)}
-            className="border-middle-blue flex size-11! items-center justify-center rounded-full! border"
-            variant="secondary"
-          >
-            <Icon iconName="plus" className="stroke-blue fill-blue size-6" />
-          </Button>
-        </div>
+        <BtnStepper />
         <label className="mb-6 block">
           <p className="mb-3">Recording time:</p>
           <input
