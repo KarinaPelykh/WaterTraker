@@ -1,8 +1,8 @@
 import { z } from 'zod';
 
 export const UserWaterEntitySchema = z.object({
-  time: z.string(),
-  amount: z.number(),
+  time: z.iso.time(),
+  amount: z.string(),
 });
 
 export const UserDailyWaterRateSchema = z.object({

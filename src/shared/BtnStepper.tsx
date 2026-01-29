@@ -1,9 +1,9 @@
-import { useState } from 'react';
+// import { useState } from 'react';
 import { Button } from './Button';
 import { Icon } from './Icon';
 
-export const BtnStepper = () => {
-  const [amountWater, setAmountWater] = useState(50);
+export const BtnStepper = ({ amountWater, setAmountWater }) => {
+  // const [amountWater, setAmountWater] = useState(50);
 
   const handelAmountWater = () => {
     return amountWater > 0 && setAmountWater(amountWater - 50);

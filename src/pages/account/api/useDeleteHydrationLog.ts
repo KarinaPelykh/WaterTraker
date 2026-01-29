@@ -11,6 +11,7 @@ export const useDeleteHydrationLog = (userID: string) => {
       queryClient.invalidateQueries({
         queryKey: ['today-story'],
       });
+      queryClient.invalidateQueries({ queryKey: ['months-water'] });
     },
   });
 };

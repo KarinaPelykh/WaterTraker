@@ -22,3 +22,4 @@ export function WaterGoal() {
     </Root>
   );
 }
+/// you must pay attention to how you got daily goal from hook getUserInf!!!!!!!!!

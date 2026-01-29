@@ -12,10 +12,10 @@ export const useAddDailyRate = ({
 
   return useMutation({
     mutationFn: addDailyRate,
-    mutationKey: ['daily-rate'],
+    mutationKey: ['daily-goal'],
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['daily-rate'] });
       reset();
+      queryClient.invalidateQueries({ queryKey: ['user'] });
     },
   });
 };

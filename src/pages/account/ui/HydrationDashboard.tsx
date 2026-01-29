@@ -4,31 +4,19 @@ import { ScrollAreaBar } from '../../../shared/ScrollAreaBar';
 import { ProgressBar } from './ProgressBar';
 import { WaterConsumptionItem } from './WaterConsumptionItem';
 import { WaterGoal } from './WaterGoal';
-import { AddWater } from '../../../shared/ModalContent/AddWater';
 import { useTodaysHydrationStory } from '../api/useTodaysHydrationStory';
 import { HydrationMonthlyStats } from './HydrationMonthlyStats';
 import { useGetUserInfo } from '../api/useGetUserInfo';
 import { useToggle } from '../../../shared/hooks/useToggle';
+import { HydrationLogEditor } from '../../../shared/ModalContent/HydrationLogEditor';
+import type { UserWaterEntity } from '../model/contract';
 
 export function HydrationDashboard() {
   const { data: userIfo } = useGetUserInfo();
 
-  const userID = userIfo?.id;
-
-  const { data, isPending } = useTodaysHydrationStory(userID);
-  // console.log(data);
+  const { data } = useTodaysHydrationStory(userIfo?.id);
 
   const { isOpen, setIsOpen } = useToggle();
-
-  // const consumed = data.list?.reduce(
-  //   (sum: number, { amount }: { amount: string }) => sum + Number(amount),
-  //   0,
-  // );
-
-  // const percentOfConsumedWater =
-  //   consumed && userIfo?.water
-  //     ? (consumed / Number(userIfo?.water * 1000)) * 100
-  //     : 0;
 
   return (
     <section className="pb-10">
@@ -55,15 +43,9 @@ export function HydrationDashboard() {
               <p className="text-3x mb-4">Today</p>
               <ScrollAreaBar className="max-h-[200px]">
                 <ul>
-                  {isPending ? (
-                    <span>Loading...</span>
-                  ) : (
-                    data?.list.map(
-                      (item: { _id: string; time: string; amount: number }) => (
-                        <WaterConsumptionItem key={item._id} item={item} />
-                      ),
-                    )
-                  )}
+                  {data?.list.map((item: { _id: string } & UserWaterEntity) => (
+                    <WaterConsumptionItem key={item._id} item={item} />
+                  ))}
                 </ul>
               </ScrollAreaBar>
               <Trigger className="text-blue mb-6 flex cursor-pointer items-center justify-center gap-2 font-medium">
@@ -73,7 +55,7 @@ export function HydrationDashboard() {
             </div>
             <HydrationMonthlyStats />
           </div>
-          <AddWater setIsOpen={setIsOpen} />
+          <HydrationLogEditor setIsOpen={setIsOpen} />
         </Root>
       </div>
     </section>

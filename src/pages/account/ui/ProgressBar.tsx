@@ -15,9 +15,9 @@ export function ProgressBar({ percentOfConsumedWater }: ProgressBarProps) {
     <div className="tablet-ms:mb-0 desktop-m:w-2/3 mb-4 w-full">
       <span className="text-2x text-blue mb-2 block">Today</span>
       <div>
-        <div className="relative mb-1">
+        <div className="relative mb-1 w-full">
           <Progress.Root
-            className="bg-blue2 mx-2.5 h-2 overflow-hidden rounded-s"
+            className="bg-blue2 h-2 overflow-hidden rounded-s"
             value={50}
           >
             <Progress.Indicator

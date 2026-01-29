@@ -3,7 +3,12 @@ import { addWater } from '../../../shared/lib/service';
 import type { UseFormReset } from 'react-hook-form';
 import type { UserWaterEntity } from '../model/contract';
 
-export const useAddWater = (reset: UseFormReset<UserWaterEntity>) => {
+type AddWaterProps = {
+  reset: UseFormReset<UserWaterEntity>;
+  setIsOpen: (value: boolean) => void;
+};
+
+export const useAddWater = ({ reset, setIsOpen }: AddWaterProps) => {
   const queryClient = useQueryClient();
 
   return useMutation({
@@ -13,7 +18,11 @@ export const useAddWater = (reset: UseFormReset<UserWaterEntity>) => {
       queryClient.invalidateQueries({
         queryKey: ['today-story'],
       });
+      queryClient.invalidateQueries({
+        queryKey: ['months-water'],
+      });
       reset();
+      setIsOpen(false);
     },
   });
 };

@@ -2,9 +2,9 @@ import { Root, Trigger } from '@radix-ui/react-dialog';
 import { Icon } from '../../../shared/Icon';
 import * as Separator from '@radix-ui/react-separator';
 import { AlterContent } from '../../../shared/ModalContent/AlterContent';
-import { EditAmountOfWater } from '../../../shared/ModalContent/EditAmountOfWater';
 import type { UserWaterEntity } from '../model/contract';
 import { useToggle } from '../../../shared/hooks/useToggle';
+import { HydrationLogEditor } from '../../../shared/ModalContent/HydrationLogEditor';
 
 type WaterConsumptionItemProps = {
   item: { _id: string } & UserWaterEntity;
@@ -24,11 +24,11 @@ export function WaterConsumptionItem({ item }: WaterConsumptionItemProps) {
           {item.amount} ml
         </p>
         <p className="text-sx tablet-ms:mr-auto mr-[38px]">{item.time}</p>
-        <Root>
+        <Root open={isOpen} onOpenChange={setIsOpen}>
           <Trigger className="mr-4.5! cursor-pointer">
             <Icon iconName="edit" className="stroke-middle-blue size-4" />
           </Trigger>
-          <EditAmountOfWater item={item} />
+          <HydrationLogEditor setIsOpen={setIsOpen} item={item} />
         </Root>
         <Root open={isOpen} onOpenChange={setIsOpen}>
           <Trigger className="cursor-pointer">
