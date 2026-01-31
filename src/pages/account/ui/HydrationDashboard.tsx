@@ -6,15 +6,13 @@ import { WaterConsumptionItem } from './WaterConsumptionItem';
 import { WaterGoal } from './WaterGoal';
 import { useTodaysHydrationStory } from '../api/useTodaysHydrationStory';
 import { HydrationMonthlyStats } from './HydrationMonthlyStats';
-import { useGetUserInfo } from '../api/useGetUserInfo';
 import { useToggle } from '../../../shared/hooks/useToggle';
 import { HydrationLogEditor } from '../../../shared/ModalContent/HydrationLogEditor';
 import type { UserWaterEntity } from '../model/contract';
 
 export function HydrationDashboard() {
-  const { data: userIfo } = useGetUserInfo();
 
-  const { data } = useTodaysHydrationStory(userIfo?.id);
+  const { data } = useTodaysHydrationStory();
 
   const { isOpen, setIsOpen } = useToggle();
 

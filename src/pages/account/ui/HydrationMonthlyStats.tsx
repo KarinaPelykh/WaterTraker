@@ -1,15 +1,12 @@
 // import { Button } from '../../../shared/Button';
 // import { Icon } from '../../../shared/Icon';
-import { useGetUserInfo } from '../api/useGetUserInfo';
 import { useGetMonthWater } from '../api/useGetMonthWater';
 import { HydrationMonthlyItem } from './HydrationMontlyItem';
 import type { MonthWaterlog } from '../types/hydration-dashboar.types';
 // import { RenderCustomMonth } from '../../../shared/DataPicker';
 
 export function HydrationMonthlyStats() {
-  const { data } = useGetUserInfo();
-
-  const { data: monthWaterlog } = useGetMonthWater(data?.id);
+  const { data: monthWaterlog } = useGetMonthWater();
 
   return (
     <div>

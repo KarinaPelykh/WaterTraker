@@ -31,14 +31,19 @@ export function useAuth() {
 }
 
 export function AuthProvider({ children }: AuthProviderProps) {
-  const [token, setToken] = useState('');
+  const [token, setToken] = useState(
+    () => localStorage.getItem('accessToken') ?? '',
+  );
 
-  const { data } = useIsAuthenticated(token);
+  const { data } = useIsAuthenticated();
 
   useEffect(() => {
     if (token) {
+      localStorage.setItem('accessToken', token);
+
       setAuthToken(token);
     } else {
+      localStorage.removeItem('accessToken');
       removeAuthToken();
     }
   }, [token]);
