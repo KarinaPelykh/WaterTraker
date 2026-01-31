@@ -36,7 +36,7 @@ export const signin = async (data: UserSignin) => {
 export const current = async () => {
   const response = await axiosInstance.get('auth/current');
 
-  return response;
+  return response.data;
 };
 // auth/
 
@@ -86,7 +86,6 @@ export const addEditWater = async (data: AmountWater & { userID: string }) => {
     amount,
     time,
   });
-  console.log(response);
 
   return response.data;
 };
