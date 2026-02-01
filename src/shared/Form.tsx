@@ -10,7 +10,7 @@ export function Form({ ...props }: FromProps) {
 }
 
 export function Label({ className, ...props }: ComponentProps<'label'>) {
-  return <label className={clsx('text-2x mb-2', className)} {...props} />;
+  return <label className={clsx('text-2x mb-2 block', className)} {...props} />;
 }
 
 export function ItemLabel({ className, ...props }: ComponentProps<'div'>) {

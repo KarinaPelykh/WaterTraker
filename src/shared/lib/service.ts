@@ -73,7 +73,7 @@ export const getUserInfo = async () => {
 export const getMonthHydrationStory = async () => {
   const response = await axiosInstance.get(`water/month`, {
     params: {
-      date: '2026.01',
+      date: '2026.02',
     },
   });
 

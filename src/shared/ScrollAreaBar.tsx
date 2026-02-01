@@ -5,16 +5,24 @@ import type { ReactNode } from 'react';
 export function ScrollAreaBar({
   children,
   className,
+  scrollClassName,
 }: {
   children: ReactNode;
   className: string;
+  scrollClassName?: string;
 }) {
   return (
-    <ScrollArea.Root className="flex" type="auto">
-      <ScrollArea.Viewport className={clsx('relative w-full pr-2', className)}>
+    <ScrollArea.Root className="flex w-full" type="auto">
+      <ScrollArea.Viewport
+        className={clsx(
+          'relative w-full pr-2',
+          className,
+          scrollClassName && 'pr-0!',
+        )}
+      >
         {children}
       </ScrollArea.Viewport>
-      <div className="relative w-0.5">
+      <div className={clsx('relative w-0.5', scrollClassName)}>
         <ScrollArea.Scrollbar
           className="bg-blue2 absolute top-0 right-0 w-0.5 touch-none rounded-s opacity-100 transition-all"
           orientation="vertical"

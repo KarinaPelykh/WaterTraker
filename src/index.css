@@ -64,6 +64,10 @@
   --text-1x--line-height: 20px;
   --text-1x--font-weight: 400;
 
+  --text-base: 14px;
+  --text-base--line-height: 18px;
+  --text-base--font-weight: 500;
+
   --text-sx: 12px;
   --text-1x--line-height: 16px;
   --text-1x--font-weight: 400;

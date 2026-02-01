@@ -46,19 +46,24 @@ export function User() {
       <HoverCard.Portal>
         <HoverCard.Content
           asChild
-          className="box- shadow-base flex h-[88px] w-[180px] rounded-s bg-white p-4"
+          className="shadow-base flex h-[88px] w-[118px] rounded-s bg-white p-4"
         >
-          <ul className="flex">
-            <Root open={isOpen} onOpenChange={setIsOpen}>
-              <Trigger className="text-blue mb-4 flex cursor-pointer gap-1">
-                <Icon iconName="setting" className="stroke-blue! size-4" />
-                Setting
-              </Trigger>
-              <UserProfile setIsOpen={setIsOpen} />
-            </Root>
+          <ul className="flex flex-col gap-4">
+            <li>
+              <Root open={isOpen} onOpenChange={setIsOpen}>
+                <Trigger className="text-blue mb-4 flex cursor-pointer gap-1 text-base">
+                  <Icon iconName="setting" className="stroke-blue! size-4" />
+                  Setting
+                </Trigger>
+                <UserProfile setIsOpen={setIsOpen} />
+              </Root>
+            </li>
 
             <li>
-              <button className="text-blue flex gap-1" onClick={logout}>
+              <button
+                className="text-blue flex gap-1 text-base"
+                onClick={logout}
+              >
                 <Icon iconName="logout" className="stroke-blue! size-4" /> Log
                 out
               </button>
