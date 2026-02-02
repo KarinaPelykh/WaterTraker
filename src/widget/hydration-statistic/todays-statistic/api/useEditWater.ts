@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { addEditWater } from '../../../shared/lib/service';
+import { addEditWater } from '../../../../shared/lib/service';
 
 // type EditWaterProps = {
 //   setIsOpen: (value: boolean) => void;

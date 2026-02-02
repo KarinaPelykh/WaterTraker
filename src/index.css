@@ -82,6 +82,9 @@
   --shadow-base: 0px 4px 14px 0px #407bff4d;
   --shadow-secondary: 0px 4px 8px 0px #407bff57;
   --shadow-third: 0px 4px 8px 0px #9ebbff1f;
+  --shadow-btn: 0px 4px 14px 0px #407bff8a;
+
+  --shadow-tooltip: 0px 4px 4px 0px #407bff4d;
 }
 
 .container {

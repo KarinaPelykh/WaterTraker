@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { deleteHydrationLog } from '../../../shared/lib/service';
+import { deleteHydrationLog } from '../../../../shared/lib/service';
 
 export const useDeleteHydrationLog = (userID: string) => {
   const queryClient = useQueryClient();

@@ -15,7 +15,9 @@ export function WaterGoal() {
           <span className="text-7x desktop-m:text-3x text-blue font-bold">
             {isPending ? 1.5 : data.water} L
           </span>
-          <Trigger className="text-blue-marine! cursor-pointer">Edit</Trigger>
+          <Trigger className="text-blue-marine! cursor-pointer transition-colors duration-500 hover:text-[#FF9D43]!">
+            Edit
+          </Trigger>
         </div>
       </div>
       <DailyRateContent setIsOpen={setIsOpen} />

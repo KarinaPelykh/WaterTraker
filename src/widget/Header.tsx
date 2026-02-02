@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import { Icon } from '../shared/Icon';
 import { useAuth } from '../providers/AuthProvider';
-import { User } from './User';
+import { User } from '../components/User';
 
 export function Header() {
   const { data } = useAuth();

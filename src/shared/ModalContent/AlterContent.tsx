@@ -2,7 +2,7 @@ import * as Dialog from '@radix-ui/react-dialog';
 import { Button } from '../Button';
 import { Icon } from '../Icon';
 import { ModalContainer } from './ModalContainer';
-import { useDeleteHydrationLog } from '../../pages/account/api/useDeleteHydrationLog';
+import { useDeleteHydrationLog } from '../../widget/hydration-statistic/todays-statistic/api/useDeleteHydrationLog';
 import { useForm } from 'react-hook-form';
 
 export function AlterContent({
@@ -10,7 +10,7 @@ export function AlterContent({
   setIsOpen,
 }: {
   userID: string;
-  setIsOpen: (value: boolean) => void;
+  setIsOpen?: (value: boolean) => void;
 }) {
   const { mutate: deleteHydrationLog } = useDeleteHydrationLog(userID);
 

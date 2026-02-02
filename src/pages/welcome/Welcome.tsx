@@ -1,6 +1,6 @@
-import { List } from '../components/List';
+import { List } from '../../components/List';
 import icon from '/sprite.svg';
-import css from './main.module.css';
+import css from './welcome.module.css';
 import clsx from 'clsx';
 import { Link } from 'react-router-dom';
 
@@ -13,7 +13,7 @@ const info = [
   { iconName: 'setting-user', content: 'Personal rate setting' },
 ];
 
-export function Main() {
+export function Welcome() {
   return (
     <section
       className={clsx(

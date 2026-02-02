@@ -13,7 +13,7 @@ import {
 import { ModalContainer } from './ModalContainer';
 import { useEffect, useState } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useEditWater } from '../../pages/account/api/useEditWater';
+import { useEditWater } from '../../widget/hydration-statistic/todays-statistic/api/useEditWater';
 
 type HydrationLogEditorProps = {
   setIsOpen: (value: boolean) => void;

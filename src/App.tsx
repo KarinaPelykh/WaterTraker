@@ -1,17 +1,17 @@
 import './index.css';
 import { createBrowserRouter } from 'react-router-dom';
-import { Main } from './pages/Main';
+import { Welcome } from './pages/welcome/Welcome';
 import { RootLayout } from './components/RootLayout';
 import { Signup } from './pages/signup/Signup';
 import { Signin } from './pages/signin/Signin';
-import { HydrationDashboard } from './pages/account/ui/HydrationDashboard';
+import { HydrationDashboard } from './pages/account/ui/HydrationTraker';
 
 const routers = createBrowserRouter([
   {
     path: '/',
     element: <RootLayout />,
     children: [
-      { index: true, element: <Main /> },
+      { index: true, element: <Welcome /> },
       { path: 'signup', element: <Signup /> },
       { path: 'signin', element: <Signin /> },
       { path: 'main', element: <HydrationDashboard /> },

@@ -1,8 +1,8 @@
 // import { Button } from '../../../shared/Button';
 // import { Icon } from '../../../shared/Icon';
-import { useGetMonthWater } from '../api/useGetMonthWater';
+import { useGetMonthWater } from './api/useGetMonthWater';
 import { HydrationMonthlyItem } from './HydrationMontlyItem';
-import type { MonthWaterlog } from '../types/hydration-dashboar.types';
+import type { MonthWaterlog } from '../../../pages/account/types/hydration-dashboar.types';
 // import { RenderCustomMonth } from '../../../shared/DataPicker';
 
 export function HydrationMonthlyStats() {
@@ -37,7 +37,7 @@ export function HydrationMonthlyStats() {
         </div>
       </div>
 
-      <ul className="flex flex-wrap justify-between gap-[22px]">
+      <ul className="desktop-m:gap-[22px] flex flex-wrap gap-[26px]">
         {monthWaterlog?.map((item: MonthWaterlog, i: number) => (
           <HydrationMonthlyItem key={i} item={item} />
         ))}
