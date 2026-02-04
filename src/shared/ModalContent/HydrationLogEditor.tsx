@@ -1,6 +1,6 @@
 import { ErrorMessage, Form, ItemLabel, Label } from '../Form';
 import * as Dialog from '@radix-ui/react-dialog';
-import { Icon } from '../Icon';
+
 import { BtnStepper } from '../BtnStepper';
 import { Button } from '../Button';
 import { Input } from '../Input';
@@ -10,7 +10,7 @@ import {
   UserWaterEntitySchema,
   type UserWaterEntity,
 } from '../../pages/account/model/contract';
-import { ModalContainer } from './ModalContainer';
+import { DialogContainer } from './DialogContainer';
 import { useEffect, useState } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useEditWater } from '../../widget/hydration-statistic/todays-statistic/api/useEditWater';
@@ -47,7 +47,10 @@ export function HydrationLogEditor({
   const { mutate: addEditWater } = useEditWater();
 
   return (
-    <ModalContainer className="desktop-m:w-[592px] tablet-ms:w-[704px]">
+    <DialogContainer
+      title={item ? 'Edit the entered amount of water' : 'Add water'}
+      className="desktop-m:w-[592px] tablet-ms:w-[704px]"
+    >
       <Form
         onSubmit={handleSubmit(({ amount, time }) => {
           return item
@@ -55,17 +58,6 @@ export function HydrationLogEditor({
             : addWater({ amount: Number(amount), time });
         })}
       >
-        <div className="mb-6 flex items-center justify-between">
-          <Dialog.Title className="text-4x">
-            {item ? 'Edit the entered amount of water' : 'Add water'}
-          </Dialog.Title>
-          <Dialog.Close
-            onClick={() => reset()}
-            className="rotate-45 cursor-pointer"
-          >
-            <Icon iconName="plus" className="stroke-blue size-6" />
-          </Dialog.Close>
-        </div>
         <Dialog.DialogDescription aria-description={undefined} />
         <h2 className="text-2x mb-4">Choose a value:</h2>
         <p className="text-2x mb-3">Amount of water:</p>
@@ -104,6 +96,6 @@ export function HydrationLogEditor({
           </Button>
         </div>
       </Form>
-    </ModalContainer>
+    </DialogContainer>
   );
 }

@@ -1,36 +1,29 @@
 import * as Dialog from '@radix-ui/react-dialog';
 import { Button } from '../Button';
-import { Icon } from '../Icon';
-import { ModalContainer } from './ModalContainer';
 import { useDeleteHydrationLog } from '../../widget/hydration-statistic/todays-statistic/api/useDeleteHydrationLog';
 import { useForm } from 'react-hook-form';
+import { DialogContainer } from './DialogContainer';
 
 export function AlterContent({
   userID,
   setIsOpen,
 }: {
   userID: string;
-  setIsOpen?: (value: boolean) => void;
+  setIsOpen: (value: boolean) => void;
 }) {
   const { mutate: deleteHydrationLog } = useDeleteHydrationLog(userID);
 
   const { handleSubmit } = useForm();
 
   return (
-    <ModalContainer className="tablet-ms:w-[592px]">
+    <DialogContainer title="Delete entry" className="tablet-ms:w-[592px]">
       <form
         onSubmit={handleSubmit(() => {
           deleteHydrationLog();
           setIsOpen(false);
         })}
       >
-        <div className="mb-6 flex items-center justify-between">
-          <Dialog.Title className="text-4x">Delete entry</Dialog.Title>
-          <Dialog.DialogDescription aria-describedby={undefined} />
-          <Dialog.Close className="cursor-pointer">
-            <Icon iconName="plus" className="stroke-blue size-6 rotate-45" />
-          </Dialog.Close>
-        </div>
+
         <p className="text-2x mb-6">
           Are you sure you want to delete the entry?
         </p>
@@ -49,6 +42,6 @@ export function AlterContent({
           </Button>
         </div>
       </form>
-    </ModalContainer>
+    </DialogContainer>
   );
 }

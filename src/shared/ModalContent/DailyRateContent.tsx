@@ -1,15 +1,13 @@
 import { Button } from '../Button';
 import { Form, ItemLabel, Label } from '../Form';
-import { Icon } from '../Icon';
 import { Input } from '../Input';
-import * as Dialog from '@radix-ui/react-dialog';
 import { ScrollAreaBar } from '../ScrollAreaBar';
-import { ModalContainer } from './ModalContainer';
 import { Controller, useForm } from 'react-hook-form';
 import { useAddDailyRate } from '../../pages/account/api/useAddDailyRate';
 import type { UserDailyWaterRate } from '../../pages/account/model/contract';
 import { RadioBtn } from '../RadioBtn';
 import * as RadioGroup from '@radix-ui/react-radio-group';
+import { DialogContainer } from './DialogContainer';
 
 const Gender = {
   male: 'male',
@@ -33,7 +31,10 @@ export function DailyRateContent({ setIsOpen }: DailyRateContentProps) {
   const { mutate: addDailyRate } = useAddDailyRate({ reset });
 
   return (
-    <ModalContainer className="tablet-ms:w-[704px] desktop-m:w-[592px] flex">
+    <DialogContainer
+      title="My daily norma"
+      className="tablet-ms:w-[704px] desktop-m:w-[592px] flex"
+    >
       <ScrollAreaBar className="flex min-h-0 flex-1">
         <Form
           onSubmit={handleSubmit((data) => {
@@ -41,13 +42,6 @@ export function DailyRateContent({ setIsOpen }: DailyRateContentProps) {
             setIsOpen(false);
           })}
         >
-          <div className="mb-6 flex items-center justify-between">
-            <Dialog.Title className="text-4x">My daily norma</Dialog.Title>
-            <Dialog.Trigger className="cursor-pointer">
-              <Icon iconName="plus" className="stroke-blue size-6 rotate-45" />
-            </Dialog.Trigger>
-          </div>
-          <Dialog.DialogDescription aria-describedby={undefined} />
           <div className="tablet-ms:flex tablet-ms:gap-6 mb-3">
             <p className="tablet-ms:m-0 mb-4">
               For girl:
@@ -129,6 +123,6 @@ export function DailyRateContent({ setIsOpen }: DailyRateContentProps) {
           </div>
         </Form>
       </ScrollAreaBar>
-    </ModalContainer>
+    </DialogContainer>
   );
 }

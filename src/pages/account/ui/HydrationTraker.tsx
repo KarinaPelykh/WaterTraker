@@ -12,7 +12,7 @@ import type { UserWaterEntity } from '../model/contract';
 import { useTodaysHydrationStory } from '../api/useTodaysHydrationStory';
 
 export function HydrationDashboard() {
-  const { data } = useTodaysHydrationStory();
+  const { data, isLoading } = useTodaysHydrationStory();
 
   const { isOpen, setIsOpen } = useToggle();
 
@@ -37,15 +37,20 @@ export function HydrationDashboard() {
             </div>
           </div>
           <div className="bg-light-blue shadow-base tablet-ms:py-8 tablet-ms:px-6 desktop-m:w-1/2 desktop-m:h-[680px] flex flex-col rounded-s px-2 py-6">
-            <div className="desktop-m::mb-auto mb-6">
+            <div className="desktop-m:mb-auto mb-6">
               <p className="text-3x mb-4">Today</p>
-              <ScrollAreaBar className="mb-6 max-h-[200px]">
-                <ul>
-                  {data?.list.map((item: { _id: string } & UserWaterEntity) => (
-                    <WaterConsumptionItem key={item._id} item={item} />
-                  ))}
-                </ul>
-              </ScrollAreaBar>
+              {isLoading ? null : (
+                <ScrollAreaBar className="mb-6 max-h-[200px]">
+                  <ul>
+                    {data?.list.map(
+                      (item: { _id: string } & UserWaterEntity) => (
+                        <WaterConsumptionItem key={item._id} item={item} />
+                      ),
+                    )}
+                  </ul>
+                </ScrollAreaBar>
+              )}
+
               <Trigger className="group flex cursor-pointer items-center justify-center gap-2">
                 <Icon
                   iconName="plus"

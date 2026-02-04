@@ -1,9 +1,28 @@
 import clsx from 'clsx';
-import type { ComponentProps } from 'react';
+import { type ComponentProps } from 'react';
 
 type Form = ComponentProps<'form'>;
 
 type FromProps = Form & {};
+
+// const FormFiledContext = createContext(null);
+
+// const useFormFiledContext = () => {
+//   const filedContext = useContext(FormFiledContext);
+//   if (!filedContext) {
+//     throw new Error('useFormFiledContext must be used inside <FormField>');
+//   }
+
+//   return filedContext;
+// };
+
+// export const FormField = (className, ...props) => {
+//   return (
+//     <FormFiledContext value={}>
+//       <div className="" {...props} />;
+//     </FormFiledContext>
+//   );
+// };
 
 export function Form({ ...props }: FromProps) {
   return <form {...props} />;

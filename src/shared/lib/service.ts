@@ -70,6 +70,7 @@ export const getUserInfo = async () => {
 
   return response.data;
 };
+
 export const getMonthHydrationStory = async () => {
   const response = await axiosInstance.get(`water/month`, {
     params: {
@@ -103,6 +104,14 @@ export const addUserProfile = async (data: {
     name,
     password,
   });
+
+  return response.data;
+};
+
+export const addUserPhoto = async (formData: FormData) => {
+  console.log(formData);
+
+  const response = await axiosInstance.post('user/avatar', formData);
 
   return response.data;
 };
