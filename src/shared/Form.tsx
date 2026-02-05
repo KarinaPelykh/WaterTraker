@@ -1,35 +1,72 @@
 import clsx from 'clsx';
-import { type ComponentProps } from 'react';
+import {
+  createContext,
+  useContext,
+  useMemo,
+  type ComponentProps,
+  type ReactNode,
+} from 'react';
 
 type Form = ComponentProps<'form'>;
 
 type FromProps = Form & {};
 
-// const FormFiledContext = createContext(null);
+type FomFormFiledType = {
+  className?: string;
+  errorMessage?: string;
+  name: string;
+  children?: ReactNode;
+};
 
-// const useFormFiledContext = () => {
-//   const filedContext = useContext(FormFiledContext);
-//   if (!filedContext) {
-//     throw new Error('useFormFiledContext must be used inside <FormField>');
-//   }
+const FormFiledContext = createContext<FomFormFiledType | null>(null);
 
-//   return filedContext;
-// };
+const useFormFiled = () => {
+  const filedContext = useContext(FormFiledContext);
+  if (!filedContext) {
+    throw new Error('useFormFiledContext must be used inside <FormField>');
+  }
 
-// export const FormField = (className, ...props) => {
-//   return (
-//     <FormFiledContext value={}>
-//       <div className="" {...props} />;
-//     </FormFiledContext>
-//   );
-// };
+  return filedContext;
+};
+
+export const FormField = ({
+  name,
+  className,
+  errorMessage,
+  children,
+  ...props
+}: FomFormFiledType) => {
+  const value = useMemo(
+    () => ({ errorMessage, className, name }),
+    [errorMessage, className, name],
+  );
+
+  return (
+    <FormFiledContext value={value}>
+      <div className={clsx(className)} {...props}>
+        {children}
+      </div>
+    </FormFiledContext>
+  );
+};
 
 export function Form({ ...props }: FromProps) {
   return <form {...props} />;
 }
 
 export function Label({ className, ...props }: ComponentProps<'label'>) {
-  return <label className={clsx('text-2x mb-2 block', className)} {...props} />;
+  // const { errorMessage } = useFormFiled();
+
+  return (
+    <label
+      className={clsx(
+        'text-2x mb-2 block',
+        className,
+        // errorMessage && 'border-error-color',
+      )}
+      {...props}
+    />
+  );
 }
 
 export function ItemLabel({ className, ...props }: ComponentProps<'div'>) {
@@ -41,8 +78,13 @@ export function ErrorMessage({
   children,
   ...props
 }: ComponentProps<'div'>) {
+  const { errorMessage } = useFormFiled();
+
   return (
-    <div className={clsx(className)} {...props}>
+    <div
+      className={clsx(className, errorMessage && 'text-error-color')}
+      {...props}
+    >
       {children}
     </div>
   );

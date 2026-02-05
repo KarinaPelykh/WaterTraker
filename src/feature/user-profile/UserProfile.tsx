@@ -1,4 +1,10 @@
-import { ErrorMessage, Form, ItemLabel, Label } from '../../shared/Form';
+import {
+  ErrorMessage,
+  Form,
+  FormField,
+  ItemLabel,
+  Label,
+} from '../../shared/Form';
 import { Icon } from '../../shared/Icon';
 import { Input } from '../../shared/Input';
 import { PasswordInput } from '../../shared/PasswordInput';
@@ -139,62 +145,82 @@ export const UserProfile = ({ setIsOpen }: UserProfileProps) => {
                   </ItemLabel>
                 </RadioGroup.Root>
               </div>
-
-              <ItemLabel className="mb-6">
-                <Label>Your name</Label>
-                <Input
-                  type="text"
-                  placeholder="David"
-                  id="name"
-                  {...register('name')}
-                />
-                <ErrorMessage>{errors.name?.message}</ErrorMessage>
-              </ItemLabel>
-              <ItemLabel className="desktop-m:mb-0 mb-6">
-                <Label>E-mail</Label>
-                <Input
-                  type="email"
-                  id="email"
-                  placeholder="david01@gmail.com"
-                  {...register('email')}
-                />
-                <ErrorMessage>{errors.email?.message}</ErrorMessage>
-              </ItemLabel>
+              <FormField name="name" errorMessage={errors.name?.message}>
+                <ItemLabel className="mb-6">
+                  <Label htmlFor="name">Your name</Label>
+                  <Input
+                    type="text"
+                    placeholder="David"
+                    id="name"
+                    {...register('name')}
+                  />
+                  <ErrorMessage>{errors.name?.message}</ErrorMessage>
+                </ItemLabel>
+              </FormField>
+              <FormField name="email" errorMessage={errors.email?.message}>
+                <ItemLabel className="desktop-m:mb-0 mb-6">
+                  <Label htmlFor="email">E-mail</Label>
+                  <Input
+                    type="email"
+                    id="email"
+                    placeholder="david01@gmail.com"
+                    {...register('email')}
+                  />
+                  <ErrorMessage>{errors.email?.message}</ErrorMessage>
+                </ItemLabel>
+              </FormField>
             </div>
             <div className="desktop-m:w-[392px]">
               <h2 className="text-2x mb-3 font-medium">Password</h2>
-              <ItemLabel className="mb-6">
-                <Label>Outdated password:</Label>
-                <PasswordInput
-                  placeholder="Password"
-                  id="currentPassword"
-                  {...register('currentPassword')}
-                />
+              <FormField
+                name="currentPassword"
+                errorMessage={errors.currentPassword?.message}
+              >
+                <ItemLabel className="mb-6">
+                  <Label htmlFor="currentPassword">Outdated password:</Label>
+                  <PasswordInput
+                    placeholder="Password"
+                    id="currentPassword"
+                    {...register('currentPassword')}
+                  />
 
-                <ErrorMessage>{errors.currentPassword?.message}</ErrorMessage>
-              </ItemLabel>
-              <ItemLabel className="mb-6">
-                <Label>New password:</Label>
-                <PasswordInput
-                  placeholder="Password"
-                  id="newPassword"
-                  {...register('newPassword')}
-                />
+                  <ErrorMessage>{errors.currentPassword?.message}</ErrorMessage>
+                </ItemLabel>
+              </FormField>
+              <FormField
+                name="newPassword"
+                errorMessage={errors.newPassword?.message}
+              >
+                <ItemLabel className="mb-6">
+                  <Label htmlFor="newPassword">New password:</Label>
+                  <PasswordInput
+                    placeholder="Password"
+                    id="newPassword"
+                    {...register('newPassword')}
+                  />
 
-                <ErrorMessage>{errors.newPassword?.message}</ErrorMessage>
-              </ItemLabel>
-              <ItemLabel className="desktop-m:mb-0">
-                <Label>Repeat new password:</Label>
-                <PasswordInput
-                  placeholder="Password"
-                  id="confirmNewPassword"
-                  {...register('confirmNewPassword')}
-                />
+                  <ErrorMessage>{errors.newPassword?.message}</ErrorMessage>
+                </ItemLabel>
+              </FormField>
+              <FormField
+                name="confirmNewPassword"
+                errorMessage={errors.confirmNewPassword?.message}
+              >
+                <ItemLabel className="desktop-m:mb-0">
+                  <Label htmlFor="confirmNewPassword">
+                    Repeat new password:
+                  </Label>
+                  <PasswordInput
+                    placeholder="Password"
+                    id="confirmNewPassword"
+                    {...register('confirmNewPassword')}
+                  />
 
-                <ErrorMessage>
-                  {errors.confirmNewPassword?.message}
-                </ErrorMessage>
-              </ItemLabel>
+                  <ErrorMessage>
+                    {errors.confirmNewPassword?.message}
+                  </ErrorMessage>
+                </ItemLabel>
+              </FormField>
             </div>
           </div>
           <Button
