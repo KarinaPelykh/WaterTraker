@@ -95,22 +95,22 @@ export const addEditWater = async (data: AmountWater & { userID: string }) => {
 export const addUserProfile = async (data: {
   email: string;
   name: string;
-  password: string;
+  currentPassword: string;
+  newPassword: string;
 }) => {
-  const { email, name, password } = data;
+  const { email, name, currentPassword, newPassword } = data;
 
   const response = await axiosInstance.patch('user', {
     email,
     name,
-    password,
+    currentPassword,
+    newPassword,
   });
 
   return response.data;
 };
 
 export const addUserPhoto = async (formData: FormData) => {
-  console.log(formData);
-
   const response = await axiosInstance.post('user/avatar', formData);
 
   return response.data;

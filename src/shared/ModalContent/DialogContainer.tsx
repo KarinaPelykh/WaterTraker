@@ -18,7 +18,7 @@ export function DialogContainer({
       <Dialog.Overlay className="fixed inset-0 z-40 size-full bg-black/80">
         <Dialog.Content
           className={clsx(
-            'fixed top-1/2 left-1/2 max-h-[90vh] w-[280px] -translate-x-1/2 -translate-y-1/2 rounded-s bg-white px-6 py-8',
+            'fixed top-1/2 left-1/2 flex max-h-[90vh] w-[280px] -translate-x-1/2 -translate-y-1/2 flex-col rounded-s bg-white px-6 py-8',
             className,
           )}
         >

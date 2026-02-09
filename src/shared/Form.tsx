@@ -18,6 +18,10 @@ type FomFormFiledType = {
   children?: ReactNode;
 };
 
+type Input = ComponentProps<'input'>;
+
+type InputProps = Input & {};
+
 const FormFiledContext = createContext<FomFormFiledType | null>(null);
 
 const useFormFiled = () => {
@@ -55,22 +59,25 @@ export function Form({ ...props }: FromProps) {
 }
 
 export function Label({ className, ...props }: ComponentProps<'label'>) {
-  // const { errorMessage } = useFormFiled();
-
-  return (
-    <label
-      className={clsx(
-        'text-2x mb-2 block',
-        className,
-        // errorMessage && 'border-error-color',
-      )}
-      {...props}
-    />
-  );
+  return <label className={clsx('text-2x mb-2 block', className)} {...props} />;
 }
 
 export function ItemLabel({ className, ...props }: ComponentProps<'div'>) {
   return <div className={clsx(className, 'mb-4')} {...props} />;
+}
+
+export function Input({ className, ...props }: InputProps) {
+  const { errorMessage } = useFormFiled();
+  return (
+    <input
+      className={clsx(
+        className,
+        'text-1x border-middle-blue placeholder:text-middle-blue w-full rounded-xs border bg-white px-2.5 py-3 outline-none',
+        errorMessage && 'border-error-color!',
+      )}
+      {...props}
+    />
+  );
 }
 
 export function ErrorMessage({

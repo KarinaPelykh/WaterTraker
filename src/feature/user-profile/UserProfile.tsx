@@ -4,9 +4,9 @@ import {
   FormField,
   ItemLabel,
   Label,
+  Input,
 } from '../../shared/Form';
 import { Icon } from '../../shared/Icon';
-import { Input } from '../../shared/Input';
 import { PasswordInput } from '../../shared/PasswordInput';
 import { useForm } from 'react-hook-form';
 import { useEffect, useState, type ChangeEvent } from 'react';
@@ -19,7 +19,7 @@ import * as RadioGroup from '@radix-ui/react-radio-group';
 import { DialogContainer } from '../../shared/ModalContent/DialogContainer';
 import { useAddUserPhoto } from './api/useAddUserPhoto';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { UserProfileSchema } from './model/constract';
+import { UserProfileSchema, type UserProfileData } from './model/constract';
 
 type UserProfileProps = {
   setIsOpen: (value: boolean) => void;
@@ -35,8 +35,6 @@ export const UserProfile = ({ setIsOpen }: UserProfileProps) => {
 
   const { data } = useGetUserInfo();
 
-  const { mutate: addUserProfile } = useEditUserProfile();
-
   const { mutate: addUserPhoto } = useAddUserPhoto();
 
   const {
@@ -44,13 +42,7 @@ export const UserProfile = ({ setIsOpen }: UserProfileProps) => {
     reset,
     handleSubmit,
     formState: { errors },
-  } = useForm<{
-    email: string;
-    name: string;
-    currentPassword: string;
-    newPassword: string;
-    confirmNewPassword: string;
-  }>({
+  } = useForm<UserProfileData>({
     defaultValues: {
       email: '',
       name: '',
@@ -59,6 +51,11 @@ export const UserProfile = ({ setIsOpen }: UserProfileProps) => {
       confirmNewPassword: '',
     },
     resolver: zodResolver(UserProfileSchema),
+  });
+
+  const { mutate: addUserProfile } = useEditUserProfile({
+    setIsOpen,
+    reset,
   });
 
   useEffect(() => {
@@ -79,22 +76,24 @@ export const UserProfile = ({ setIsOpen }: UserProfileProps) => {
       addUserPhoto(formData);
     }
   };
-  console.log(errors);
-
+  // ({
+  //             email,
+  //             name,
+  //             confirmNewPassword: newPassword,
+  //             currentPassword,
+  //           }) => {
+  //             addUserProfile({ email, name, currentPassword, newPassword });
+  //           },
+  //         )}
   return (
     <DialogContainer
       title="Setting"
-      className="tablet-ms:w-[704px] desktop-m:w-[1008px] flex flex-col"
+      className="tablet-ms:w-[704px] desktop-m:w-[1008px]"
     >
       <ScrollAreaBar className="flex min-h-0 flex-1" scrollClassName="hidden">
         <Form
           className="flex flex-col"
-          onSubmit={handleSubmit(
-            ({ email, name, confirmNewPassword: password }) => {
-              addUserProfile({ email, name, password });
-              setIsOpen(false);
-            },
-          )}
+          onSubmit={handleSubmit((data) => addUserProfile(data))}
         >
           <div className="desktop-m:flex desktop-m:w-full desktop-m:items-end desktop-m:gap-10 tablet-ms:w-[392px] mb-6">
             <div className="desktop-m:w-[392px]">

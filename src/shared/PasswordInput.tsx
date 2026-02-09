@@ -1,6 +1,6 @@
 import { Button } from './Button';
+import { Input } from './Form';
 import { Icon } from './Icon';
-import { Input } from './Input';
 
 export function PasswordInput({ ...props }) {
   return (

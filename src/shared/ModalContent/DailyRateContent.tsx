@@ -1,6 +1,5 @@
 import { Button } from '../Button';
-import { Form, ItemLabel, Label } from '../Form';
-import { Input } from '../Input';
+import { Form, ItemLabel, Label, Input } from '../Form';
 import { ScrollAreaBar } from '../ScrollAreaBar';
 import { Controller, useForm } from 'react-hook-form';
 import { useAddDailyRate } from '../../pages/account/api/useAddDailyRate';

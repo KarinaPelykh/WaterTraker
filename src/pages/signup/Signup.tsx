@@ -1,7 +1,13 @@
 import { Link } from 'react-router-dom';
 import { Button } from '../../shared/Button';
-import { ErrorMessage, Form, ItemLabel, Label } from '../../shared/Form';
-import { Input } from '../../shared/Input';
+import {
+  ErrorMessage,
+  Form,
+  FormField,
+  ItemLabel,
+  Label,
+  Input,
+} from '../../shared/Form';
 import { PasswordInput } from '../../shared/PasswordInput';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -35,29 +41,39 @@ export function Signup() {
           )}
         >
           <p className="text-4x mb-4">Sign up</p>
-          <ItemLabel>
-            <Label htmlFor="email">Enter your email</Label>
-            <Input placeholder="E-mail" id="email" {...register('email')} />
-            <ErrorMessage>{errors.email?.message}</ErrorMessage>
-          </ItemLabel>
-          <ItemLabel>
-            <Label htmlFor="password">Enter your password</Label>
-            <PasswordInput
-              placeholder="Password"
-              id="password"
-              {...register('password')}
-            />
-            <ErrorMessage>{errors.password?.message}</ErrorMessage>
-          </ItemLabel>
-          <ItemLabel>
-            <Label htmlFor="conf-password">Repeat password</Label>
-            <PasswordInput
-              placeholder="Repeat password"
-              id="conf-password"
-              {...register('confirmPassword')}
-            />
-            <ErrorMessage>{errors.confirmPassword?.message}</ErrorMessage>
-          </ItemLabel>
+          <FormField name="email" errorMessage={errors.email?.message}>
+            <ItemLabel>
+              <Label htmlFor="email">Enter your email</Label>
+              <Input placeholder="E-mail" id="email" {...register('email')} />
+              <ErrorMessage>{errors.email?.message}</ErrorMessage>
+            </ItemLabel>
+          </FormField>
+          <FormField name="password" errorMessage={errors.password?.message}>
+            <ItemLabel>
+              <Label htmlFor="password">Enter your password</Label>
+              <PasswordInput
+                placeholder="Password"
+                id="password"
+                {...register('password')}
+              />
+              <ErrorMessage>{errors.password?.message}</ErrorMessage>
+            </ItemLabel>
+          </FormField>
+          <FormField
+            name="conf-password"
+            errorMessage={errors.confirmPassword?.message}
+          >
+            <ItemLabel>
+              <Label htmlFor="conf-password">Repeat password</Label>
+              <PasswordInput
+                placeholder="Repeat password"
+                id="conf-password"
+                {...register('confirmPassword')}
+              />
+              <ErrorMessage>{errors.confirmPassword?.message}</ErrorMessage>
+            </ItemLabel>
+          </FormField>
+
           <Button className="text-2x! mb-4! w-full py-2.5" type="submit">
             Sign Up
           </Button>

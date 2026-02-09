@@ -1,9 +1,9 @@
-import { ErrorMessage, Form, ItemLabel, Label } from '../Form';
+import { ErrorMessage, Form, ItemLabel, Label, Input } from '../Form';
 import * as Dialog from '@radix-ui/react-dialog';
 
 import { BtnStepper } from '../BtnStepper';
 import { Button } from '../Button';
-import { Input } from '../Input';
+
 import { useForm } from 'react-hook-form';
 import { useAddWater } from '../../pages/account/api/useAddWater';
 import {
@@ -11,7 +11,7 @@ import {
   type UserWaterEntity,
 } from '../../pages/account/model/contract';
 import { DialogContainer } from './DialogContainer';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useEditWater } from '../../widget/hydration-statistic/todays-statistic/api/useEditWater';
 
@@ -24,7 +24,7 @@ export function HydrationLogEditor({
   setIsOpen,
   item,
 }: HydrationLogEditorProps) {
-  const [amountWater, setAmountWater] = useState(50);
+  // const [amountWater, setAmountWater] = useState(50);
 
   const {
     register,
@@ -61,7 +61,9 @@ export function HydrationLogEditor({
         <Dialog.DialogDescription aria-description={undefined} />
         <h2 className="text-2x mb-4">Choose a value:</h2>
         <p className="text-2x mb-3">Amount of water:</p>
-        <BtnStepper setAmountWater={setAmountWater} amountWater={amountWater} />
+        <BtnStepper />
+
+        {/* <BtnStepper setAmountWater={setAmountWater} amountWater={amountWater} /> */}
         <ItemLabel className="mb-6 block">
           <Label>Recording time:</Label>
           <Input

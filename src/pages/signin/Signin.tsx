@@ -1,7 +1,13 @@
 import { Link } from 'react-router-dom';
 import { Button } from '../../shared/Button';
-import { ErrorMessage, Form, ItemLabel, Label } from '../../shared/Form';
-import { Input } from '../../shared/Input';
+import {
+  ErrorMessage,
+  Form,
+  FormField,
+  ItemLabel,
+  Label,
+  Input,
+} from '../../shared/Form';
 import { useForm } from 'react-hook-form';
 import { UserSigninSchema, type UserSignin } from './model/contact';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -30,26 +36,30 @@ export function Signin() {
           })}
         >
           <p className="text-4x mb-4">Sign in</p>
-          <ItemLabel>
-            <Label htmlFor="email">Enter your email</Label>
-            <Input
-              type="email"
-              id="email"
-              placeholder="E-mail"
-              {...register('email')}
-            />
-            <ErrorMessage>{errors.email?.message}</ErrorMessage>
-          </ItemLabel>
-          <ItemLabel>
-            <Label htmlFor="password">Enter your password</Label>
-            <Input
-              type="password"
-              id="password"
-              placeholder="Password"
-              {...register('password')}
-            />
-            <ErrorMessage>{errors.password?.message}</ErrorMessage>
-          </ItemLabel>
+          <FormField name="email" errorMessage={errors.email?.message}>
+            <ItemLabel>
+              <Label htmlFor="email">Enter your email</Label>
+              <Input
+                type="email"
+                id="email"
+                placeholder="E-mail"
+                {...register('email')}
+              />
+              <ErrorMessage>{errors.email?.message}</ErrorMessage>
+            </ItemLabel>
+          </FormField>
+          <FormField name="password" errorMessage={errors.password?.message}>
+            <ItemLabel>
+              <Label htmlFor="password">Enter your password</Label>
+              <Input
+                type="password"
+                id="password"
+                placeholder="Password"
+                {...register('password')}
+              />
+              <ErrorMessage>{errors.password?.message}</ErrorMessage>
+            </ItemLabel>
+          </FormField>
           <Button type="submit" className="text-2x! mb-4! w-full py-2.5">
             Sign In
           </Button>

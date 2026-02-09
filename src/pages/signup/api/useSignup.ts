@@ -8,6 +8,7 @@ export const useSignup = (reset: UseFormReset<UserSignup>) => {
   const navigate = useNavigate();
 
   return useMutation({
+    mutationKey: ['signup'],
     mutationFn: signup,
     onSuccess: () => {
       reset();

@@ -24,4 +24,4 @@ export const UserProfileSchema = z
     }
   });
 
-export type UserProfile = z.infer<typeof UserProfileSchema>;
+export type UserProfileData = z.infer<typeof UserProfileSchema>;
