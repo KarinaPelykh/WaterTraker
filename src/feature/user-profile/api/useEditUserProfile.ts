@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { addUserProfile } from '../../../shared/lib/service';
+import { updateUserDate } from '../../../shared/lib/service';
 import { toastNotification } from '../../../shared/lib/toast';
 import type { UseFormReset } from 'react-hook-form';
 import type { UserProfileData } from '../model/constract';
@@ -16,13 +16,16 @@ export const useEditUserProfile = ({
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationKey: ['user-profile'],
-    mutationFn: addUserProfile,
+    mutationKey: ['update-profile'],
+    mutationFn: updateUserDate,
     onSuccess: () => {
       setIsOpen(false);
       reset();
       queryClient.invalidateQueries({ queryKey: ['user'] });
-      toastNotification('User profile updated!');
+      toastNotification('success', 'User profile updated!');
+    },
+    onError: () => {
+      toastNotification('error', 'User profile wasnt updated!');
     },
   });
 };

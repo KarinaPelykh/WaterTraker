@@ -12,7 +12,7 @@ export function ScrollAreaBar({
   scrollClassName?: string;
 }) {
   return (
-    <ScrollArea.Root className="flex w-full" type="auto">
+    <ScrollArea.Root className="flex min-h-0 w-full flex-1" type="auto">
       <ScrollArea.Viewport
         className={clsx(
           'relative w-full pr-2',

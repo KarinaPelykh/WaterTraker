@@ -3,6 +3,7 @@ import { z } from 'zod';
 export const UserProfileSchema = z
   .object({
     email: z.email('Email invalid'),
+    gender: z.string(),
     name: z.string(),
     currentPassword: z
       .string('Password is required')

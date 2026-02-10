@@ -1,7 +1,8 @@
-import { toast } from 'react-toastify';
+import { toast, type TypeOptions } from 'react-toastify';
 
-export const toastNotification = (text: string) => {
+export const toastNotification = (type: TypeOptions, text: string) => {
   return toast(text, {
+    type,
     position: 'top-right',
     autoClose: 5000,
     hideProgressBar: false,

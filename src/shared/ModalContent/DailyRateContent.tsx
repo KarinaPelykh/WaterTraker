@@ -1,5 +1,5 @@
 import { Button } from '../Button';
-import { Form, ItemLabel, Label, Input } from '../Form';
+import { Form, ItemLabel, Label, Input, FormField } from '../Form';
 import { ScrollAreaBar } from '../ScrollAreaBar';
 import { Controller, useForm } from 'react-hook-form';
 import { useAddDailyRate } from '../../pages/account/api/useAddDailyRate';
@@ -7,6 +7,8 @@ import type { UserDailyWaterRate } from '../../pages/account/model/contract';
 import { RadioBtn } from '../RadioBtn';
 import * as RadioGroup from '@radix-ui/react-radio-group';
 import { DialogContainer } from './DialogContainer';
+import { useGetUserInfo } from '../../pages/account/api/useGetUserInfo';
+import { useEffect } from 'react';
 
 const Gender = {
   male: 'male',
@@ -28,6 +30,14 @@ export function DailyRateContent({ setIsOpen }: DailyRateContentProps) {
     });
 
   const { mutate: addDailyRate } = useAddDailyRate({ reset });
+
+  const { data } = useGetUserInfo();
+
+  useEffect(() => {
+    if (data) {
+      reset({ gender: data.gender });
+    }
+  }, [data, reset]);
 
   return (
     <DialogContainer
@@ -86,22 +96,29 @@ export function DailyRateContent({ setIsOpen }: DailyRateContentProps) {
                 )}
               />
             </div>
-            <ItemLabel>
-              <Label className="text-1x">Your weight in kilograms:</Label>
-              <Input placeholder="0" id="weight" {...register('weight')} />
-            </ItemLabel>
-            <ItemLabel>
-              <Label className="text-1x">
-                The time of active participation in sports or other activities
-                with a high physical. load in hours:
-              </Label>
+            <FormField name="weight">
+              <ItemLabel>
+                <Label className="text-1x" htmlFor="weight">
+                  Your weight in kilograms:
+                </Label>
+                <Input placeholder="0" id="weight" {...register('weight')} />
+              </ItemLabel>
+            </FormField>
+            <FormField name="activeTime">
+              <ItemLabel>
+                <Label className="text-1x" htmlFor="activeTime">
+                  The time of active participation in sports or other activities
+                  with a high physical. load in hours:
+                </Label>
 
-              <Input
-                placeholder="0"
-                id="activeTime"
-                {...register('activeTime')}
-              />
-            </ItemLabel>
+                <Input
+                  placeholder="0"
+                  id="activeTime"
+                  {...register('activeTime')}
+                />
+              </ItemLabel>
+            </FormField>
+
             <div className="tablet-ms:justify-start mb-6 flex items-center justify-between">
               The required amount of water in liters per day:
               <span className="text-blue block"> 1.8L</span>

@@ -11,11 +11,13 @@ const progress = [
 type ProgressBarProps = { percentOfConsumedWater: number };
 
 export function ProgressBar({ percentOfConsumedWater }: ProgressBarProps) {
+  const cappedPercent = Math.min(percentOfConsumedWater, 100);
+
   return (
     <div className="tablet-ms:mb-0 desktop-m:w-2/3 mb-4 w-full">
       <span className="text-2x text-blue mb-2 block">Today</span>
       <div>
-        <div className="relative mb-1 w-full">
+        <div className="relative mb-1 max-w-full">
           <Progress.Root
             className="bg-blue2 h-2 overflow-hidden rounded-s"
             value={50}
@@ -28,7 +30,9 @@ export function ProgressBar({ percentOfConsumedWater }: ProgressBarProps) {
             />
             <div
               className="border-blue absolute top-1/2 size-3.5 -translate-y-1/2 rounded-full border bg-white transition-all duration-500 ease-out"
-              style={{ left: `calc(${percentOfConsumedWater}% - 10px)` }}
+              style={{
+                left: `calc(${cappedPercent}% - 10px)`,
+              }}
             />
           </Progress.Root>
         </div>

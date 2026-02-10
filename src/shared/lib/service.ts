@@ -21,6 +21,14 @@ type UserDailyRate = {
   activeTime: string;
 };
 
+type UserData = {
+  email: string;
+  name: string;
+  currentPassword: string;
+  newPassword: string;
+  confirmNewPassword: string;
+  gender: string;
+};
 // auth
 export const signup = async (data: SignupSchema) => {
   const response = await axiosInstance.post('auth/signup', data);
@@ -92,19 +100,15 @@ export const addEditWater = async (data: AmountWater & { userID: string }) => {
   return response.data;
 };
 
-export const addUserProfile = async (data: {
-  email: string;
-  name: string;
-  currentPassword: string;
-  newPassword: string;
-}) => {
-  const { email, name, currentPassword, newPassword } = data;
+export const updateUserDate = async (data: UserData) => {
+  const { email, name, currentPassword, confirmNewPassword, gender } = data;
 
   const response = await axiosInstance.patch('user', {
     email,
     name,
     currentPassword,
-    newPassword,
+    newPassword: confirmNewPassword,
+    gender,
   });
 
   return response.data;

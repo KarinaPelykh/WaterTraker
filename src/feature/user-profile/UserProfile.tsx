@@ -8,7 +8,7 @@ import {
 } from '../../shared/Form';
 import { Icon } from '../../shared/Icon';
 import { PasswordInput } from '../../shared/PasswordInput';
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { useEffect, useState, type ChangeEvent } from 'react';
 import { Button } from '../../shared/Button';
 import { useEditUserProfile } from './api/useEditUserProfile';
@@ -33,14 +33,11 @@ const Gender = {
 export const UserProfile = ({ setIsOpen }: UserProfileProps) => {
   const [selectedPhoto, setSelectedPhoto] = useState('');
 
-  const { data } = useGetUserInfo();
-
-  const { mutate: addUserPhoto } = useAddUserPhoto();
-
   const {
     register,
     reset,
     handleSubmit,
+    control,
     formState: { errors },
   } = useForm<UserProfileData>({
     defaultValues: {
@@ -49,19 +46,24 @@ export const UserProfile = ({ setIsOpen }: UserProfileProps) => {
       currentPassword: '',
       newPassword: '',
       confirmNewPassword: '',
+      gender: '',
     },
     resolver: zodResolver(UserProfileSchema),
   });
 
-  const { mutate: addUserProfile } = useEditUserProfile({
+  const { mutate: updateUserDate } = useEditUserProfile({
     setIsOpen,
     reset,
   });
 
+  const { data } = useGetUserInfo();
+
+  const { mutate: addUserPhoto } = useAddUserPhoto();
+
   useEffect(() => {
     const name = data?.name ?? '';
     if (data) {
-      reset({ name, email: data.email });
+      reset({ name, email: data.email, gender: data.gender });
     }
   }, [data, reset]);
 
@@ -76,15 +78,7 @@ export const UserProfile = ({ setIsOpen }: UserProfileProps) => {
       addUserPhoto(formData);
     }
   };
-  // ({
-  //             email,
-  //             name,
-  //             confirmNewPassword: newPassword,
-  //             currentPassword,
-  //           }) => {
-  //             addUserProfile({ email, name, currentPassword, newPassword });
-  //           },
-  //         )}
+
   return (
     <DialogContainer
       title="Setting"
@@ -93,7 +87,7 @@ export const UserProfile = ({ setIsOpen }: UserProfileProps) => {
       <ScrollAreaBar className="flex min-h-0 flex-1" scrollClassName="hidden">
         <Form
           className="flex flex-col"
-          onSubmit={handleSubmit((data) => addUserProfile(data))}
+          onSubmit={handleSubmit((data) => updateUserDate(data))}
         >
           <div className="desktop-m:flex desktop-m:w-full desktop-m:items-end desktop-m:gap-10 tablet-ms:w-[392px] mb-6">
             <div className="desktop-m:w-[392px]">
@@ -101,17 +95,19 @@ export const UserProfile = ({ setIsOpen }: UserProfileProps) => {
                 <Label>Your photo</Label>
 
                 <div className="flex items-center">
-                  <img
-                    src={
-                      selectedPhoto
-                        ? selectedPhoto
-                        : 'https://img.freepik.com/premium-vector/free-vector-user-icon_901408-589.jpg'
-                    }
-                    alt="User photo"
-                    width={80}
-                    height={80}
-                    className="mr-2 size-20! rounded-full object-cover"
-                  />
+                  <div className="mr-2 h-20 w-20 overflow-hidden rounded-full">
+                    <img
+                      src={
+                        selectedPhoto ||
+                        data?.image ||
+                        'https://img.freepik.com/premium-vector/free-vector-user-icon_901408-589.jpg'
+                      }
+                      alt="User photo"
+                      width={80}
+                      height={80}
+                      className="h-full w-full object-contain"
+                    />
+                  </div>
 
                   <div className="group relative flex cursor-pointer">
                     <Icon
@@ -133,16 +129,31 @@ export const UserProfile = ({ setIsOpen }: UserProfileProps) => {
               </ItemLabel>
               <div className="mb-6">
                 <p className="text-2x mb-3">Your gender identity</p>
-                <RadioGroup.Root className="flex items-center gap-6">
-                  <ItemLabel className="m-0! flex items-center gap-2">
-                    <RadioBtn id="" value={Gender.female} />
-                    <Label className="text-1x! m-0!">Woman</Label>
-                  </ItemLabel>
-                  <ItemLabel className="m-0! flex items-center gap-2">
-                    <RadioBtn id="" value={Gender.male} />
-                    <Label className="text-1x! m-0!">Man</Label>
-                  </ItemLabel>
-                </RadioGroup.Root>
+                <Controller
+                  name="gender"
+                  control={control}
+                  rules={{ required: true }}
+                  render={({ field }) => (
+                    <RadioGroup.Root
+                      className="flex items-center gap-1"
+                      {...field}
+                      onValueChange={field.onChange}
+                    >
+                      <ItemLabel className="m-0! flex items-center gap-2">
+                        <RadioBtn value={Gender.female} id="r1" />
+                        <Label className="m-0!" htmlFor="r1">
+                          For woman
+                        </Label>
+                      </ItemLabel>
+                      <ItemLabel className="m-0! flex items-center gap-2">
+                        <RadioBtn value={Gender.male} id="r2" />
+                        <Label className="m-0!" htmlFor="r2">
+                          For man
+                        </Label>
+                      </ItemLabel>
+                    </RadioGroup.Root>
+                  )}
+                />
               </div>
               <FormField name="name" errorMessage={errors.name?.message}>
                 <ItemLabel className="mb-6">

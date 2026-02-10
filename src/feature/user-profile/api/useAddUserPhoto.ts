@@ -10,7 +10,7 @@ export const useAddUserPhoto = () => {
     mutationFn: addUserPhoto,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['user'] });
-      toastNotification('User profile updated');
+      toastNotification('success', 'User profile updated');
     },
   });
 };

@@ -1,4 +1,11 @@
-import { ErrorMessage, Form, ItemLabel, Label, Input } from '../Form';
+import {
+  ErrorMessage,
+  Form,
+  ItemLabel,
+  Label,
+  Input,
+  FormField,
+} from '../Form';
 import * as Dialog from '@radix-ui/react-dialog';
 
 import { BtnStepper } from '../BtnStepper';
@@ -64,31 +71,35 @@ export function HydrationLogEditor({
         <BtnStepper />
 
         {/* <BtnStepper setAmountWater={setAmountWater} amountWater={amountWater} /> */}
-        <ItemLabel className="mb-6 block">
-          <Label>Recording time:</Label>
-          <Input
-            id="time"
-            {...register('time')}
-            placeholder="7:00"
-            className="border-blue tablet-ms:w-full placeholder:text-blue block h-11 w-[120px] rounded-xs border px-2.5 py-3 outline-none"
-          />
-          <ErrorMessage>{errors.time?.message}</ErrorMessage>
-        </ItemLabel>
-        <ItemLabel>
-          <Label className="text-2x mb-4 font-medium">
-            Enter the value of the water used:
-          </Label>
-          <Input
-            id="amount"
-            {...register('amount')}
-            type="number"
-            // value={userChoose}
-            // onChange={(e) => setUserChoose(e.target.value)}
-            placeholder="50"
-            className="border-blue tablet-ms:w-full placeholder:text-blue h-11 w-[120px] rounded-xs border px-2.5 py-3 outline-none"
-          />
-          <ErrorMessage>{errors.amount?.message}</ErrorMessage>
-        </ItemLabel>
+        <FormField name="time">
+          <ItemLabel className="mb-6 block">
+            <Label htmlFor="time">Recording time:</Label>
+            <Input
+              id="time"
+              {...register('time')}
+              placeholder="7:00"
+              className="border-blue tablet-ms:w-full placeholder:text-blue block h-11 w-[120px] rounded-xs border px-2.5 py-3 outline-none"
+            />
+            <ErrorMessage>{errors.time?.message}</ErrorMessage>
+          </ItemLabel>
+        </FormField>
+        <FormField name="amount">
+          <ItemLabel>
+            <Label className="text-2x mb-4 font-medium" htmlFor="amount">
+              Enter the value of the water used:
+            </Label>
+            <Input
+              id="amount"
+              {...register('amount')}
+              type="number"
+              // value={userChoose}
+              // onChange={(e) => setUserChoose(e.target.value)}
+              placeholder="50"
+              className="border-blue tablet-ms:w-full placeholder:text-blue h-11 w-[120px] rounded-xs border px-2.5 py-3 outline-none"
+            />
+            <ErrorMessage>{errors.amount?.message}</ErrorMessage>
+          </ItemLabel>
+        </FormField>
         <div className="tablet-ms:justify-end tablet-ms:gap-6 tablet-ms:flex-row flex flex-col items-center justify-center gap-6">
           <span className="text-blue font-bold">
             {/* {userChoose ? userChoose : amountWater}ml */}

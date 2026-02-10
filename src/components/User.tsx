@@ -8,9 +8,7 @@ import clsx from 'clsx';
 export function User() {
   const { data } = useGetUserInfo();
 
-  const name = data?.name
-    ? data?.name
-    : data?.email.slice(0, data?.email.indexOf('@'));
+  const name = data?.name || data?.email.slice(0, data?.email.indexOf('@'));
 
   const { isOpen, setIsOpen } = useToggle();
 
@@ -19,17 +17,18 @@ export function User() {
       <DropdownMenu.Trigger className="cursor-pointer" asChild>
         <div className="flex items-center gap-2">
           <p>{name}</p>
-          <img
-            src={
-              data?.image
-                ? data.image
-                : 'https://png.pngtree.com/png-vector/20231019/ourmid/pngtree-user-profile-avatar-png-image_10211467.png'
-            }
-            alt="User photo"
-            width={28}
-            height={28}
-            className="size-7! rounded-full"
-          />
+          <div className="h-7 w-7 overflow-hidden rounded-full">
+            <img
+              src={
+                data?.image ||
+                'https://png.pngtree.com/png-vector/20231019/ourmid/pngtree-user-profile-avatar-png-image_10211467.png'
+              }
+              alt="User photo"
+              width={28}
+              height={28}
+              className="h-full w-full object-cover"
+            />
+          </div>
 
           <Icon
             iconName="arrow-down"
