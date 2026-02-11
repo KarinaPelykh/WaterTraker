@@ -44,7 +44,7 @@ export function DailyRateContent({ setIsOpen }: DailyRateContentProps) {
       title="My daily norma"
       className="tablet-ms:w-[704px] desktop-m:w-[592px] flex"
     >
-      <ScrollAreaBar className="flex min-h-0 flex-1">
+      <ScrollAreaBar className="flex min-h-0 flex-1" scrollClassName="hidden">
         <Form
           onSubmit={handleSubmit((data) => {
             addDailyRate(data);

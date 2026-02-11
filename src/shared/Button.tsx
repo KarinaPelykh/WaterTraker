@@ -12,7 +12,7 @@ export function Button({ className, variant, ...props }: ButtonProps) {
       type="button"
       className={clsx(
         'bg-blue shadow-secondary text-1x tablet-ms:text-2x hover:shadow-btn cursor-pointer rounded-s px-[30px] py-2 text-white transition duration-500',
-        variant === 'secondary' && 'size-fit bg-transparent p-0! shadow-none!',
+        variant === 'secondary' && 'size-fit bg-transparent p-0!',
         className,
       )}
       {...props}

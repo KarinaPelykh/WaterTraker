@@ -1,8 +1,9 @@
 import { z } from 'zod';
 
 export const UserWaterEntitySchema = z.object({
-  time: z.iso.time(),
-  amount: z.string(),
+  time: z.iso.time('Time must be in HH:mm format').trim(),
+  amount: z.string().trim(),
+  // stepAmount: z.string().trim(),
 });
 
 export const UserDailyWaterRateSchema = z.object({

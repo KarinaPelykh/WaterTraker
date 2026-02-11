@@ -63,7 +63,7 @@ export function Label({ className, ...props }: ComponentProps<'label'>) {
 }
 
 export function ItemLabel({ className, ...props }: ComponentProps<'div'>) {
-  return <div className={clsx(className, 'mb-4')} {...props} />;
+  return <div className={clsx(className, 'mb-4 block')} {...props} />;
 }
 
 export function Input({ className, ...props }: InputProps) {
@@ -71,9 +71,9 @@ export function Input({ className, ...props }: InputProps) {
   return (
     <input
       className={clsx(
-        className,
-        'text-1x border-middle-blue placeholder:text-middle-blue w-full rounded-xs border bg-white px-2.5 py-3 outline-none',
+        'text-1x border-middle-blue placeholder:text-middle-blue block w-full rounded-xs border bg-white px-2.5 py-3 outline-none',
         errorMessage && 'border-error-color!',
+        className,
       )}
       {...props}
     />

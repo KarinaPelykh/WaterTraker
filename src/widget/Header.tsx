@@ -14,7 +14,7 @@ export function Header() {
   return (
     <Root open={isOpen} onOpenChange={setIsOpen}>
       <header className="tablet-ms:pt-4 desktop:pt-3 bg-white pt-2">
-        <div className="container flex justify-between">
+        <div className="container flex items-center justify-between">
           <NavLink to="/">
             <Icon iconName="logo" className="tablet-ms:h-12 h-10 w-[102px]" />
           </NavLink>
