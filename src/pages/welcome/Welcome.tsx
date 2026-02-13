@@ -40,7 +40,7 @@ export function Welcome() {
           </ul>
           <Link
             to="/signin"
-            className="bg-blue shadow-secondary text-1x tablet-ms:text-2x w-[300px] rounded-s px-[30px] py-2 text-white"
+            className="bg-blue shadow-secondary text-1x tablet-ms:text-2x tablet-ms:w-[300px] block w-full rounded-s px-[30px] py-2 text-center text-white"
           >
             Try tracker
           </Link>
