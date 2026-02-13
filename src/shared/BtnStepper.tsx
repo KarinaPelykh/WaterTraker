@@ -2,16 +2,17 @@ import { Button } from './Button';
 import { Icon } from './Icon';
 
 type BtnStepperProps = {
-  value: string;
+  value?: number | string;
   onChange: (value: number) => void;
 };
 
 export const BtnStepper = ({ value, onChange }: BtnStepperProps) => {
-  const increment = () => {
-    onChange(Number(value) + 50);
-  };
+  const numberVal = Number(value);
 
-  const decrement = () => value > 0 && onChange(Number(value) - 50);
+  const increment = () => onChange(numberVal + 50);
+
+  const decrement = () =>
+    numberVal >= 0 && onChange(Math.max(0, numberVal - 50));
 
   return (
     <div className="mb-6 flex items-center gap-[7px]">
@@ -23,7 +24,7 @@ export const BtnStepper = ({ value, onChange }: BtnStepperProps) => {
         <Icon iconName="minus" className="fill-blue size-6" />
       </Button>
       <span className="text-blue text-2x bg-blue2 rounded-m block px-2.5 py-1.5 font-bold">
-        {value}ml
+        {numberVal}ml
       </span>
       <Button
         onClick={increment}

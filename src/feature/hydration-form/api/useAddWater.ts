@@ -2,6 +2,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { addWater } from '../../../shared/lib/service';
 import type { UseFormReset } from 'react-hook-form';
 import type { UserWaterEntity } from '../model/contract';
+import { toastNotification } from '../../../shared/lib/toast';
 
 type AddWaterProps = {
   reset: UseFormReset<UserWaterEntity>;
@@ -23,6 +24,10 @@ export const useAddWater = ({ reset, setIsOpen }: AddWaterProps) => {
       });
       reset();
       setIsOpen(false);
+      toastNotification('success', 'Water log added');
+    },
+    onError: () => {
+      toastNotification('error', 'Try again');
     },
   });
 };

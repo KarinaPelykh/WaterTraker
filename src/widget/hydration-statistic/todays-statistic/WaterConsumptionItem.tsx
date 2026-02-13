@@ -2,11 +2,11 @@ import { Root, Trigger } from '@radix-ui/react-dialog';
 import { Icon } from '../../../shared/Icon';
 import * as Separator from '@radix-ui/react-separator';
 import { AlterContent } from '../../../shared/ModalContent/AlterContent';
-import type { UserWaterEntity } from '../../../pages/account/model/contract';
 import { useToggle } from '../../../shared/hooks/useToggle';
-import { HydrationLogEditor } from '../../../shared/ModalContent/HydrationLogEditor';
+import { HydrationForm } from '../../../feature/hydration-form/ui/HydrationForm';
 import { useState } from 'react';
 import clsx from 'clsx';
+import type { UserWaterEntity } from '../../../feature/hydration-form/model/contract';
 
 type WaterConsumptionItemProps = {
   item: { _id: string } & UserWaterEntity;
@@ -55,7 +55,7 @@ export function WaterConsumptionItem({ item }: WaterConsumptionItemProps) {
             </Trigger>
           ))}
           {dialogType === 'edit' ? (
-            <HydrationLogEditor setIsOpen={setIsOpen} item={item} />
+            <HydrationForm setIsOpen={setIsOpen} dataWaterLog={item} />
           ) : (
             <AlterContent setIsOpen={setIsOpen} userID={item._id} />
           )}

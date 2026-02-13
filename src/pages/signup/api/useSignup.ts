@@ -3,6 +3,7 @@ import { signup } from '../../../shared/lib/service';
 import { useNavigate } from 'react-router-dom';
 import type { UseFormReset } from 'react-hook-form';
 import type { UserSignup } from '../model/contract';
+import { toastNotification } from '../../../shared/lib/toast';
 
 export const useSignup = (reset: UseFormReset<UserSignup>) => {
   const navigate = useNavigate();
@@ -13,6 +14,10 @@ export const useSignup = (reset: UseFormReset<UserSignup>) => {
     onSuccess: () => {
       reset();
       navigate('/main');
+      toastNotification('success', 'Signup successfully');
+    },
+    onError(error) {
+      toastNotification('error', error.message);
     },
   });
 };

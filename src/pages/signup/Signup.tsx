@@ -13,6 +13,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { UserSignupSchema, type UserSignup } from './model/contract';
 import { useSignup } from './api/useSignup';
+import { Loader } from '../../shared/Loader';
 
 export function Signup() {
   const {
@@ -29,7 +30,7 @@ export function Signup() {
     resolver: zodResolver(UserSignupSchema),
   });
 
-  const { mutate: signup } = useSignup(reset);
+  const { mutate: signup, isPending } = useSignup(reset);
 
   return (
     <section className="tablet-ms:pb-[172px] tablet-ms:pt-10 desktop-m:pb-10 desktop-m:pt-5 min-h-screen overflow-hidden pt-6 pb-5">
@@ -74,8 +75,11 @@ export function Signup() {
             </ItemLabel>
           </FormField>
 
-          <Button className="text-2x! mb-4! w-full py-2.5" type="submit">
-            Sign Up
+          <Button
+            className="text-2x! mb-4! flex w-full items-center justify-center gap-5 py-2.5"
+            type="submit"
+          >
+            Sign Up {isPending && <Loader />}
           </Button>
           <Link to="/signin" className="text-blue text-1x">
             Sign in

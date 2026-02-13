@@ -5,7 +5,8 @@ import { useToggle } from '../../../shared/hooks/useToggle';
 
 export function WaterGoal() {
   const { isOpen, setIsOpen } = useToggle();
-  const { data, isPending } = useGetUserInfo();
+
+  const { data } = useGetUserInfo();
 
   return (
     <Root open={isOpen} onOpenChange={setIsOpen}>
@@ -13,7 +14,7 @@ export function WaterGoal() {
         <p className="text-2x mb-3">My daily norma</p>
         <div className="flex items-center gap-3">
           <span className="text-7x desktop-m:text-3x text-blue font-bold">
-            {isPending ? 1.5 : data.water} L
+            {data?.water ? data?.water : 1.5} L
           </span>
           <Trigger className="text-blue-marine! cursor-pointer transition-colors duration-500 hover:text-[#FF9D43]!">
             Edit

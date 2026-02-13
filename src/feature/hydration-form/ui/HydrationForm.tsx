@@ -5,34 +5,27 @@ import {
   Label,
   Input,
   FormField,
-} from '../Form';
-import * as Dialog from '@radix-ui/react-dialog';
+} from '../../../shared/Form';
 
-import { BtnStepper } from '../BtnStepper';
-import { Button } from '../Button';
+import { BtnStepper } from '../../../shared/BtnStepper';
+import { Button } from '../../../shared/Button';
 
 import { Controller, useForm } from 'react-hook-form';
-import { useAddWater } from '../../pages/account/api/useAddWater';
-import {
-  UserWaterEntitySchema,
-  type UserWaterEntity,
-} from '../../pages/account/model/contract';
-import { DialogContainer } from './DialogContainer';
+
+import { DialogContainer } from '../../../shared/ModalContent/DialogContainer';
 import { useEffect } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useEditWater } from '../../widget/hydration-statistic/todays-statistic/api/useEditWater';
-import { ScrollAreaBar } from '../ScrollAreaBar';
-import { Icon } from '../Icon';
+import { ScrollAreaBar } from '../../../shared/ScrollAreaBar';
+import { Icon } from '../../../shared/Icon';
+import { useFormSubmit } from '../api/useFormSubmit';
+import { UserWaterEntitySchema, type UserWaterEntity } from '../model/contract';
 
-type HydrationLogEditorProps = {
+type HydrationFormProps = {
   setIsOpen: (value: boolean) => void;
-  item?: UserWaterEntity & { _id: string };
+  dataWaterLog?: UserWaterEntity & { _id: string };
 };
 
-export function HydrationLogEditor({
-  setIsOpen,
-  item,
-}: HydrationLogEditorProps) {
+export function HydrationForm({ setIsOpen, dataWaterLog }: HydrationFormProps) {
   const {
     register,
     handleSubmit,
@@ -41,58 +34,46 @@ export function HydrationLogEditor({
     control,
     formState: { errors },
   } = useForm<UserWaterEntity>({
-    defaultValues: { time: '', amount: '', stepAmount: '' },
     resolver: zodResolver(UserWaterEntitySchema),
+    defaultValues: { time: '', amount: 50 },
   });
 
   useEffect(() => {
-    if (item) {
-      reset({ time: item.time, amount: item.amount });
+    if (dataWaterLog) {
+      reset({ time: dataWaterLog.time, amount: dataWaterLog.amount });
     }
-  }, [item, reset]);
+  }, [dataWaterLog, reset]);
 
-  const { mutate: addWater } = useAddWater({ reset, setIsOpen });
-
-  const { mutate: addEditWater } = useEditWater();
+  const onSubmit = useFormSubmit({ setIsOpen, dataWaterLog, reset });
 
   return (
     <DialogContainer
-      title={item ? 'Edit the entered amount of water' : 'Add water'}
+      title={dataWaterLog ? 'Edit the entered amount of water' : 'Add water'}
       className="desktop-m:w-[592px] tablet-ms:w-[704px]"
     >
       <ScrollAreaBar className="flex min-h-0 flex-1" scrollClassName="hidden">
-        <Form
-          onSubmit={handleSubmit(({ amount, time, stepAmount }) => {
-            const finalAmount = amount || stepAmount;
-            console.log(amount || stepAmount, amount, stepAmount);
-
-            return item
-              ? addEditWater({
-                  userID: item._id,
-                  amount: Number(finalAmount),
-                  time,
-                })
-              : addWater({ amount: Number(finalAmount), time });
-          })}
-        >
-          <Dialog.DialogDescription aria-description={undefined} />
-          {item && (
+        <Form onSubmit={handleSubmit((data) => onSubmit(data))}>
+          {dataWaterLog && (
             <div className="bg-light-blue tablet-ms:w-[254px] mb-6 flex items-center rounded-s px-6 py-2">
               <Icon iconName="glass" className="fill-blue mr-3 size-9" />
-              <p className="text-2x text-blue mr-4">{item?.amount} ml</p>
-              <p className="text-sx">{item?.time}</p>
+              <p className="text-2x text-blue mr-4">
+                {dataWaterLog?.amount} ml
+              </p>
+              <p className="text-sx">{dataWaterLog?.time}</p>
             </div>
           )}
 
           <h2 className="text-2x mb-4 font-bold">
-            {item ? 'Correct entered data:' : 'Choose a value:'}
+            {dataWaterLog ? 'Correct entered data:' : 'Choose a value:'}
           </h2>
           <p className="text-2x mb-3">Amount of water:</p>
 
           <Controller
-            name="stepAmount"
+            name="amount"
             control={control}
-            render={({ field }) => <BtnStepper {...field} />}
+            render={({ field }) => (
+              <BtnStepper value={field.value ?? 50} onChange={field.onChange} />
+            )}
           />
 
           <FormField name="time" errorMessage={errors.time?.message}>
@@ -112,19 +93,29 @@ export function HydrationLogEditor({
               <Label className="text-2x mb-4 font-bold" htmlFor="amount">
                 Enter the value of the water used:
               </Label>
-              <Input
-                id="amount"
-                {...register('amount')}
-                type="number"
-                placeholder="50"
-                className="border-blue2! placeholder:text-blue! tablet-ms:w-full! w-[120px]!"
+              <Controller
+                name="amount"
+                control={control}
+                render={({ field }) => (
+                  <Input
+                    {...field}
+                    type="number"
+                    placeholder="50"
+                    value={field.value ?? ''}
+                    className="border-blue2! placeholder:text-blue! tablet-ms:w-full! w-[120px]!"
+                    onChange={(e) => {
+                      const val = e.target.value;
+                      field.onChange(val === '' ? '' : Number(val));
+                    }}
+                  />
+                )}
               />
               <ErrorMessage>{errors.amount?.message}</ErrorMessage>
             </ItemLabel>
           </FormField>
           <div className="tablet-ms:justify-end tablet-ms:gap-6 tablet-ms:flex-row flex flex-col items-center justify-center gap-6">
             <span className="text-blue font-bold">
-              {watch('amount') || watch('stepAmount')}
+              {watch('amount') || 0}
               ml
             </span>
             <Button type="submit" className="tablet-ms:w-40 w-full">

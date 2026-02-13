@@ -12,6 +12,7 @@ import { useForm } from 'react-hook-form';
 import { UserSigninSchema, type UserSignin } from './model/contact';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useSignin } from './api/useSignin';
+import { Loader } from '../../shared/Loader';
 
 export function Signin() {
   const {
@@ -24,7 +25,7 @@ export function Signin() {
     resolver: zodResolver(UserSigninSchema),
   });
 
-  const { mutate: signin } = useSignin(reset);
+  const { mutate: signin, isPending } = useSignin(reset);
 
   return (
     <section className="tablet-ms:pb-[264px] tablet-ms:pt-10 desktop-m:pb-10 desktop-m:pt-5 max-h-screen overflow-hidden pt-6 pb-5">
@@ -60,8 +61,11 @@ export function Signin() {
               <ErrorMessage>{errors.password?.message}</ErrorMessage>
             </ItemLabel>
           </FormField>
-          <Button type="submit" className="text-2x! mb-4! w-full py-2.5">
-            Sign In
+          <Button
+            type="submit"
+            className="text-2x! mb-4! flex w-full items-center justify-center gap-5 py-2.5"
+          >
+            Sign In {isPending && <Loader />}
           </Button>
           <Link to="/signup" className="text-blue text-1x">
             Sign up

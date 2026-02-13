@@ -7,9 +7,9 @@ import { WaterGoal } from './WaterGoal';
 
 import { HydrationMonthlyStats } from '../../../widget/hydration-statistic/month-statistic/HydrationMonthlyStats';
 import { useToggle } from '../../../shared/hooks/useToggle';
-import { HydrationLogEditor } from '../../../shared/ModalContent/HydrationLogEditor';
-import type { UserWaterEntity } from '../model/contract';
+import { HydrationForm } from '../../../feature/hydration-form/ui/HydrationForm';
 import { useTodaysHydrationStory } from '../api/useTodaysHydrationStory';
+import type { UserWaterEntity } from '../../../feature/hydration-form/model/contract';
 
 export function HydrationDashboard() {
   const { data, isLoading } = useTodaysHydrationStory();
@@ -63,7 +63,7 @@ export function HydrationDashboard() {
             </div>
             <HydrationMonthlyStats />
           </div>
-          <HydrationLogEditor setIsOpen={setIsOpen} />
+          <HydrationForm setIsOpen={setIsOpen} />
         </Root>
       </div>
     </section>
