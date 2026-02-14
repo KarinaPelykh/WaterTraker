@@ -1,15 +1,23 @@
 import { NavLink } from 'react-router-dom';
 import { Icon } from '../shared/Icon';
 import { useAuth } from '../providers/AuthProvider';
-import { User } from '../components/User';
+import { User } from '../feature/user-profile/User';
 import { UserProfile } from '../feature/user-profile/UserProfile';
 import { Root } from '@radix-ui/react-dialog';
 import { useToggle } from '../shared/hooks/useToggle';
+import { useState } from 'react';
+import { AlertContent } from '../shared/ModalContent/AlterContent';
+import { DialogContainer } from '../shared/ModalContent/DialogContainer';
+import { useSignout } from '../feature/user-profile/api/useSignout';
 
 export function Header() {
-  const { data } = useAuth();
+  const [modalType, setModalType] = useState('');
 
   const { isOpen, setIsOpen } = useToggle();
+
+  const { mutate: signout } = useSignout(setIsOpen);
+
+  const { data } = useAuth();
 
   return (
     <Root open={isOpen} onOpenChange={setIsOpen}>
@@ -20,7 +28,7 @@ export function Header() {
           </NavLink>
 
           {data ? (
-            <User />
+            <User setModalType={setModalType} />
           ) : (
             <div className="flex items-center gap-2">
               <NavLink
@@ -34,7 +42,18 @@ export function Header() {
           )}
         </div>
       </header>
-      <UserProfile setIsOpen={setIsOpen} />
+      {modalType === 'alert' ? (
+        <DialogContainer title="Log out" className="tablet-ms:w-[592px]">
+          <AlertContent
+            text="Do you really want to leave?"
+            textBtn="Log out"
+            className="tablet-ms:justify-start"
+            onSubmit={signout}
+          />
+        </DialogContainer>
+      ) : (
+        <UserProfile setIsOpen={setIsOpen} />
+      )}
     </Root>
   );
 }

@@ -1,12 +1,14 @@
 import { Root, Trigger } from '@radix-ui/react-dialog';
 import { Icon } from '../../../shared/Icon';
 import * as Separator from '@radix-ui/react-separator';
-import { AlterContent } from '../../../shared/ModalContent/AlterContent';
+import { AlertContent } from '../../../shared/ModalContent/AlterContent';
 import { useToggle } from '../../../shared/hooks/useToggle';
 import { HydrationForm } from '../../../feature/hydration-form/ui/HydrationForm';
 import { useState } from 'react';
 import clsx from 'clsx';
 import type { UserWaterEntity } from '../../../feature/hydration-form/model/contract';
+import { DialogContainer } from '../../../shared/ModalContent/DialogContainer';
+import { useDeleteHydrationLog } from './api/useDeleteHydrationLog';
 
 type WaterConsumptionItemProps = {
   item: { _id: string } & UserWaterEntity;
@@ -18,6 +20,11 @@ export function WaterConsumptionItem({ item }: WaterConsumptionItemProps) {
   const { isOpen, setIsOpen } = useToggle();
 
   const [dialogType, setDialogType] = useState('');
+
+  const { mutate: deleteHydrationLog } = useDeleteHydrationLog({
+    userID: item._id,
+    setIsOpen,
+  });
 
   return (
     <>
@@ -57,7 +64,16 @@ export function WaterConsumptionItem({ item }: WaterConsumptionItemProps) {
           {dialogType === 'edit' ? (
             <HydrationForm setIsOpen={setIsOpen} dataWaterLog={item} />
           ) : (
-            <AlterContent setIsOpen={setIsOpen} userID={item._id} />
+            <DialogContainer
+              title="Delete entry"
+              className="tablet-ms:w-[592px]"
+            >
+              <AlertContent
+                textBtn="Delete"
+                text="Are you sure you want to delete the entry?"
+                onSubmit={deleteHydrationLog}
+              />
+            </DialogContainer>
           )}
         </Root>
       </li>

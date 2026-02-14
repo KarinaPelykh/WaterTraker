@@ -47,6 +47,12 @@ export const current = async () => {
 
   return response.data;
 };
+
+export const signout = async () => {
+  const response = await axiosInstance.post('auth/signout');
+
+  return response.data;
+};
 // auth/
 
 export const addWater = async (data: AmountWater) => {

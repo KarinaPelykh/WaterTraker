@@ -5,6 +5,5 @@ export const useIsAuthenticated = () => {
   return useQuery({
     queryKey: ['me'],
     queryFn: current,
-    // retry: false,
   });
 };

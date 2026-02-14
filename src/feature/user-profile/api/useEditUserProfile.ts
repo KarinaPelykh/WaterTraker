@@ -25,7 +25,7 @@ export const useEditUserProfile = ({
       toastNotification('success', 'User profile updated!');
     },
     onError: () => {
-      toastNotification('error', 'User profile wasnt updated!');
+      toastNotification('error', 'User profile wasn`t updated!');
     },
   });
 };
