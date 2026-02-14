@@ -38,7 +38,7 @@ export function User({ setModalType }: UserProps) {
             <img
               src={
                 data?.image ||
-                'https://png.pngtree.com/png-vector/20231019/ourmid/pngtree-user-profile-avatar-png-image_10211467.png'
+                'https://img.freepik.com/premium-vector/free-vector-user-icon_901408-589.jpg'
               }
               alt="User photo"
               width={28}
@@ -75,29 +75,6 @@ export function User({ setModalType }: UserProps) {
               </Trigger>
             </DropdownMenu.Item>
           ))}
-          {/* <DropdownMenu.Item className="outline-none">
-            <Trigger className="group mb-4 flex cursor-pointer gap-1">
-              <Icon
-                iconName="setting"
-                className="stroke-blue size-4 transition duration-500 group-hover:stroke-[#FF9D43]"
-              />
-              <span className="text-blue text-base transition duration-500 group-hover:text-[#FF9D43]">
-                Setting
-              </span>
-            </Trigger>
-          </DropdownMenu.Item>
-
-          <DropdownMenu.Item className="outline-none">
-            <button className="text-blue group flex gap-1 text-base">
-              <Icon
-                iconName="logout"
-                className="stroke-blue size-4 transition duration-500 group-hover:stroke-[#FF9D43]"
-              />
-              <span className="transition duration-500 group-hover:text-[#FF9D43]">
-                Log out
-              </span>
-            </button>
-          </DropdownMenu.Item> */}
         </DropdownMenu.Content>
       </DropdownMenu.Portal>
     </DropdownMenu.Root>

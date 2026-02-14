@@ -1,6 +1,6 @@
 .background {
   background-image: url('/hero/mobile.png');
-  background-size: contain;
+  background-size: cover;
   background-repeat: no-repeat;
   background-position: bottom;
   /* max-width: 100%;
