@@ -1,9 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
 import { getMonthHydrationStory } from '../../../../shared/lib/service';
 
-export const useGetMonthWater = () => {
+export const useGetMonthWater = (date: string) => {
   return useQuery({
-    queryKey: ['months-water'],
-    queryFn: getMonthHydrationStory,
+    queryKey: ['months-water', date],
+    queryFn: () => getMonthHydrationStory(date),
   });
 };

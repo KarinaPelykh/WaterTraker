@@ -36,7 +36,7 @@ export function HydrationDashboard() {
               </Trigger>
             </div>
           </div>
-          <div className="bg-light-blue shadow-base tablet-ms:py-8 tablet-ms:px-6 desktop-m:w-1/2 desktop-m:h-[680px] flex flex-col rounded-s px-2 py-6">
+          <div className="bg-light-blue shadow-base tablet-ms:py-8 tablet-ms:px-6 desktop-m:w-1/2 desktop-m:h-[680px] desktop-m:overflow-visible flex flex-col overflow-hidden rounded-s px-2 py-6">
             <div className="desktop-m:mb-auto mb-6">
               <p className="text-3x mb-4">Today</p>
               {isLoading ? null : (

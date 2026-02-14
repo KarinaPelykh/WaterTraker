@@ -85,10 +85,10 @@ export const getUserInfo = async () => {
   return response.data;
 };
 
-export const getMonthHydrationStory = async () => {
+export const getMonthHydrationStory = async (date: string) => {
   const response = await axiosInstance.get(`water/month`, {
     params: {
-      date: '2026.02',
+      date,
     },
   });
 
