@@ -22,12 +22,12 @@ type UserDailyRate = {
 };
 
 type UserData = {
-  email: string;
-  name: string;
-  currentPassword: string;
-  newPassword: string;
-  confirmNewPassword: string;
-  gender: string;
+  email?: string;
+  name?: string;
+  currentPassword?: string;
+  newPassword?: string;
+  confirmNewPassword?: string;
+  gender?: string;
 };
 // auth
 export const signup = async (data: SignupSchema) => {

@@ -5,6 +5,7 @@ export const UserProfileSchema = z
     email: z.email('Email invalid'),
     gender: z.string(),
     name: z.string(),
+
     currentPassword: z
       .string()
       .transform((val) => (val === '' ? undefined : val))
