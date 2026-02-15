@@ -13,7 +13,7 @@ export const useSignup = (reset: UseFormReset<UserSignup>) => {
     mutationFn: signup,
     onSuccess: () => {
       reset();
-      navigate('/main');
+      navigate('/signin');
       toastNotification('success', 'Signup successfully');
     },
     onError(error) {
