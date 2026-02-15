@@ -3,11 +3,14 @@ import { Tooltip } from '../../Tooltip';
 import type { MonthWaterlog } from '../../../pages/account/types/hydration-dashboar.types';
 
 type HydrationMonthlyItemProps = {
-  item: MonthWaterlog;
+  item: MonthWaterlog | number;
 };
 
 export function HydrationMonthlyItem({ item }: HydrationMonthlyItemProps) {
-  const [number] = item.date.split(',');
+  const defaultDay = typeof item === 'number' ? item : null;
+
+  const [number] =
+    typeof defaultDay === 'number' ? [] : (item?.date.split(',') ?? null);
 
   return (
     <Tooltip item={item}>
@@ -15,12 +18,14 @@ export function HydrationMonthlyItem({ item }: HydrationMonthlyItemProps) {
         <div
           className={clsx(
             'flex size-[34px] items-center justify-center rounded-full border bg-white',
-            item.percent <= 60 ? 'border-error-color' : 'border-transparent',
+            (item?.percent || defaultDay) <= 60
+              ? 'border-error-color'
+              : 'border-transparent',
           )}
         >
-          {number}
+          {defaultDay || number}
         </div>
-        <span className="text-blue">{item.percent}%</span>
+        <span className="text-blue">{item?.percent || 0}%</span>
       </li>
     </Tooltip>
   );

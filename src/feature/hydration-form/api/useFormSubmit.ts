@@ -24,13 +24,25 @@ export const useFormSubmit = ({
   const { mutate: addWater } = useAddWater({ reset, setIsOpen });
 
   return function onSubmit({ amount, time }: FormValues) {
+    console.log(amount, time);
+
     if (!amount) return;
-    return dataWaterLog
-      ? addEditWater({
-          userID: dataWaterLog._id,
-          amount,
-          time,
-        })
-      : addWater({ amount, time });
+
+    if (dataWaterLog) {
+      addEditWater({
+        userID: dataWaterLog._id,
+        amount,
+        time,
+      });
+    } else {
+      addWater({ amount, time });
+    }
+    // return dataWaterLog
+    //   ? addEditWater({
+    //       userID: dataWaterLog._id,
+    //       amount,
+    //       time,
+    //     })
+    //   : addWater({ amount, time });
   };
 };

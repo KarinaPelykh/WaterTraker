@@ -58,7 +58,7 @@ export const signout = async () => {
 export const addWater = async (data: AmountWater) => {
   const response = await axiosInstance.post('water', data);
 
-  return response;
+  return response.data;
 };
 
 export const getTodaysHydrationStory = async () => {

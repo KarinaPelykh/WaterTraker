@@ -6,14 +6,31 @@ export const UserProfileSchema = z
     gender: z.string(),
     name: z.string(),
     currentPassword: z
-      .string('Password is required')
-      .min(6, 'Minimum 6 characters')
-      .max(12, 'Maximum 12 characters'),
+      .string()
+      .transform((val) => (val === '' ? undefined : val))
+      .pipe(
+        z
+          .string('Password is required')
+          .min(6, 'Minimum 6 characters')
+          .max(12, 'Maximum 12 characters')
+          .optional(),
+      ),
+
     newPassword: z
-      .string('Password is required')
-      .min(6, 'Minimum 6 characters')
-      .max(12, 'Maximum 12 characters'),
-    confirmNewPassword: z.string('Please confirm your password'),
+      .string()
+      .transform((val) => (val === '' ? undefined : val))
+      .pipe(
+        z
+          .string('Password is required')
+          .min(6, 'Minimum 6 characters')
+          .max(12, 'Maximum 12 characters')
+          .optional(),
+      ),
+
+    confirmNewPassword: z
+      .string()
+      .transform((val) => (val === '' ? undefined : val))
+      .pipe(z.string('Please confirm your password').optional()),
   })
   .superRefine((val, cxl) => {
     if (val.newPassword !== val.confirmNewPassword) {

@@ -10,11 +10,17 @@ import { useToggle } from '../../../shared/hooks/useToggle';
 import { HydrationForm } from '../../../feature/hydration-form/ui/HydrationForm';
 import { useTodaysHydrationStory } from '../api/useTodaysHydrationStory';
 import type { UserWaterEntity } from '../../../feature/hydration-form/model/contract';
+import { useGetUserInfo } from '../api/useGetUserInfo';
+import { AlertContent } from '../../../shared/ModalContent/AlterContent';
+import { DialogContainer } from '../../../shared/ModalContent/DialogContainer';
+import { signout } from '../../../shared/lib/service';
 
 export function HydrationDashboard() {
-  const { data, isLoading } = useTodaysHydrationStory();
+  const { data } = useTodaysHydrationStory();
 
   const { isOpen, setIsOpen } = useToggle();
+
+  const user = useGetUserInfo();
 
   return (
     <section className="pb-10">
@@ -39,7 +45,7 @@ export function HydrationDashboard() {
           <div className="bg-light-blue shadow-base tablet-ms:py-8 tablet-ms:px-6 desktop-m:w-1/2 desktop-m:h-[680px] desktop-m:overflow-visible flex flex-col overflow-hidden rounded-s px-2 py-6">
             <div className="desktop-m:mb-auto mb-6">
               <p className="text-3x mb-4">Today</p>
-              {isLoading ? null : (
+              {data?.list.length === 0 ? null : (
                 <ScrollAreaBar className="mb-6 max-h-[200px]">
                   <ul>
                     {data?.list.map(
@@ -63,7 +69,22 @@ export function HydrationDashboard() {
             </div>
             <HydrationMonthlyStats />
           </div>
-          <HydrationForm setIsOpen={setIsOpen} />
+
+          {!user?.data?.water ? (
+            <DialogContainer
+              title="Notification"
+              className="tablet-ms:w-[592px]"
+            >
+              <AlertContent
+                text="You must set up water limit!"
+                textBtn="Log out"
+                className="hidden"
+                onSubmit={signout}
+              />
+            </DialogContainer>
+          ) : (
+            <HydrationForm setIsOpen={setIsOpen} />
+          )}
         </Root>
       </div>
     </section>

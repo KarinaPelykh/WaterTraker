@@ -22,6 +22,7 @@ export const useAddWater = ({ reset, setIsOpen }: AddWaterProps) => {
       queryClient.invalidateQueries({
         queryKey: ['months-water'],
       });
+
       reset();
       setIsOpen(false);
       toastNotification('success', 'Water log added');

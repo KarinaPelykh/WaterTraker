@@ -2,20 +2,28 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { addDailyRate } from '../../../shared/lib/service';
 import type { UseFormReset } from 'react-hook-form';
 import type { UserDailyWaterRate } from '../model/contract';
+import { toastNotification } from '../../../shared/lib/toast';
 
 export const useAddDailyRate = ({
   reset,
+  setIsOpen,
 }: {
   reset: UseFormReset<UserDailyWaterRate>;
+  setIsOpen: (value: boolean) => void;
 }) => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: addDailyRate,
     mutationKey: ['daily-goal'],
+    mutationFn: addDailyRate,
     onSuccess: () => {
       reset();
+      setIsOpen(false);
       queryClient.invalidateQueries({ queryKey: ['user'] });
+      toastNotification('success', 'Limit added successfully');
+    },
+    onError: () => {
+      toastNotification('error', 'Try again');
     },
   });
 };

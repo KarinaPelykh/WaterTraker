@@ -42,6 +42,15 @@ export function HydrationMonthlyStats() {
 
   const { data: monthWaterlog } = useGetMonthWater(`${year}.${numberMOnth}`);
 
+  const placeholder = (month: number, year: number) => {
+    const date = new Date(year, month, 0).getDate();
+
+    return Array.from({ length: date }, (_, i) => i + 1);
+  };
+
+  const daysPlaceholderArray = placeholder(month, year);
+  console.log(monthWaterlog);
+
   return (
     <div>
       <div className="mb-4 flex items-center justify-between">
@@ -73,9 +82,11 @@ export function HydrationMonthlyStats() {
       </div>
 
       <ul className="desktop-m:gap-[22px] desktop-m:justify-between tablet-ms:gap-6 tablet-ms:grid-cols-10 grid grid-cols-5 gap-[26px]">
-        {monthWaterlog?.map((item: MonthWaterlog, i: number) => (
-          <HydrationMonthlyItem key={i} item={item} />
-        ))}
+        {(monthWaterlog || daysPlaceholderArray)?.map(
+          (item: MonthWaterlog | number, i: number) => (
+            <HydrationMonthlyItem key={i} item={item} />
+          ),
+        )}
       </ul>
     </div>
   );

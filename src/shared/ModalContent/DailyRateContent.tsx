@@ -29,7 +29,7 @@ export function DailyRateContent({ setIsOpen }: DailyRateContentProps) {
       },
     });
 
-  const { mutate: addDailyRate } = useAddDailyRate({ reset });
+  const { mutate: addDailyRate } = useAddDailyRate({ reset, setIsOpen });
 
   const { data } = useGetUserInfo();
 
@@ -45,12 +45,7 @@ export function DailyRateContent({ setIsOpen }: DailyRateContentProps) {
       className="tablet-ms:w-[704px] desktop-m:w-[592px] flex"
     >
       <ScrollAreaBar className="flex min-h-0 flex-1" scrollClassName="hidden">
-        <Form
-          onSubmit={handleSubmit((data) => {
-            addDailyRate(data);
-            setIsOpen(false);
-          })}
-        >
+        <Form onSubmit={handleSubmit((data) => addDailyRate(data))}>
           <div className="tablet-ms:flex tablet-ms:gap-6 mb-3">
             <p className="tablet-ms:m-0 mb-4">
               For girl:
