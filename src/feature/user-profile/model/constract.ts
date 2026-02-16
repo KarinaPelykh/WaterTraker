@@ -2,36 +2,22 @@ import { z } from 'zod';
 
 export const UserProfileSchema = z
   .object({
-    email: z.email('Email invalid'),
-    gender: z.string(),
-    name: z.string(),
-
+    email: z.email('Email invalid').or(z.literal('')),
+    gender: z.string().or(z.literal('')),
+    name: z.string().or(z.literal('')),
     currentPassword: z
-      .string()
-      .transform((val) => (val === '' ? undefined : val))
-      .pipe(
-        z
-          .string('Password is required')
-          .min(6, 'Minimum 6 characters')
-          .max(12, 'Maximum 12 characters')
-          .optional(),
-      ),
-
+      .string('Password is required')
+      .min(6, 'Minimum 6 characters')
+      .max(12, 'Maximum 12 characters')
+      .or(z.literal('')),
     newPassword: z
-      .string()
-      .transform((val) => (val === '' ? undefined : val))
-      .pipe(
-        z
-          .string('Password is required')
-          .min(6, 'Minimum 6 characters')
-          .max(12, 'Maximum 12 characters')
-          .optional(),
-      ),
-
+      .string('Password is required')
+      .min(6, 'Minimum 6 characters')
+      .max(12, 'Maximum 12 characters')
+      .or(z.literal('')),
     confirmNewPassword: z
-      .string()
-      .transform((val) => (val === '' ? undefined : val))
-      .pipe(z.string('Please confirm your password').optional()),
+      .string('Please confirm your password')
+      .or(z.literal('')),
   })
   .superRefine((val, cxl) => {
     if (val.newPassword !== val.confirmNewPassword) {
