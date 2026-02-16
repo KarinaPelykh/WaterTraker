@@ -10,7 +10,9 @@ type TooltipProps = {
 export const Tooltip = ({ children, item }: TooltipProps) => {
   const [show, setShow] = useState(false);
 
-  return (
+  return typeof item === 'number' ? (
+    <>{children}</>
+  ) : (
     <div
       className={clsx(
         'relative inset-0 mx-auto w-full max-w-md',
@@ -23,7 +25,7 @@ export const Tooltip = ({ children, item }: TooltipProps) => {
           show ? 'visible opacity-100' : 'invisible opacity-0',
         )}
       >
-        {/* <p className="text-blue">{item?.date}</p>
+        <p className="text-blue">{item?.date}</p>
         <p>
           Daily norma:
           <span className="text-blue text-2x"> {item?.dailyNormWater}L</span>
@@ -35,8 +37,8 @@ export const Tooltip = ({ children, item }: TooltipProps) => {
 
         <p>
           How many servings of water:
-          <span className="text-blue text-2x"> {item?.list.length}</span>
-        </p>*/}
+          <span className="text-blue text-2x"> {item?.list?.length}</span>
+        </p>
       </div>
 
       <div

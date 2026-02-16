@@ -7,10 +7,13 @@ type HydrationMonthlyItemProps = {
 };
 
 export function HydrationMonthlyItem({ item }: HydrationMonthlyItemProps) {
-  const defaultDay = typeof item === 'number' ? item : null;
+  const isPlaceholder = typeof item === 'number';
 
-  const [number] =
-    typeof defaultDay === 'number' ? [] : (item?.date.split(',') ?? null);
+  const [number] = isPlaceholder ? [] : (item?.date.split(',') ?? null);
+
+  const defaultNum = isPlaceholder && item;
+
+  const percent = isPlaceholder ? 0 : item.percent;
 
   return (
     <Tooltip item={item}>
@@ -18,14 +21,12 @@ export function HydrationMonthlyItem({ item }: HydrationMonthlyItemProps) {
         <div
           className={clsx(
             'flex size-[34px] items-center justify-center rounded-full border bg-white',
-            (item?.percent || defaultDay) <= 60
-              ? 'border-error-color'
-              : 'border-transparent',
+            percent <= 60 ? 'border-error-color' : 'border-transparent',
           )}
         >
-          {defaultDay || number}
+          {number || defaultNum}
         </div>
-        <span className="text-blue">{item?.percent || 0}%</span>
+        <span className="text-blue">{percent}%</span>
       </li>
     </Tooltip>
   );

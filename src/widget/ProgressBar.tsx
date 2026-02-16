@@ -25,7 +25,7 @@ export function ProgressBar({ percentOfConsumedWater }: ProgressBarProps) {
             <Progress.Indicator
               className="bg-middle-blue size-full transition duration-500"
               style={{
-                transform: `translateX(-${100 - percentOfConsumedWater}%)`,
+                transform: `translateX(-${100 - cappedPercent}%)`,
               }}
             />
             <div

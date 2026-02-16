@@ -49,7 +49,6 @@ export function HydrationMonthlyStats() {
   };
 
   const daysPlaceholderArray = placeholder(month, year);
-  console.log(monthWaterlog);
 
   return (
     <div>

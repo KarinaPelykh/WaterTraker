@@ -20,6 +20,9 @@ export const useAddDailyRate = ({
       reset();
       setIsOpen(false);
       queryClient.invalidateQueries({ queryKey: ['user'] });
+      queryClient.invalidateQueries({ queryKey: ['months-water'] });
+      queryClient.invalidateQueries({ queryKey: ['today-story'] });
+
       toastNotification('success', 'Limit added successfully');
     },
     onError: () => {

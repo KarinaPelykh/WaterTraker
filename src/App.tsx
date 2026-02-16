@@ -5,6 +5,7 @@ import { RootLayout } from './components/RootLayout';
 import { Signup } from './pages/signup/Signup';
 import { Signin } from './pages/signin/Signin';
 import { HydrationDashboard } from './pages/account/ui/HydrationTraker';
+import { ProtectedRout } from './providers/ProtectedRoute';
 
 const routers = createBrowserRouter([
   {
@@ -14,7 +15,14 @@ const routers = createBrowserRouter([
       { index: true, element: <Welcome /> },
       { path: 'signup', element: <Signup /> },
       { path: 'signin', element: <Signin /> },
-      { path: 'main', element: <HydrationDashboard /> },
+      {
+        path: 'main',
+        element: (
+          <ProtectedRout>
+            <HydrationDashboard />
+          </ProtectedRout>
+        ),
+      },
     ],
   },
 ]);
