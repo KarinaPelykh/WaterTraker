@@ -116,7 +116,7 @@ body {
   font-family: 'Roboto', sans-serif;
   background-color: var(--color-white);
   color: var(--color-black);
-  background-image: url('/hero/mob.png');
+  background-image: url('/hero/hero-mob.png');
   background-size: contain;
   background-position: center center;
   background-repeat: no-repeat;
@@ -125,14 +125,14 @@ body {
 
 @media screen and (min-width: 760px) {
   body {
-    background-image: url('/hero/tabl.png');
+    background-image: url('/hero/hero-tablet.png');
   }
 }
 
 @media screen and (min-width: 1020px) {
   body {
     background-position: top center;
-    background-image: url('/hero/hero-desktop2.png');
+    background-image: url('/hero/hero-desktop.png');
   }
 }
 
@@ -141,8 +141,4 @@ img {
   height: auto;
   display: block;
   object-fit: contain;
-}
-
-input[type='time']::-webkit-calendar-picker-indicator {
-  background: none;
 }
