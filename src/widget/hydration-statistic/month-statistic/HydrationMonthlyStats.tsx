@@ -1,8 +1,7 @@
-import { Button } from '../../../shared/Button';
-import { Icon } from '../../../shared/Icon';
+import { Button, Icon } from '../../../shared/ui';
 import { useGetMonthWater } from './api/useGetMonthWater';
-import { HydrationMonthlyItem } from './HydrationMontlyItem';
-import type { MonthWaterlog } from '../../../pages/account/types/hydration-dashboar.types';
+import { HydrationMonthlyItem } from './HydrationMonthlyItem';
+import type { MonthWaterlog } from '../../../pages/account/types/hydration-dashboard.types';
 import { useState } from 'react';
 
 const months = [

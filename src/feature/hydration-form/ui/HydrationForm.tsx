@@ -5,20 +5,17 @@ import {
   Label,
   Input,
   FormField,
-} from '../../../shared/Form';
-
-import { BtnStepper } from '../../../shared/BtnStepper';
-import { Button } from '../../../shared/Button';
+} from '../../../shared/ui/Form';
 
 import { Controller, useForm } from 'react-hook-form';
 
 import { DialogContainer } from '../../../shared/ModalContent/DialogContainer';
 import { useEffect } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { ScrollAreaBar } from '../../../shared/ScrollAreaBar';
-import { Icon } from '../../../shared/Icon';
+
 import { useFormSubmit } from '../api/useFormSubmit';
 import { UserWaterEntitySchema, type UserWaterEntity } from '../model/contract';
+import { BtnStepper, Button, Icon, ScrollAreaBar } from '../../../shared/ui';
 
 type HydrationFormProps = {
   setIsOpen: (value: boolean) => void;

@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-import { Button } from '../../shared/Button';
 import {
   ErrorMessage,
   Form,
@@ -7,13 +6,12 @@ import {
   ItemLabel,
   Label,
   Input,
-} from '../../shared/Form';
-import { PasswordInput } from '../../shared/PasswordInput';
+} from '../../shared/ui/Form';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { UserSignupSchema, type UserSignup } from './model/contract';
 import { useSignup } from './api/useSignup';
-import { Loader } from '../../shared/Loader';
+import { Loader, Button, PasswordInput } from '../../shared/ui';
 
 export function Signup() {
   const {

@@ -3,15 +3,7 @@ import icon from '/sprite.svg';
 import css from './welcome.module.css';
 import clsx from 'clsx';
 import { Link } from 'react-router-dom';
-
-const info = [
-  {
-    iconName: 'calendar',
-    content: 'Habit drive',
-  },
-  { iconName: 'chart', content: 'View statistics' },
-  { iconName: 'setting-user', content: 'Personal rate setting' },
-];
+import { info } from './welcome.constants';
 
 export function Welcome() {
   return (

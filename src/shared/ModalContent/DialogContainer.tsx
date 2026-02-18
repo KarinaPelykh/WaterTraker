@@ -1,7 +1,7 @@
 import * as Dialog from '@radix-ui/react-dialog';
 import clsx from 'clsx';
 import type { ReactNode } from 'react';
-import { Icon } from '../Icon';
+import { Icon } from '../ui/Icon';
 
 export function DialogContainer({
   children,

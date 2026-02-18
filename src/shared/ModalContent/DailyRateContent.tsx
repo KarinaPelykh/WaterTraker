@@ -1,10 +1,10 @@
-import { Button } from '../Button';
-import { Form, ItemLabel, Label, Input, FormField } from '../Form';
-import { ScrollAreaBar } from '../ScrollAreaBar';
+import { Button } from '../ui/Button';
+import { Form, ItemLabel, Label, Input, FormField } from '../ui/Form';
+import { ScrollAreaBar } from '../ui/ScrollAreaBar';
 import { Controller, useForm } from 'react-hook-form';
-import { useAddDailyRate } from '../../pages/account/api/useAddDailyRate';
-import type { UserDailyWaterRate } from '../../pages/account/model/contract';
-import { RadioBtn } from '../RadioBtn';
+import { useAddDailyRate } from '../../feature/daly-rate/api/useAddDailyRate';
+import type { UserDailyWaterRate } from '../../feature/daly-rate/model/contract';
+import { RadioBtn } from '../ui/RadioBtn';
 import * as RadioGroup from '@radix-ui/react-radio-group';
 import { DialogContainer } from './DialogContainer';
 import { useGetUserInfo } from '../../pages/account/api/useGetUserInfo';
@@ -119,12 +119,6 @@ export function DailyRateContent({ setIsOpen }: DailyRateContentProps) {
               <span className="text-blue block"> 1.8L</span>
             </div>
 
-            {/* Do it later, like option for user add own amount of water */}
-
-            {/* <ItemLabel>
-              <Label>Write down how much water you will drink:</Label>
-              <Input placeholder="0" />
-            </ItemLabel> */}
             <Button
               className="tablet-ms:w-40 tablet-ms:ml-auto w-full"
               type="submit"

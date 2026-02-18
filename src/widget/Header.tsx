@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom';
-import { Icon } from '../shared/Icon';
+import { Icon } from '../shared/ui';
 import { useAuth } from '../providers/AuthProvider';
 import { User } from '../feature/user-profile/User';
 import { UserProfile } from '../feature/user-profile/UserProfile';

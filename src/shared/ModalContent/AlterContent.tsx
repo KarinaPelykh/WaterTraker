@@ -1,5 +1,5 @@
 import * as Dialog from '@radix-ui/react-dialog';
-import { Button } from '../Button';
+import { Button } from '../ui/Button';
 import { useForm } from 'react-hook-form';
 import clsx from 'clsx';
 

@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-import { Button } from '../../shared/Button';
 import {
   ErrorMessage,
   Form,
@@ -7,12 +6,12 @@ import {
   ItemLabel,
   Label,
   Input,
-} from '../../shared/Form';
+} from '../../shared/ui/Form';
 import { useForm } from 'react-hook-form';
 import { UserSigninSchema, type UserSignin } from './model/contact';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useSignin } from './api/useSignin';
-import { Loader } from '../../shared/Loader';
+import { Loader, Button } from '../../shared/ui';
 
 export function Signin() {
   const {

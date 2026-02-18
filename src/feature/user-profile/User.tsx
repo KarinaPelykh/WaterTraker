@@ -1,9 +1,11 @@
 import { Trigger } from '@radix-ui/react-dialog';
-import { Icon } from '../../shared/Icon';
-import { useGetUserInfo } from '../../pages/account/api/useGetUserInfo';
-import { useToggle } from '../../shared/hooks/useToggle';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import clsx from 'clsx';
+
+import { useGetUserInfo } from '../../pages/account/api/useGetUserInfo';
+import { useToggle } from '../../shared/hooks/useToggle';
+
+import { Icon } from '../../shared/ui';
 
 const modals = [
   {

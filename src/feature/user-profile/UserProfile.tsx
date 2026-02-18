@@ -5,16 +5,19 @@ import {
   ItemLabel,
   Label,
   Input,
-} from '../../shared/Form';
-import { Icon } from '../../shared/Icon';
-import { PasswordInput } from '../../shared/PasswordInput';
+} from '../../shared/ui/Form';
+import {
+  Icon,
+  PasswordInput,
+  Button,
+  ScrollAreaBar,
+  RadioBtn,
+} from '../../shared/ui';
 import { Controller, useForm } from 'react-hook-form';
 import { useEffect, useState, type ChangeEvent } from 'react';
-import { Button } from '../../shared/Button';
 import { useEditUserProfile } from './api/useEditUserProfile';
 import { useGetUserInfo } from '../../pages/account/api/useGetUserInfo';
-import { ScrollAreaBar } from '../../shared/ScrollAreaBar';
-import { RadioBtn } from '../../shared/RadioBtn';
+
 import * as RadioGroup from '@radix-ui/react-radio-group';
 import { DialogContainer } from '../../shared/ModalContent/DialogContainer';
 import { useAddUserPhoto } from './api/useAddUserPhoto';

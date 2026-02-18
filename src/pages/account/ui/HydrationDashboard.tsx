@@ -1,9 +1,8 @@
 import { Root, Trigger } from '@radix-ui/react-dialog';
-import { Icon } from '../../../shared/Icon';
-import { ScrollAreaBar } from '../../../shared/ScrollAreaBar';
+import { Icon, ScrollAreaBar } from '../../../shared/ui';
 import { ProgressBar } from '../../../widget/ProgressBar';
 import { WaterConsumptionItem } from '../../../widget/hydration-statistic/todays-statistic/WaterConsumptionItem';
-import { WaterGoal } from './WaterGoal';
+import { WaterGoal } from '../../../feature/daly-rate/ui/WaterGoal';
 
 import { HydrationMonthlyStats } from '../../../widget/hydration-statistic/month-statistic/HydrationMonthlyStats';
 import { useToggle } from '../../../shared/hooks/useToggle';
@@ -20,7 +19,7 @@ export function HydrationDashboard() {
 
   const { isOpen, setIsOpen } = useToggle();
 
-  const user = useGetUserInfo();
+  const { data: userData } = useGetUserInfo();
 
   return (
     <section className="pb-10">
@@ -70,7 +69,7 @@ export function HydrationDashboard() {
             <HydrationMonthlyStats />
           </div>
 
-          {!user?.data?.water ? (
+          {!userData?.data?.water ? (
             <DialogContainer
               title="Notification"
               className="tablet-ms:w-[592px]"

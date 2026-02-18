@@ -1,5 +1,5 @@
 import { Root, Trigger } from '@radix-ui/react-dialog';
-import { Icon } from '../../../shared/Icon';
+import { Icon } from '../../../shared/ui';
 import * as Separator from '@radix-ui/react-separator';
 import { AlertContent } from '../../../shared/ModalContent/AlterContent';
 import { useToggle } from '../../../shared/hooks/useToggle';
