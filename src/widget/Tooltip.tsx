@@ -1,6 +1,6 @@
 import clsx from 'clsx';
-import { useState, type ReactNode } from 'react';
 import type { MonthWaterlog } from '../pages/account/types/hydration-dashboar.types';
+import { useState, type ReactNode } from 'react';
 
 type TooltipProps = {
   children: ReactNode;
@@ -21,7 +21,7 @@ export const Tooltip = ({ children, item }: TooltipProps) => {
     >
       <div
         className={clsx(
-          'shadow-tooltip desktop-m:w-[292px] absolute -top-[188px] left-1/2 z-40 flex w-[280px] -translate-x-1/2 flex-col gap-4 rounded-xs bg-white px-4 py-6 transition-opacity duration-500',
+          'shadow-tooltip max-desktop-m:fixed desktop-m:w-[292px] desktop-m:absolute desktop-m:-top-[188px] top-20 left-1/2 z-40 flex w-[280px] -translate-x-1/2 flex-col gap-4 rounded-xs bg-white px-4 py-6 opacity-100 transition-opacity duration-500',
           show ? 'visible opacity-100' : 'invisible opacity-0',
         )}
       >

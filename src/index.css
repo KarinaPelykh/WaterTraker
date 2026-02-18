@@ -69,8 +69,8 @@
   --text-base--font-weight: 500;
 
   --text-sx: 12px;
-  --text-1x--line-height: 16px;
-  --text-1x--font-weight: 400;
+  --text-sx--line-height: 16px;
+  --text-sx--font-weight: 400;
 
   --radius-*: initial;
   --radius-xs: 6px;
@@ -120,6 +120,7 @@ body {
   background-size: contain;
   background-position: center center;
   background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 @media screen and (min-width: 760px) {
@@ -132,7 +133,6 @@ body {
   body {
     background-position: top center;
     background-image: url('/hero/hero-desktop2.png');
-    background-attachment: fixed;
   }
 }
 

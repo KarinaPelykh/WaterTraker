@@ -23,7 +23,9 @@ export function Welcome() {
       <div className="desktop-m:flex desktop-m:gap-[81px] desktop-m:justify-center container">
         <div className="desktop-m:pb-0 pb-10">
           <h1 className="text-5x mb-4 font-bold">Water consumption tracker</h1>
-          <p className="text-3x mb-6">Record daily water intake and track</p>
+          <p className="text-3x mb-6 w-[197px]">
+            Record daily water intake and track
+          </p>
 
           <p className="text-2x mb-3 font-bold">Tracker Benefits</p>
           <ul className="tablet-ms:flex-row tablet-ms:justify-between desktop-m:flex-col mb-6 flex flex-col gap-4">
@@ -40,7 +42,7 @@ export function Welcome() {
           </ul>
           <Link
             to="/signin"
-            className="bg-blue shadow-secondary text-1x tablet-ms:text-2x tablet-ms:w-[300px] block w-full rounded-s px-[30px] py-2 text-center text-white"
+            className="bg-blue shadow-secondary text-1x tablet-ms:text-2x tablet-ms:w-[300px] block h-9 w-full rounded-s px-[30px] py-2 text-center text-white"
           >
             Try tracker
           </Link>

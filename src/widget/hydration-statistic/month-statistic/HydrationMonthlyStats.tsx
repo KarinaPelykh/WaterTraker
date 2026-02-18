@@ -83,7 +83,7 @@ export function HydrationMonthlyStats() {
       <ul className="desktop-m:gap-[22px] desktop-m:justify-between tablet-ms:gap-6 tablet-ms:grid-cols-10 grid grid-cols-5 gap-[26px]">
         {(monthWaterlog || daysPlaceholderArray)?.map(
           (item: MonthWaterlog | number, i: number) => (
-            <HydrationMonthlyItem key={i} item={item} />
+            <HydrationMonthlyItem item={item} key={i} />
           ),
         )}
       </ul>
