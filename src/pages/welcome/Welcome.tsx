@@ -1,9 +1,10 @@
-import { List } from '../../components/List';
 import icon from '/sprite.svg';
-import css from './welcome.module.css';
 import clsx from 'clsx';
 import { Link } from 'react-router-dom';
+
 import { info } from './welcome.constants';
+import css from './welcome.module.css';
+import { List } from '../../components/List';
 
 export function Welcome() {
   return (

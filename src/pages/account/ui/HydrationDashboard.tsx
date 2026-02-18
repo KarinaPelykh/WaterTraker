@@ -1,18 +1,19 @@
 import { Root, Trigger } from '@radix-ui/react-dialog';
-import { Icon, ScrollAreaBar } from '../../../shared/ui';
-import { ProgressBar } from '../../../widget/ProgressBar';
-import { WaterConsumptionItem } from '../../../widget/hydration-statistic/todays-statistic/WaterConsumptionItem';
-import { WaterGoal } from '../../../feature/daly-rate/ui/WaterGoal';
 
-import { HydrationMonthlyStats } from '../../../widget/hydration-statistic/month-statistic/HydrationMonthlyStats';
 import { useToggle } from '../../../shared/hooks/useToggle';
-import { HydrationForm } from '../../../feature/hydration-form/ui/HydrationForm';
-import { useTodaysHydrationStory } from '../api/useTodaysHydrationStory';
-import type { UserWaterEntity } from '../../../feature/hydration-form/model/contract';
-import { useGetUserInfo } from '../api/useGetUserInfo';
+import { signout } from '../../../shared/lib/service';
 import { AlertContent } from '../../../shared/ModalContent/AlterContent';
 import { DialogContainer } from '../../../shared/ModalContent/DialogContainer';
-import { signout } from '../../../shared/lib/service';
+import { Icon, ScrollAreaBar } from '../../../shared/ui';
+
+import { WaterGoal } from '../../../feature/daly-rate/ui/WaterGoal';
+import type { UserWaterEntity } from '../../../feature/hydration-form/model/contract';
+import { HydrationForm } from '../../../feature/hydration-form/ui/HydrationForm';
+import { HydrationMonthlyStats } from '../../../widget/hydration-statistic/month-statistic/HydrationMonthlyStats';
+import { WaterConsumptionItem } from '../../../widget/hydration-statistic/todays-statistic/WaterConsumptionItem';
+import { ProgressBar } from '../../../widget/ProgressBar';
+import { useGetUserInfo } from '../api/useGetUserInfo';
+import { useTodaysHydrationStory } from '../api/useTodaysHydrationStory';
 
 export function HydrationDashboard() {
   const { data } = useTodaysHydrationStory();
@@ -69,7 +70,7 @@ export function HydrationDashboard() {
             <HydrationMonthlyStats />
           </div>
 
-          {!userData?.data?.water ? (
+          {!userData?.water ? (
             <DialogContainer
               title="Notification"
               className="tablet-ms:w-[592px]"

@@ -5,6 +5,7 @@ import {
   useState,
   type ReactNode,
 } from 'react';
+
 import { useIsAuthenticated } from '../shared/hooks/useIsAuthenticated';
 import { removeAuthToken, setAuthToken } from '../shared/lib/Api';
 

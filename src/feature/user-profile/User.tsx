@@ -4,7 +4,6 @@ import clsx from 'clsx';
 
 import { useGetUserInfo } from '../../pages/account/api/useGetUserInfo';
 import { useToggle } from '../../shared/hooks/useToggle';
-
 import { Icon } from '../../shared/ui';
 
 const modals = [

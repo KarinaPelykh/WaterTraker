@@ -1,7 +1,9 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import type { UseFormReset } from 'react-hook-form';
+
 import { updateUserDate } from '../../../shared/lib/service';
 import { toastNotification } from '../../../shared/lib/toast';
-import type { UseFormReset } from 'react-hook-form';
+
 import type { UserProfileData } from '../model/constract';
 
 type useEditUserProfileProps = {

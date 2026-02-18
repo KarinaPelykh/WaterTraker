@@ -1,4 +1,10 @@
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
+
+import { useSignin } from './api/useSignin';
+import { UserSigninSchema, type UserSignin } from './model/contact';
+import { Loader, Button } from '../../shared/ui';
 import {
   ErrorMessage,
   Form,
@@ -7,11 +13,6 @@ import {
   Label,
   Input,
 } from '../../shared/ui/Form';
-import { useForm } from 'react-hook-form';
-import { UserSigninSchema, type UserSignin } from './model/contact';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useSignin } from './api/useSignin';
-import { Loader, Button } from '../../shared/ui';
 
 export function Signin() {
   const {
@@ -73,7 +74,9 @@ export function Signin() {
         <img
           className="tablet-ms:-right-28 max-tablet-ms:max-w-[336px] desktop-m:-ml-38 desktop-m:max-w-[916px] desktop-m:max-h-[680px] tablet-ms:max-w-[736px] tablet-ms:max-h-[548px] max-tablet-ms:mx-auto tablet-ms:top-0 tablet-ms:absolute desktop-m:static -z-20"
           src="/signup-desk.png"
-          alt="Botel of water"
+          alt="Bottle of water"
+          width={280}
+          height={210}
         />
       </div>
     </section>

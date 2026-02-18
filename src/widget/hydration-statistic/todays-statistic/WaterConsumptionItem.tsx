@@ -1,14 +1,17 @@
 import { Root, Trigger } from '@radix-ui/react-dialog';
-import { Icon } from '../../../shared/ui';
 import * as Separator from '@radix-ui/react-separator';
-import { AlertContent } from '../../../shared/ModalContent/AlterContent';
-import { useToggle } from '../../../shared/hooks/useToggle';
-import { HydrationForm } from '../../../feature/hydration-form/ui/HydrationForm';
-import { useState } from 'react';
 import clsx from 'clsx';
-import type { UserWaterEntity } from '../../../feature/hydration-form/model/contract';
+import { useState } from 'react';
+
+import { useToggle } from '../../../shared/hooks/useToggle';
+import { AlertContent } from '../../../shared/ModalContent/AlterContent';
 import { DialogContainer } from '../../../shared/ModalContent/DialogContainer';
+import { Icon } from '../../../shared/ui';
+
 import { useDeleteHydrationLog } from './api/useDeleteHydrationLog';
+import type { UserWaterEntity } from '../../../feature/hydration-form/model/contract';
+import { HydrationForm } from '../../../feature/hydration-form/ui/HydrationForm';
+import { getTimeOfDay } from '../../../shared/hooks/getTimeOfDay';
 
 type WaterConsumptionItemProps = {
   item: { _id: string } & UserWaterEntity;
@@ -26,6 +29,8 @@ export function WaterConsumptionItem({ item }: WaterConsumptionItemProps) {
     setIsOpen,
   });
 
+  const timeOfDay = getTimeOfDay(item.time);
+
   return (
     <>
       <li className="mt-[13px] mb-3 flex items-center">
@@ -36,7 +41,9 @@ export function WaterConsumptionItem({ item }: WaterConsumptionItemProps) {
         <p className="text-2x text-blue tablet-ms:mr-4 mr-3">
           {item.amount} ml
         </p>
-        <p className="text-sx tablet-ms:mr-auto mr-[38px]">{item.time}</p>
+        <p className="text-sx tablet-ms:mr-auto mr-[38px]">
+          {`${item.time} ${timeOfDay}`}
+        </p>
 
         <Root open={isOpen} onOpenChange={setIsOpen}>
           {DIALOG_TYPES.map((dialog, i) => (

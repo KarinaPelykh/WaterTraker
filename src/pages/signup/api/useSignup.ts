@@ -1,9 +1,11 @@
 import { useMutation } from '@tanstack/react-query';
-import { signup } from '../../../shared/lib/service';
-import { useNavigate } from 'react-router-dom';
 import type { UseFormReset } from 'react-hook-form';
-import type { UserSignup } from '../model/contract';
+import { useNavigate } from 'react-router-dom';
+
+import { signup } from '../../../shared/lib/service';
 import { toastNotification } from '../../../shared/lib/toast';
+
+import type { UserSignup } from '../model/contract';
 
 export const useSignup = (reset: UseFormReset<UserSignup>) => {
   const navigate = useNavigate();

@@ -1,14 +1,16 @@
-import { Button } from '../ui/Button';
-import { Form, ItemLabel, Label, Input, FormField } from '../ui/Form';
-import { ScrollAreaBar } from '../ui/ScrollAreaBar';
+import * as RadioGroup from '@radix-ui/react-radio-group';
+import { useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
+
+import { DialogContainer } from './DialogContainer';
 import { useAddDailyRate } from '../../feature/daly-rate/api/useAddDailyRate';
 import type { UserDailyWaterRate } from '../../feature/daly-rate/model/contract';
-import { RadioBtn } from '../ui/RadioBtn';
-import * as RadioGroup from '@radix-ui/react-radio-group';
-import { DialogContainer } from './DialogContainer';
 import { useGetUserInfo } from '../../pages/account/api/useGetUserInfo';
-import { useEffect } from 'react';
+import { Button } from '../ui/Button';
+import { Form, ItemLabel, Label, Input, FormField } from '../ui/Form';
+import { RadioBtn } from '../ui/RadioBtn';
+import { ScrollAreaBar } from '../ui/ScrollAreaBar';
+
 
 const Gender = {
   male: 'male',

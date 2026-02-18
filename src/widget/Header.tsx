@@ -1,14 +1,15 @@
+import { Root } from '@radix-ui/react-dialog';
+import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import { Icon } from '../shared/ui';
-import { useAuth } from '../providers/AuthProvider';
+
+import { useSignout } from '../feature/user-profile/api/useSignout';
 import { User } from '../feature/user-profile/User';
 import { UserProfile } from '../feature/user-profile/UserProfile';
-import { Root } from '@radix-ui/react-dialog';
+import { useAuth } from '../providers/AuthProvider';
 import { useToggle } from '../shared/hooks/useToggle';
-import { useState } from 'react';
 import { AlertContent } from '../shared/ModalContent/AlterContent';
 import { DialogContainer } from '../shared/ModalContent/DialogContainer';
-import { useSignout } from '../feature/user-profile/api/useSignout';
+import { Icon } from '../shared/ui';
 
 export function Header() {
   const [modalType, setModalType] = useState('');

@@ -1,7 +1,9 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useNavigate } from 'react-router-dom';
+
 import { signout } from '../../../shared/lib/service';
 import { toastNotification } from '../../../shared/lib/toast';
-import { useNavigate } from 'react-router-dom';
+
 import { useAuth } from '../../../providers/AuthProvider';
 
 export const useSignout = (setIsOpen: (value: boolean) => void) => {

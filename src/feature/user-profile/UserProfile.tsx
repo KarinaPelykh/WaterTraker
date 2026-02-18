@@ -1,3 +1,20 @@
+import { zodResolver } from '@hookform/resolvers/zod';
+import * as RadioGroup from '@radix-ui/react-radio-group';
+import { useEffect, useState, type ChangeEvent } from 'react';
+import { Controller, useForm } from 'react-hook-form';
+
+import { useAddUserPhoto } from './api/useAddUserPhoto';
+import { useEditUserProfile } from './api/useEditUserProfile';
+import { UserProfileSchema, type UserProfileData } from './model/constract';
+import { useGetUserInfo } from '../../pages/account/api/useGetUserInfo';
+import { DialogContainer } from '../../shared/ModalContent/DialogContainer';
+import {
+  Icon,
+  PasswordInput,
+  Button,
+  ScrollAreaBar,
+  RadioBtn,
+} from '../../shared/ui';
 import {
   ErrorMessage,
   Form,
@@ -6,23 +23,6 @@ import {
   Label,
   Input,
 } from '../../shared/ui/Form';
-import {
-  Icon,
-  PasswordInput,
-  Button,
-  ScrollAreaBar,
-  RadioBtn,
-} from '../../shared/ui';
-import { Controller, useForm } from 'react-hook-form';
-import { useEffect, useState, type ChangeEvent } from 'react';
-import { useEditUserProfile } from './api/useEditUserProfile';
-import { useGetUserInfo } from '../../pages/account/api/useGetUserInfo';
-
-import * as RadioGroup from '@radix-ui/react-radio-group';
-import { DialogContainer } from '../../shared/ModalContent/DialogContainer';
-import { useAddUserPhoto } from './api/useAddUserPhoto';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { UserProfileSchema, type UserProfileData } from './model/constract';
 
 type UserProfileProps = {
   setIsOpen: (value: boolean) => void;

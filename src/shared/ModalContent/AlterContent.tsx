@@ -1,7 +1,9 @@
 import * as Dialog from '@radix-ui/react-dialog';
-import { Button } from '../ui/Button';
-import { useForm } from 'react-hook-form';
 import clsx from 'clsx';
+import { useForm } from 'react-hook-form';
+
+import { Button } from '../ui/Button';
+
 
 type AlertContentProps = {
   textBtn: string;

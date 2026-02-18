@@ -1,3 +1,9 @@
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useEffect } from 'react';
+import { Controller, useForm } from 'react-hook-form';
+
+import { DialogContainer } from '../../../shared/ModalContent/DialogContainer';
+import { BtnStepper, Button, Icon, ScrollAreaBar } from '../../../shared/ui';
 import {
   ErrorMessage,
   Form,
@@ -7,15 +13,12 @@ import {
   FormField,
 } from '../../../shared/ui/Form';
 
-import { Controller, useForm } from 'react-hook-form';
 
-import { DialogContainer } from '../../../shared/ModalContent/DialogContainer';
-import { useEffect } from 'react';
-import { zodResolver } from '@hookform/resolvers/zod';
+
 
 import { useFormSubmit } from '../api/useFormSubmit';
 import { UserWaterEntitySchema, type UserWaterEntity } from '../model/contract';
-import { BtnStepper, Button, Icon, ScrollAreaBar } from '../../../shared/ui';
+
 
 type HydrationFormProps = {
   setIsOpen: (value: boolean) => void;

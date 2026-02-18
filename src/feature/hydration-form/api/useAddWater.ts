@@ -1,8 +1,11 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { addWater } from '../../../shared/lib/service';
 import type { UseFormReset } from 'react-hook-form';
-import type { UserWaterEntity } from '../model/contract';
+
+import { addWater } from '../../../shared/lib/service';
 import { toastNotification } from '../../../shared/lib/toast';
+
+import type { UserWaterEntity } from '../model/contract';
+
 
 type AddWaterProps = {
   reset: UseFormReset<UserWaterEntity>;

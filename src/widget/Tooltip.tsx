@@ -1,6 +1,7 @@
 import clsx from 'clsx';
-import type { MonthWaterlog } from '../pages/account/types/hydration-dashboard.types';
 import { useState, type ReactNode } from 'react';
+
+import type { MonthWaterlog } from '../pages/account/types/hydration-dashboard.types';
 
 type TooltipProps = {
   children: ReactNode;

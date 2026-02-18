@@ -1,4 +1,5 @@
 import type { UseFormReset } from 'react-hook-form';
+
 import { useAddWater } from './useAddWater';
 import { useEditWater } from './useEditWater';
 import type { UserWaterEntity } from '../model/contract';
@@ -24,8 +25,6 @@ export const useFormSubmit = ({
   const { mutate: addWater } = useAddWater({ reset, setIsOpen });
 
   return function onSubmit({ amount, time }: FormValues) {
-    console.log(amount, time);
-
     if (!amount) return;
 
     if (dataWaterLog) {
@@ -37,12 +36,5 @@ export const useFormSubmit = ({
     } else {
       addWater({ amount, time });
     }
-    // return dataWaterLog
-    //   ? addEditWater({
-    //       userID: dataWaterLog._id,
-    //       amount,
-    //       time,
-    //     })
-    //   : addWater({ amount, time });
   };
 };
