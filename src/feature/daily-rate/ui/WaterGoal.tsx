@@ -3,7 +3,7 @@ import { Root, Trigger } from '@radix-ui/react-dialog';
 import { useToggle } from '../../../shared/hooks/useToggle';
 import { DailyRateContent } from '../../../shared/ModalContent/DailyRateContent';
 
-import { useGetUserInfo } from '../../../pages/account/api/useGetUserInfo';
+import { useGetUserInfo } from '../../../pages/dashboard/api/useGetUserInfo';
 
 export function WaterGoal() {
   const { isOpen, setIsOpen } = useToggle();

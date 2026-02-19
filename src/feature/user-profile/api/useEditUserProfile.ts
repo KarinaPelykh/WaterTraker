@@ -4,7 +4,7 @@ import type { UseFormReset } from 'react-hook-form';
 import { updateUserDate } from '../../../shared/lib/service';
 import { toastNotification } from '../../../shared/lib/toast';
 
-import type { UserProfileData } from '../model/constract';
+import type { UserProfileData } from '../model/contract';
 
 type useEditUserProfileProps = {
   setIsOpen: (value: boolean) => void;

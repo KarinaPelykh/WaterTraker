@@ -2,7 +2,7 @@ import './index.css';
 import { createBrowserRouter } from 'react-router-dom';
 
 import { RootLayout } from './components/RootLayout';
-import { HydrationDashboard } from './pages/account/ui/HydrationDashboard';
+import { HydrationDashboard } from './pages/dashboard/ui/HydrationDashboard';
 import { Signin } from './pages/signin/Signin';
 import { Signup } from './pages/signup/Signup';
 import { Welcome } from './pages/welcome/Welcome';

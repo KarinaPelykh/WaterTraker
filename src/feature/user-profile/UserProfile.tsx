@@ -5,8 +5,8 @@ import { Controller, useForm } from 'react-hook-form';
 
 import { useAddUserPhoto } from './api/useAddUserPhoto';
 import { useEditUserProfile } from './api/useEditUserProfile';
-import { UserProfileSchema, type UserProfileData } from './model/constract';
-import { useGetUserInfo } from '../../pages/account/api/useGetUserInfo';
+import { UserProfileSchema, type UserProfileData } from './model/contract';
+import { useGetUserInfo } from '../../pages/dashboard/api/useGetUserInfo';
 import { DialogContainer } from '../../shared/ModalContent/DialogContainer';
 import {
   Icon,

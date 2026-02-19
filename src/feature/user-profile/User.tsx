@@ -2,7 +2,7 @@ import { Trigger } from '@radix-ui/react-dialog';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import clsx from 'clsx';
 
-import { useGetUserInfo } from '../../pages/account/api/useGetUserInfo';
+import { useGetUserInfo } from '../../pages/dashboard/api/useGetUserInfo';
 import { useToggle } from '../../shared/hooks/useToggle';
 import { Icon } from '../../shared/ui';
 

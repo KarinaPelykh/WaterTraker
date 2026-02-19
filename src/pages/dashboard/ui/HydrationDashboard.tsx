@@ -6,7 +6,7 @@ import { AlertContent } from '../../../shared/ModalContent/AlterContent';
 import { DialogContainer } from '../../../shared/ModalContent/DialogContainer';
 import { Icon, ScrollAreaBar } from '../../../shared/ui';
 
-import { WaterGoal } from '../../../feature/daly-rate/ui/WaterGoal';
+import { WaterGoal } from '../../../feature/daily-rate/ui/WaterGoal';
 import type { UserWaterEntity } from '../../../feature/hydration-form/model/contract';
 import { HydrationForm } from '../../../feature/hydration-form/ui/HydrationForm';
 import { HydrationMonthlyStats } from '../../../widget/hydration-statistic/month-statistic/HydrationMonthlyStats';
