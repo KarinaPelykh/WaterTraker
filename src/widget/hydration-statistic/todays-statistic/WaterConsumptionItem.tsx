@@ -3,6 +3,7 @@ import * as Separator from '@radix-ui/react-separator';
 import clsx from 'clsx';
 import { useState } from 'react';
 
+import { getTimeOfDay } from '../../../shared/hooks/getTimeOfDay';
 import { useToggle } from '../../../shared/hooks/useToggle';
 import { AlertContent } from '../../../shared/ModalContent/AlterContent';
 import { DialogContainer } from '../../../shared/ModalContent/DialogContainer';
@@ -11,7 +12,6 @@ import { Icon } from '../../../shared/ui';
 import { useDeleteHydrationLog } from './api/useDeleteHydrationLog';
 import type { UserWaterEntity } from '../../../feature/hydration-form/model/contract';
 import { HydrationForm } from '../../../feature/hydration-form/ui/HydrationForm';
-import { getTimeOfDay } from '../../../shared/hooks/getTimeOfDay';
 
 type WaterConsumptionItemProps = {
   item: { _id: string } & UserWaterEntity;
@@ -25,7 +25,7 @@ export function WaterConsumptionItem({ item }: WaterConsumptionItemProps) {
   const [dialogType, setDialogType] = useState('');
 
   const { mutate: deleteHydrationLog } = useDeleteHydrationLog({
-    userID: item._id,
+    id: item._id,
     setIsOpen,
   });
 

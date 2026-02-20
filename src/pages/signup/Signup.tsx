@@ -1,9 +1,8 @@
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 
 import { useSignup } from './api/useSignup';
-import { UserSignupSchema, type UserSignup } from './model/contract';
+import { UserSignupSchema } from './model/contract';
+import { useAppForm } from '../../shared/hooks/useAppForm';
 import { Loader, Button, PasswordInput } from '../../shared/ui';
 import {
   ErrorMessage,
@@ -20,13 +19,12 @@ export function Signup() {
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<UserSignup>({
+  } = useAppForm(UserSignupSchema, {
     defaultValues: {
       email: '',
       password: '',
       confirmPassword: '',
     },
-    resolver: zodResolver(UserSignupSchema),
   });
 
   const { mutate: signup, isPending } = useSignup(reset);
@@ -41,14 +39,15 @@ export function Signup() {
           )}
         >
           <p className="text-4x mb-4">Sign up</p>
-          <FormField name="email" errorMessage={errors.email?.message}>
+          <FormField name="email" errorMessage={errors}>
             <ItemLabel>
               <Label htmlFor="email">Enter your email</Label>
               <Input placeholder="E-mail" id="email" {...register('email')} />
-              <ErrorMessage>{errors.email?.message}</ErrorMessage>
+
+              <ErrorMessage />
             </ItemLabel>
           </FormField>
-          <FormField name="password" errorMessage={errors.password?.message}>
+          <FormField name="password" errorMessage={errors}>
             <ItemLabel>
               <Label htmlFor="password">Enter your password</Label>
               <PasswordInput
@@ -56,13 +55,10 @@ export function Signup() {
                 id="password"
                 {...register('password')}
               />
-              <ErrorMessage>{errors.password?.message}</ErrorMessage>
+              <ErrorMessage />
             </ItemLabel>
           </FormField>
-          <FormField
-            name="conf-password"
-            errorMessage={errors.confirmPassword?.message}
-          >
+          <FormField name="conf-password" errorMessage={errors}>
             <ItemLabel>
               <Label htmlFor="conf-password">Repeat password</Label>
               <PasswordInput
@@ -70,7 +66,7 @@ export function Signup() {
                 id="conf-password"
                 {...register('confirmPassword')}
               />
-              <ErrorMessage>{errors.confirmPassword?.message}</ErrorMessage>
+              <ErrorMessage />
             </ItemLabel>
           </FormField>
 

@@ -13,12 +13,8 @@ import {
   FormField,
 } from '../../../shared/ui/Form';
 
-
-
-
 import { useFormSubmit } from '../api/useFormSubmit';
 import { UserWaterEntitySchema, type UserWaterEntity } from '../model/contract';
-
 
 type HydrationFormProps = {
   setIsOpen: (value: boolean) => void;

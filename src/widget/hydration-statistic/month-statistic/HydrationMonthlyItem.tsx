@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 
-import type { MonthWaterlog } from '../../../pages/account/types/hydration-dashboard.types';
+import type { MonthWaterlog } from '../../../pages/dashboard/types/hydration-dashboard.types';
 import { Tooltip } from '../../Tooltip';
 
 type HydrationMonthlyItemProps = {

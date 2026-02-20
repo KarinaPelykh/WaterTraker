@@ -7,10 +7,6 @@ import {
   type ReactNode,
 } from 'react';
 
-type Form = ComponentProps<'form'>;
-
-type FromProps = Form & {};
-
 type FomFormFiledType = {
   className?: string;
   errorMessage?: string;
@@ -18,11 +14,17 @@ type FomFormFiledType = {
   children?: ReactNode;
 };
 
+type FomFormFiledContext = {
+  className?: string;
+  errorMessage?: string;
+  name: string;
+};
+
 type Input = ComponentProps<'input'>;
 
 type InputProps = Input & {};
 
-const FormFiledContext = createContext<FomFormFiledType | null>(null);
+const FormFiledContext = createContext<FomFormFiledContext | null>(null);
 
 const useFormFiled = () => {
   const filedContext = useContext(FormFiledContext);
@@ -40,9 +42,11 @@ export const FormField = ({
   children,
   ...props
 }: FomFormFiledType) => {
+  const err = errorMessage?.[name]?.message;
+
   const value = useMemo(
-    () => ({ errorMessage, className, name }),
-    [errorMessage, className, name],
+    () => ({ err, className, name }),
+    [err, className, name],
   );
 
   return (
@@ -54,7 +58,7 @@ export const FormField = ({
   );
 };
 
-export function Form({ ...props }: FromProps) {
+export function Form({ ...props }: ComponentProps<'form'>) {
   return <form {...props} />;
 }
 
@@ -67,12 +71,13 @@ export function ItemLabel({ className, ...props }: ComponentProps<'div'>) {
 }
 
 export function Input({ className, ...props }: InputProps) {
-  const { errorMessage } = useFormFiled();
+  const { err } = useFormFiled();
+
   return (
     <input
       className={clsx(
         'text-1x border-middle-blue placeholder:text-middle-blue block w-full rounded-xs border bg-white px-2.5 py-3 outline-none',
-        errorMessage && 'border-error-color!',
+        err && 'border-error-color!',
         className,
       )}
       {...props}
@@ -80,19 +85,12 @@ export function Input({ className, ...props }: InputProps) {
   );
 }
 
-export function ErrorMessage({
-  className,
-  children,
-  ...props
-}: ComponentProps<'div'>) {
-  const { errorMessage } = useFormFiled();
+export function ErrorMessage({ className, ...props }: ComponentProps<'div'>) {
+  const { err } = useFormFiled();
 
   return (
-    <div
-      className={clsx(className, errorMessage && 'text-error-color')}
-      {...props}
-    >
-      {children}
+    <div className={clsx(className, err && 'text-error-color')} {...props}>
+      {err}
     </div>
   );
 }

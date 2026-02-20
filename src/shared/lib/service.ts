@@ -1,38 +1,13 @@
 import { axiosInstance } from './Api';
-
-type SignupSchema = {
-  email: string;
-  password: string;
-};
-
-type UserSignin = {
-  email: string;
-  password: string;
-};
-
-type AmountWater = {
-  time: string;
-  amount: number | string;
-};
-
-type UserDailyRate = {
-  gender: string;
-  weight: string;
-  activeTime: string;
-};
-
-type UserData = {
-  email?: string;
-  name?: string;
-  currentPassword?: string;
-  newPassword?: string;
-  confirmNewPassword?: string;
-  gender?: string;
-};
+import type { UserDailyWaterRate } from '../../feature/daily-rate/model/contract';
+import type { UserWaterEntity } from '../../feature/hydration-form/model/contract';
+import type { UserProfileData } from '../../feature/user-profile/model/contract';
+import type { UserSignin } from '../../pages/signin/model/contact';
+import type { UserSignupApi } from '../../pages/signup/model/contract';
 
 const auth = 'auth';
 
-export const signup = async (data: SignupSchema) => {
+export const signup = async (data: UserSignupApi) => {
   const response = await axiosInstance.post(`${auth}/signup`, data);
 
   return response;
@@ -56,7 +31,7 @@ export const signout = async () => {
   return response.data;
 };
 
-export const addWater = async (data: AmountWater) => {
+export const addWater = async (data: UserWaterEntity) => {
   const response = await axiosInstance.post('water', data);
 
   return response.data;
@@ -68,8 +43,8 @@ export const getTodaysHydrationStory = async () => {
   return response.data;
 };
 
-export const deleteHydrationLog = async (userID: string) => {
-  const response = await axiosInstance.delete(`water/${userID}`);
+export const deleteHydrationLog = async (id: string) => {
+  const response = await axiosInstance.delete(`water/${id}`);
 
   return response;
 };
@@ -84,10 +59,10 @@ export const getMonthHydrationStory = async (date: string) => {
   return response.data;
 };
 
-export const addEditWater = async (data: AmountWater & { userID: string }) => {
-  const { amount, time } = data;
+export const addEditWater = async (data: UserWaterEntity & { id: string }) => {
+  const { amount, time, id } = data;
 
-  const response = await axiosInstance.put(`water/${data.userID}`, {
+  const response = await axiosInstance.put(`water/${id}`, {
     amount,
     time,
   });
@@ -95,7 +70,7 @@ export const addEditWater = async (data: AmountWater & { userID: string }) => {
   return response.data;
 };
 
-export const updateUserDate = async (data: UserData) => {
+export const updateUserDate = async (data: UserProfileData) => {
   const { email, name, currentPassword, confirmNewPassword, gender } = data;
 
   const response = await axiosInstance.patch('user', {
@@ -115,7 +90,7 @@ export const addUserPhoto = async (formData: FormData) => {
   return response.data;
 };
 
-export const addDailyRate = async (data: UserDailyRate) => {
+export const addDailyRate = async (data: UserDailyWaterRate) => {
   const response = await axiosInstance.patch('user/water-rate', data);
 
   return response;

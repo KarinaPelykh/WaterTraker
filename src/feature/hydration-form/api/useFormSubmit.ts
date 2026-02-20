@@ -4,11 +4,6 @@ import { useAddWater } from './useAddWater';
 import { useEditWater } from './useEditWater';
 import type { UserWaterEntity } from '../model/contract';
 
-type FormValues = {
-  amount?: number;
-  time: string;
-};
-
 type UseFormSubmitProps = {
   dataWaterLog?: UserWaterEntity & { _id: string };
   setIsOpen: (value: boolean) => void;
@@ -24,12 +19,12 @@ export const useFormSubmit = ({
 
   const { mutate: addWater } = useAddWater({ reset, setIsOpen });
 
-  return function onSubmit({ amount, time }: FormValues) {
+  return function onSubmit({ amount, time }: UserWaterEntity) {
     if (!amount) return;
 
     if (dataWaterLog) {
       addEditWater({
-        userID: dataWaterLog._id,
+        id: dataWaterLog._id,
         amount,
         time,
       });

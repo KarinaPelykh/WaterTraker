@@ -27,3 +27,4 @@ export const UserSignupSchema = z
   });
 
 export type UserSignup = z.infer<typeof UserSignupSchema>;
+export type UserSignupApi = Omit<UserSignup, 'confirmPassword'>;

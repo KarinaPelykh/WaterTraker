@@ -4,7 +4,7 @@ import { Button, Icon } from '../../../shared/ui';
 
 import { useGetMonthWater } from './api/useGetMonthWater';
 import { HydrationMonthlyItem } from './HydrationMonthlyItem';
-import type { MonthWaterlog } from '../../../pages/account/types/hydration-dashboard.types';
+import type { MonthWaterlog } from '../../../pages/dashboard/types/hydration-dashboard.types';
 
 const months = [
   'January',
