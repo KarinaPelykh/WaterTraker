@@ -22,7 +22,7 @@ export const EditUserPhoto = ({ image }: { image: string }) => {
 
   return (
     <div className="flex items-center">
-      <div className="mr-2 h-20 w-20 overflow-hidden rounded-full">
+      <div className="mr-2 h-20 w-20 shrink-0 overflow-hidden rounded-full">
         <img
           src={
             selectedPhoto ||
