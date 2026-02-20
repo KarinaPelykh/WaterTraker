@@ -1,15 +1,14 @@
-import { zodResolver } from '@hookform/resolvers/zod';
 import * as RadioGroup from '@radix-ui/react-radio-group';
-import { useEffect, useState, type ChangeEvent } from 'react';
-import { Controller, useForm } from 'react-hook-form';
+import { useEffect } from 'react';
+import { Controller } from 'react-hook-form';
 
-import { useAddUserPhoto } from './api/useAddUserPhoto';
 import { useEditUserProfile } from './api/useEditUserProfile';
-import { UserProfileSchema, type UserProfileData } from './model/contract';
+import { EditUserPhoto } from './EditUserPhoto';
+import { UserProfileSchema } from './model/contract';
 import { useGetUserInfo } from '../../pages/dashboard/api/useGetUserInfo';
+import { useAppForm } from '../../shared/hooks/useAppForm';
 import { DialogContainer } from '../../shared/ModalContent/DialogContainer';
 import {
-  Icon,
   PasswordInput,
   Button,
   ScrollAreaBar,
@@ -33,16 +32,8 @@ const Gender = {
   female: 'woman',
 };
 
-export const UserProfile = ({ setIsOpen }: UserProfileProps) => {
-  const [selectedPhoto, setSelectedPhoto] = useState('');
-
-  const {
-    register,
-    reset,
-    handleSubmit,
-    control,
-    formState: { errors },
-  } = useForm<UserProfileData>({
+export const EditProfileForm = ({ setIsOpen }: UserProfileProps) => {
+  const form = useAppForm(UserProfileSchema, {
     defaultValues: {
       email: '',
       name: '',
@@ -51,36 +42,21 @@ export const UserProfile = ({ setIsOpen }: UserProfileProps) => {
       confirmNewPassword: '',
       gender: '',
     },
-    resolver: zodResolver(UserProfileSchema),
   });
 
   const { mutate: updateUserDate } = useEditUserProfile({
     setIsOpen,
-    reset,
+    reset: form.reset,
   });
 
   const { data } = useGetUserInfo();
 
-  const { mutate: addUserPhoto } = useAddUserPhoto();
-
   useEffect(() => {
     const name = data?.name ?? '';
     if (data) {
-      reset({ name, email: data.email, gender: data.gender });
+      form.reset({ name, email: data.email, gender: data.gender });
     }
-  }, [data, reset]);
-
-  const handlePhoto = (e: ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-
-    if (file) {
-      setSelectedPhoto(URL.createObjectURL(file));
-      const formData = new FormData();
-      formData.append('avatar', file);
-
-      addUserPhoto(formData);
-    }
-  };
+  }, [data, form]);
 
   return (
     <DialogContainer
@@ -89,52 +65,21 @@ export const UserProfile = ({ setIsOpen }: UserProfileProps) => {
     >
       <ScrollAreaBar className="flex min-h-0 flex-1" scrollClassName="hidden">
         <Form
+          form={form}
           className="flex flex-col"
-          onSubmit={handleSubmit((data) => updateUserDate(data))}
+          onSubmit={form.handleSubmit((data) => updateUserDate(data))}
         >
           <div className="desktop-m:flex desktop-m:w-full desktop-m:items-end desktop-m:gap-10 tablet-ms:w-[392px] mb-6">
             <div className="desktop-m:w-[392px]">
               <ItemLabel className="mb-6!">
                 <Label>Your photo</Label>
-
-                <div className="flex items-center">
-                  <div className="mr-2 h-20 w-20 overflow-hidden rounded-full">
-                    <img
-                      src={
-                        selectedPhoto ||
-                        data?.image ||
-                        'https://img.freepik.com/premium-vector/free-vector-user-icon_901408-589.jpg'
-                      }
-                      alt="User photo"
-                      width={80}
-                      height={80}
-                      className="h-full w-full object-contain"
-                    />
-                  </div>
-
-                  <div className="group relative flex cursor-pointer">
-                    <Icon
-                      iconName="arrow-up"
-                      className="stroke-blue mr-2 size-4 transition duration-500 group-hover:stroke-[#FF9D43]"
-                    />
-                    <span className="text-blue text-base transition duration-500 group-hover:text-[#FF9D43]">
-                      Upload photo
-                    </span>
-
-                    <input
-                      type="file"
-                      accept="image/png, image/jpeg"
-                      className="absolute top-0 left-0 w-full opacity-0"
-                      onChange={handlePhoto}
-                    />
-                  </div>
-                </div>
+                <EditUserPhoto image={data?.image} />
               </ItemLabel>
               <div className="mb-6">
                 <p className="text-2x mb-3">Your gender identity</p>
                 <Controller
                   name="gender"
-                  control={control}
+                  control={form.control}
                   rules={{ required: true }}
                   render={({ field }) => (
                     <RadioGroup.Root
@@ -158,67 +103,58 @@ export const UserProfile = ({ setIsOpen }: UserProfileProps) => {
                   )}
                 />
               </div>
-              <FormField name="name" errorMessage={errors.name?.message}>
+              <FormField name="name">
                 <ItemLabel className="mb-6">
                   <Label htmlFor="name">Your name</Label>
                   <Input
                     type="text"
                     placeholder="David"
                     id="name"
-                    {...register('name')}
+                    {...form.register('name')}
                   />
-                  <ErrorMessage>{errors.name?.message}</ErrorMessage>
+                  <ErrorMessage />
                 </ItemLabel>
               </FormField>
-              <FormField name="email" errorMessage={errors.email?.message}>
+              <FormField name="email">
                 <ItemLabel className="desktop-m:mb-0 mb-6">
                   <Label htmlFor="email">E-mail</Label>
                   <Input
                     type="email"
                     id="email"
                     placeholder="david01@gmail.com"
-                    {...register('email')}
+                    {...form.register('email')}
                   />
-                  <ErrorMessage>{errors.email?.message}</ErrorMessage>
+                  <ErrorMessage />
                 </ItemLabel>
               </FormField>
             </div>
             <div className="desktop-m:w-[392px]">
               <h2 className="text-2x mb-3 font-medium">Password</h2>
-              <FormField
-                name="currentPassword"
-                errorMessage={errors.currentPassword?.message}
-              >
+              <FormField name="currentPassword">
                 <ItemLabel className="mb-6">
                   <Label htmlFor="currentPassword">Outdated password:</Label>
                   <PasswordInput
                     placeholder="Password"
                     id="currentPassword"
-                    {...register('currentPassword')}
+                    {...form.register('currentPassword')}
                   />
 
-                  <ErrorMessage>{errors.currentPassword?.message}</ErrorMessage>
+                  <ErrorMessage />
                 </ItemLabel>
               </FormField>
-              <FormField
-                name="newPassword"
-                errorMessage={errors.newPassword?.message}
-              >
+              <FormField name="newPassword">
                 <ItemLabel className="mb-6">
                   <Label htmlFor="newPassword">New password:</Label>
                   <PasswordInput
                     placeholder="Password"
                     id="newPassword"
-                    {...register('newPassword')}
+                    {...form.register('newPassword')}
                   />
 
-                  <ErrorMessage>{errors.newPassword?.message}</ErrorMessage>
+                  <ErrorMessage />
                 </ItemLabel>
               </FormField>
-              <FormField
-                name="confirmNewPassword"
-                errorMessage={errors.confirmNewPassword?.message}
-              >
+              <FormField name="confirmNewPassword">
                 <ItemLabel className="desktop-m:mb-0">
                   <Label htmlFor="confirmNewPassword">
                     Repeat new password:
@@ -226,12 +162,10 @@ export const UserProfile = ({ setIsOpen }: UserProfileProps) => {
                   <PasswordInput
                     placeholder="Password"
                     id="confirmNewPassword"
-                    {...register('confirmNewPassword')}
+                    {...form.register('confirmNewPassword')}
                   />
 
-                  <ErrorMessage>
-                    {errors.confirmNewPassword?.message}
-                  </ErrorMessage>
+                  <ErrorMessage />
                 </ItemLabel>
               </FormField>
             </div>

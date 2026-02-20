@@ -1,11 +1,12 @@
 import * as RadioGroup from '@radix-ui/react-radio-group';
 import { useEffect } from 'react';
-import { Controller, useForm } from 'react-hook-form';
+import { Controller } from 'react-hook-form';
 
 import { DialogContainer } from './DialogContainer';
 import { useAddDailyRate } from '../../feature/daily-rate/api/useAddDailyRate';
-import type { UserDailyWaterRate } from '../../feature/daily-rate/model/contract';
+import { UserDailyWaterRateSchema } from '../../feature/daily-rate/model/contract';
 import { useGetUserInfo } from '../../pages/dashboard/api/useGetUserInfo';
+import { useAppForm } from '../hooks/useAppForm';
 import { Button } from '../ui/Button';
 import { Form, ItemLabel, Label, Input, FormField } from '../ui/Form';
 import { RadioBtn } from '../ui/RadioBtn';
@@ -21,24 +22,26 @@ type DailyRateContentProps = {
 };
 
 export function DailyRateContent({ setIsOpen }: DailyRateContentProps) {
-  const { handleSubmit, register, control, reset } =
-    useForm<UserDailyWaterRate>({
-      defaultValues: {
-        gender: '',
-        weight: '',
-        activeTime: '',
-      },
-    });
+  const form = useAppForm(UserDailyWaterRateSchema, {
+    defaultValues: {
+      gender: '',
+      weight: '',
+      activeTime: '',
+    },
+  });
 
-  const { mutate: addDailyRate } = useAddDailyRate({ reset, setIsOpen });
+  const { mutate: addDailyRate } = useAddDailyRate({
+    reset: form.reset,
+    setIsOpen,
+  });
 
   const { data } = useGetUserInfo();
 
   useEffect(() => {
     if (data) {
-      reset({ gender: data.gender });
+      form.reset({ gender: data.gender });
     }
-  }, [data, reset]);
+  }, [data, form]);
 
   return (
     <DialogContainer
@@ -46,7 +49,10 @@ export function DailyRateContent({ setIsOpen }: DailyRateContentProps) {
       className="tablet-ms:w-[704px] desktop-m:w-[592px] flex"
     >
       <ScrollAreaBar className="flex min-h-0 flex-1" scrollClassName="hidden">
-        <Form onSubmit={handleSubmit((data) => addDailyRate(data))}>
+        <Form
+          form={form}
+          onSubmit={form.handleSubmit((data) => addDailyRate(data))}
+        >
           <div className="tablet-ms:flex tablet-ms:gap-6 mb-3">
             <p className="tablet-ms:m-0 mb-4">
               For girl:
@@ -68,7 +74,7 @@ export function DailyRateContent({ setIsOpen }: DailyRateContentProps) {
             <div className="mb-4 flex items-center gap-6">
               <Controller
                 name="gender"
-                control={control}
+                control={form.control}
                 rules={{ required: true }}
                 render={({ field }) => (
                   <RadioGroup.Root
@@ -97,7 +103,11 @@ export function DailyRateContent({ setIsOpen }: DailyRateContentProps) {
                 <Label className="text-1x" htmlFor="weight">
                   Your weight in kilograms:
                 </Label>
-                <Input placeholder="0" id="weight" {...register('weight')} />
+                <Input
+                  placeholder="0"
+                  id="weight"
+                  {...form.register('weight')}
+                />
               </ItemLabel>
             </FormField>
             <FormField name="activeTime">
@@ -110,7 +120,7 @@ export function DailyRateContent({ setIsOpen }: DailyRateContentProps) {
                 <Input
                   placeholder="0"
                   id="activeTime"
-                  {...register('activeTime')}
+                  {...form.register('activeTime')}
                 />
               </ItemLabel>
             </FormField>

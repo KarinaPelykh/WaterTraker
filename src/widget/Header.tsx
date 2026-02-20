@@ -3,8 +3,8 @@ import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
 import { useSignout } from '../feature/user-profile/api/useSignout';
-import { User } from '../feature/user-profile/User';
-import { UserProfile } from '../feature/user-profile/UserProfile';
+import { EditProfileForm } from '../feature/user-profile/EditProfileForm';
+import { ProfileDropdown } from '../feature/user-profile/ProfileDropdown';
 import { useAuth } from '../providers/AuthProvider';
 import { useToggle } from '../shared/hooks/useToggle';
 import { AlertContent } from '../shared/ModalContent/AlterContent';
@@ -29,7 +29,7 @@ export function Header() {
           </NavLink>
 
           {data ? (
-            <User setModalType={setModalType} />
+            <ProfileDropdown setModalType={setModalType} />
           ) : (
             <div className="flex items-center gap-2">
               <NavLink
@@ -53,7 +53,7 @@ export function Header() {
           />
         </DialogContainer>
       ) : (
-        <UserProfile setIsOpen={setIsOpen} />
+        <EditProfileForm setIsOpen={setIsOpen} />
       )}
     </Root>
   );

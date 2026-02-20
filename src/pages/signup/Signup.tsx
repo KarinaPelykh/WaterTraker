@@ -14,12 +14,7 @@ import {
 } from '../../shared/ui/Form';
 
 export function Signup() {
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useAppForm(UserSignupSchema, {
+  const form = useAppForm(UserSignupSchema, {
     defaultValues: {
       email: '',
       password: '',
@@ -27,44 +22,48 @@ export function Signup() {
     },
   });
 
-  const { mutate: signup, isPending } = useSignup(reset);
+  const { mutate: signup, isPending } = useSignup(form.reset);
 
   return (
     <section className="tablet-ms:pb-[172px] tablet-ms:pt-10 desktop-m:pb-10 desktop-m:pt-5 min-h-screen overflow-hidden pt-6 pb-5">
       <div className="tablet-ms:flex desktop-m:flex-row-reverse desktop-m:items-center desktop-m:justify-center relative container">
         <Form
+          form={form}
           className="mobile:w-[336px] max-tablet-ms:mx-auto desktop-m:w-[384px]"
-          onSubmit={handleSubmit(({ email, password }) =>
+          onSubmit={form.handleSubmit(({ email, password }) =>
             signup({ email, password }),
           )}
         >
           <p className="text-4x mb-4">Sign up</p>
-          <FormField name="email" errorMessage={errors}>
+          <FormField name="email">
             <ItemLabel>
               <Label htmlFor="email">Enter your email</Label>
-              <Input placeholder="E-mail" id="email" {...register('email')} />
-
+              <Input
+                placeholder="E-mail"
+                id="email"
+                {...form.register('email')}
+              />
               <ErrorMessage />
             </ItemLabel>
           </FormField>
-          <FormField name="password" errorMessage={errors}>
+          <FormField name="password">
             <ItemLabel>
               <Label htmlFor="password">Enter your password</Label>
               <PasswordInput
                 placeholder="Password"
                 id="password"
-                {...register('password')}
+                {...form.register('password')}
               />
               <ErrorMessage />
             </ItemLabel>
           </FormField>
-          <FormField name="conf-password" errorMessage={errors}>
+          <FormField name="confirmPassword">
             <ItemLabel>
-              <Label htmlFor="conf-password">Repeat password</Label>
+              <Label htmlFor="confirmPassword">Repeat password</Label>
               <PasswordInput
                 placeholder="Repeat password"
-                id="conf-password"
-                {...register('confirmPassword')}
+                id="confirmPassword"
+                {...form.register('confirmPassword')}
               />
               <ErrorMessage />
             </ItemLabel>

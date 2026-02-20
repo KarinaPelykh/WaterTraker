@@ -4,16 +4,15 @@ import { useToggle } from '../../../shared/hooks/useToggle';
 import { signout } from '../../../shared/lib/service';
 import { AlertContent } from '../../../shared/ModalContent/AlterContent';
 import { DialogContainer } from '../../../shared/ModalContent/DialogContainer';
-import { Icon, ScrollAreaBar } from '../../../shared/ui';
+import { Icon } from '../../../shared/ui';
 
 import { WaterGoal } from '../../../feature/daily-rate/ui/WaterGoal';
-import type { UserWaterEntity } from '../../../feature/hydration-form/model/contract';
 import { HydrationForm } from '../../../feature/hydration-form/ui/HydrationForm';
 import { HydrationMonthlyStats } from '../../../widget/hydration-statistic/month-statistic/HydrationMonthlyStats';
-import { WaterConsumptionItem } from '../../../widget/hydration-statistic/todays-statistic/WaterConsumptionItem';
+import { useTodaysHydrationStory } from '../../../widget/hydration-statistic/todays-statistic/api/useTodaysHydrationStory';
+import { WaterLogList } from '../../../widget/hydration-statistic/todays-statistic/WaterLogList';
 import { ProgressBar } from '../../../widget/ProgressBar';
 import { useGetUserInfo } from '../api/useGetUserInfo';
-import { useTodaysHydrationStory } from '../api/useTodaysHydrationStory';
 
 export function HydrationDashboard() {
   const { data } = useTodaysHydrationStory();
@@ -43,30 +42,7 @@ export function HydrationDashboard() {
             </div>
           </div>
           <div className="bg-light-blue shadow-base tablet-ms:py-8 tablet-ms:px-6 desktop-m:w-1/2 desktop-m:h-[680px] flex flex-col rounded-s px-2 py-6">
-            <div className="desktop-m:mb-auto mb-6">
-              <p className="text-3x mb-4">Today</p>
-              {data?.list.length === 0 ? null : (
-                <ScrollAreaBar className="mb-6 max-h-[200px]">
-                  <ul>
-                    {data?.list.map(
-                      (item: { _id: string } & UserWaterEntity) => (
-                        <WaterConsumptionItem key={item._id} item={item} />
-                      ),
-                    )}
-                  </ul>
-                </ScrollAreaBar>
-              )}
-
-              <Trigger className="group flex cursor-pointer items-center justify-center gap-2">
-                <Icon
-                  iconName="plus"
-                  className="stroke-blue size-4 transition-colors duration-500 group-hover:stroke-[#FF9D43]"
-                />
-                <span className="text-blue font-medium transition-colors duration-500 group-hover:text-[#FF9D43]">
-                  Add Water
-                </span>
-              </Trigger>
-            </div>
+            <WaterLogList />
             <HydrationMonthlyStats />
           </div>
 

@@ -1,7 +1,7 @@
-import { zodResolver } from '@hookform/resolvers/zod';
 import { useEffect } from 'react';
-import { Controller, useForm } from 'react-hook-form';
+import { Controller } from 'react-hook-form';
 
+import { useAppForm } from '../../../shared/hooks/useAppForm';
 import { DialogContainer } from '../../../shared/ModalContent/DialogContainer';
 import { BtnStepper, Button, Icon, ScrollAreaBar } from '../../../shared/ui';
 import {
@@ -22,25 +22,21 @@ type HydrationFormProps = {
 };
 
 export function HydrationForm({ setIsOpen, dataWaterLog }: HydrationFormProps) {
-  const {
-    register,
-    handleSubmit,
-    reset,
-    watch,
-    control,
-    formState: { errors },
-  } = useForm<UserWaterEntity>({
-    resolver: zodResolver(UserWaterEntitySchema),
+  const form = useAppForm(UserWaterEntitySchema, {
     defaultValues: { time: '', amount: 50 },
   });
 
   useEffect(() => {
     if (dataWaterLog) {
-      reset({ time: dataWaterLog.time, amount: dataWaterLog.amount });
+      form.reset({ time: dataWaterLog.time, amount: dataWaterLog.amount });
     }
-  }, [dataWaterLog, reset]);
+  }, [dataWaterLog, form]);
 
-  const onSubmit = useFormSubmit({ setIsOpen, dataWaterLog, reset });
+  const onSubmit = useFormSubmit({
+    setIsOpen,
+    dataWaterLog,
+    reset: form.reset,
+  });
 
   return (
     <DialogContainer
@@ -48,7 +44,10 @@ export function HydrationForm({ setIsOpen, dataWaterLog }: HydrationFormProps) {
       className="desktop-m:w-[592px] tablet-ms:w-[704px]"
     >
       <ScrollAreaBar className="flex min-h-0 flex-1" scrollClassName="hidden">
-        <Form onSubmit={handleSubmit((data) => onSubmit(data))}>
+        <Form
+          form={form}
+          onSubmit={form.handleSubmit((data) => onSubmit(data))}
+        >
           {dataWaterLog && (
             <div className="bg-light-blue tablet-ms:w-[254px] mb-6 flex items-center rounded-s px-6 py-2">
               <Icon iconName="glass" className="fill-blue mr-3 size-9" />
@@ -66,22 +65,22 @@ export function HydrationForm({ setIsOpen, dataWaterLog }: HydrationFormProps) {
 
           <Controller
             name="amount"
-            control={control}
+            control={form.control}
             render={({ field }) => (
               <BtnStepper value={field.value ?? 50} onChange={field.onChange} />
             )}
           />
 
-          <FormField name="time" errorMessage={errors.time?.message}>
+          <FormField name="time">
             <ItemLabel className="mb-6">
               <Label htmlFor="time">Recording time:</Label>
               <Input
                 id="time"
-                {...register('time')}
+                {...form.register('time')}
                 placeholder="07:00"
                 className="border-blue2! tablet-ms:w-full! placeholder:text-blue! w-[120px]!"
               />
-              <ErrorMessage>{errors.time?.message}</ErrorMessage>
+              <ErrorMessage />
             </ItemLabel>
           </FormField>
           <FormField name="amount">
@@ -91,7 +90,7 @@ export function HydrationForm({ setIsOpen, dataWaterLog }: HydrationFormProps) {
               </Label>
               <Controller
                 name="amount"
-                control={control}
+                control={form.control}
                 render={({ field }) => (
                   <Input
                     {...field}
@@ -106,12 +105,12 @@ export function HydrationForm({ setIsOpen, dataWaterLog }: HydrationFormProps) {
                   />
                 )}
               />
-              <ErrorMessage>{errors.amount?.message}</ErrorMessage>
+              <ErrorMessage />
             </ItemLabel>
           </FormField>
           <div className="tablet-ms:justify-end tablet-ms:gap-6 tablet-ms:flex-row flex flex-col items-center justify-center gap-6">
             <span className="text-blue font-bold">
-              {watch('amount') || 0}
+              {form.watch('amount') || 0}
               ml
             </span>
             <Button type="submit" className="tablet-ms:w-40 w-full">
