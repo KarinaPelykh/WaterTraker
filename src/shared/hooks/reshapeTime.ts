@@ -1,3 +1,3 @@
-export const reshapeTime = (time: string): Date => {
-  return new Date(time);
+export const reshapeTime = (time: string): number => {
+  return new Date(time).getTime();
 };

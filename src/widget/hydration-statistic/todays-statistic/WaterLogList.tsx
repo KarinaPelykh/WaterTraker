@@ -1,6 +1,6 @@
 import { Trigger } from '@radix-ui/react-dialog';
 
-// import { reshapeTime } from '../../../shared/hooks/reshapeTime';
+import { reshapeTime } from '../../../shared/hooks/reshapeTime';
 import { Icon, ScrollAreaBar } from '../../../shared/ui';
 
 import { useTodaysHydrationStory } from './api/useTodaysHydrationStory';
@@ -10,14 +10,11 @@ import type { UserWaterEntity } from '../../../feature/hydration-form/model/cont
 export const WaterLogList = () => {
   const { data } = useTodaysHydrationStory();
 
-  // const sortedData =
-  //   data &&
-  //   [...data.list].sort((a, b) => {
-  //     console.log(typeof new Date(a.createdAt));
-  //     console.log(typeof a.createdAt);
-
-  //     // reshapeTime(b.createdAt) - reshapeTime(a.createdAt);
-  //   });
+  const sortedData =
+    data &&
+    [...data.list].sort((a, b) => {
+      return reshapeTime(b.createdAt) - reshapeTime(a.createdAt);
+    });
 
   return (
     <div className="desktop-m:mb-auto mb-6">
@@ -25,7 +22,7 @@ export const WaterLogList = () => {
       {data?.list.length === 0 ? null : (
         <ScrollAreaBar className="mb-6 max-h-[200px]">
           <ul>
-            {[].map((item: { _id: string } & UserWaterEntity) => (
+            {sortedData?.map((item: { _id: string } & UserWaterEntity) => (
               <WaterConsumptionItem key={item._id} item={item} />
             ))}
           </ul>

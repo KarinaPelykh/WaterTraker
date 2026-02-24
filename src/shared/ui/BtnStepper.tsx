@@ -12,7 +12,7 @@ export const BtnStepper = ({ value, onChange }: BtnStepperProps) => {
   const increment = () => onChange(numberVal + 50);
 
   const decrement = () =>
-    numberVal >= 0 && onChange(Math.max(0, numberVal - 50));
+    numberVal >= 50 && onChange(Math.max(50, numberVal - 50));
 
   return (
     <div className="mb-6 flex items-center gap-[7px]">

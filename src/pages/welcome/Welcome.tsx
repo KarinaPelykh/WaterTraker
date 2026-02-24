@@ -10,13 +10,19 @@ export function Welcome() {
   return (
     <section
       className={clsx(
-        `${css.background} tablet-ms:pt-10 desktop-m:pt-20 tablet-ms:pb-[50px] desktop-m:pb-[294px] min-h-screen w-full pt-6 pb-10`,
+        `${css.background} tablet-ms:pt-10 desktop-m:pt-20 tablet-ms:pb-[50px] desktop-m:pb-[294px] relative overflow-hidden pt-6 pb-10`,
       )}
     >
+      <div
+        className={clsx(
+          `${css.bottle}`,
+          'desktop-m:hidden absolute right-0 bottom-0 z-10 h-[386px] w-[518px]',
+        )}
+      />
       <div className="desktop-m:flex desktop-m:gap-[81px] desktop-m:justify-center container">
         <div className="desktop-m:pb-0 pb-10">
           <h1 className="text-5x mb-4 font-bold">Water consumption tracker</h1>
-          <p className="text-3x mb-6 w-[197px]">
+          <p className="text-3x tablet-ms:w-full mb-6 w-[197px]">
             Record daily water intake and track
           </p>
 
@@ -45,3 +51,9 @@ export function Welcome() {
     </section>
   );
 }
+//  <div
+//    className={clsx(
+//      `${css.background}`,
+//      'absolute right-0 bottom-0 -z-20 h-auto w-full',
+//    )}
+//  />;

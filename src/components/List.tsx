@@ -1,6 +1,6 @@
 export function List() {
   return (
-    <div className="bg-light-blue tablet-ms:max-w-[494px] shadow-base h-fit w-fit rounded-s px-4 py-6">
+    <div className="bg-light-blue tablet-ms:max-w-[494px] tablet-ms:mx-0 shadow-base mx-auto h-fit w-fit rounded-s px-4 py-6">
       <p className="text-2x mb-3 font-bold">Why drink water</p>
       <ul className="text-1x flex flex-col gap-4">
         <li className="flex items-center gap-2">

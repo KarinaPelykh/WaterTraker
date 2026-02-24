@@ -89,6 +89,7 @@
 }
 
 .container {
+  margin: 0 auto;
   padding: 0 20px;
   max-width: 767px;
 }
@@ -116,23 +117,24 @@ body {
   font-family: 'Roboto', sans-serif;
   background-color: var(--color-white);
   color: var(--color-black);
-  background-image: url('/hero/hero-mob.png');
-  background-size: contain;
-  background-position: center center;
+  background-image: url('/bg/bg-mob.png');
+  background-size: cover;
+  background-position: top 64px center;
   background-repeat: no-repeat;
   background-attachment: fixed;
+  min-height: 100vh;
 }
 
 @media screen and (min-width: 760px) {
   body {
-    background-image: url('/hero/hero-tablet.png');
+    background-image: url('/bg/bg-tablet.png');
   }
 }
 
 @media screen and (min-width: 1020px) {
   body {
-    background-position: top center;
-    background-image: url('/hero/hero-desktop.png');
+    background-size: contain;
+    background-image: url('/bg/bg-desktop.png');
   }
 }
 
@@ -140,5 +142,5 @@ img {
   width: 100%;
   height: auto;
   display: block;
-  object-fit: contain;
+  object-fit: cover;
 }
