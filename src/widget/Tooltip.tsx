@@ -11,6 +11,14 @@ type TooltipProps = {
 export const Tooltip = ({ children, item }: TooltipProps) => {
   const [show, setShow] = useState(false);
 
+  let limit;
+
+  if (typeof item === 'object') {
+    const lastElement = item?.list?.length - 1;
+
+    limit = item?.list[lastElement]?.dailyGoal;
+  }
+
   return typeof item === 'number' ? (
     <>{children}</>
   ) : (
@@ -29,7 +37,7 @@ export const Tooltip = ({ children, item }: TooltipProps) => {
         <p className="text-blue">{item?.date}</p>
         <p>
           Daily norma:
-          <span className="text-blue text-2x"> {item?.dailyNormWater}L</span>
+          <span className="text-blue text-2x">{limit}L</span>
         </p>
         <p>
           Fulfillment of the daily norm:

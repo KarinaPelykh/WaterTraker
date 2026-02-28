@@ -14,7 +14,7 @@ export function HydrationMonthlyItem({ item }: HydrationMonthlyItemProps) {
 
   const defaultNum = isPlaceholder && item;
 
-  const percent = isPlaceholder ? 0 : item.percent;
+  const percent = isPlaceholder ? 0 : Math.min(100, item.percent);
 
   return (
     <Tooltip item={item}>
