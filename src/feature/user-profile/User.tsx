@@ -20,7 +20,7 @@ export function User({ isOpen, ...props }: { isOpen: boolean }) {
           alt="User photo"
           width={28}
           height={28}
-          className="h-full w-full object-cover"
+          className="h-full w-full shrink-0 object-cover"
         />
       </div>
 
