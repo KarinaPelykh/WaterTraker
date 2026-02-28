@@ -11,19 +11,17 @@ export function User({ isOpen, ...props }: { isOpen: boolean }) {
   return (
     <div {...props} className="flex items-center gap-2">
       <p>{userName}</p>
-      <div className="h-7 w-7 overflow-hidden rounded-full">
+
+      <div className="relative h-7 min-h-7 w-7 min-w-7 overflow-hidden rounded-full border border-gray-100">
         <img
           src={
             data?.image ||
             'https://img.freepik.com/premium-vector/free-vector-user-icon_901408-589.jpg'
           }
           alt="User photo"
-          width={28}
-          height={28}
-          className="h-full w-full shrink-0 object-cover"
+          className="absolute inset-0 h-full w-full object-cover"
         />
       </div>
-
       <Icon
         iconName="arrow-down"
         className={clsx(
